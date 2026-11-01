@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Ensure visual assets are crawlable for Google Images and SEO
+Allow: /assets/
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.webp
+Allow: /*.svg
+Allow: /*.js
+Allow: /*.css
+
+# Disallow internal or system paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+
+# Sitemap Location
+Sitemap: https://fabiolucas.com/sitemap.xml

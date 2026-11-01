@@ -1,0 +1,8 @@
+{
+  "name": "Fábio Lucas | Portfólio, E-books e Cursos",
+  "description": "Plataforma profissional de Fábio Lucas Pereira Ferreira, apresentando seu portfólio, e-books e cursos. Inclui um aplicativo exclusivo para clientes com acompanhamento de projetos em tempo real (notificações a cada commit do GitHub), agendamento de reuniões, e ferramentas de transcrição e legendagem de vídeos de reuniões utilizando Machine Learning.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
