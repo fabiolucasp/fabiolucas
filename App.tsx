@@ -18,6 +18,7 @@ import LoginScreen from './components/LoginScreen';
 import BichoMimadoLanding from './components/BichoMimadoLanding';
 import PineapplePayLanding from './components/PineapplePayLanding';
 import ScrollToTop from './components/ScrollToTop';
+import ScreensArchitecture from './components/ScreensArchitecture';
 
 // Main Portfolio sections component
 const PortfolioPage: React.FC = () => (
@@ -27,6 +28,7 @@ const PortfolioPage: React.FC = () => (
     <DesignPhilosophy />
     <Experience />
     <Projects />
+    <ScreensArchitecture />
     <Methodology />
     <ClientPortal />
     <Contact />

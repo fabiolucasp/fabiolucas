@@ -82,12 +82,12 @@
       "sha256": "d8647464fead2b509b6f3ad1a2ba914cd38af3ebfc4b8d87e77060ca0a8c1af0"
     },
     {
-      "path": "dist/assets/index-CVPvkVtG.css",
-      "sha256": "c3f090b5a5e12646658ea5bef7fa42b9bde18b6656fcd096ac29d0ef33566941"
+      "path": "dist/assets/index-CtHDCged.js",
+      "sha256": "ff75e00de394b81ddb448fb8e7c079492d2706a89df5e467dc3cb2548e18309b"
     },
     {
-      "path": "dist/assets/index-DGHpY9gz.js",
-      "sha256": "812b5b05ff548d791f59745cea52f509033ebcedd72739d749ac2ef3edf0fe1e"
+      "path": "dist/assets/index-iERxV_7x.css",
+      "sha256": "f8417a24290c36f25877569c63c0be96986a0cd0bd8270d63e0d5e176f33689a"
     },
     {
       "path": "dist/banner-preview.png",
@@ -119,7 +119,7 @@
     },
     {
       "path": "dist/index.html",
-      "sha256": "886db1175fecfc060133ca46ae0ac98f2a01dfbedbe49e4647e96b30d0e99e29"
+      "sha256": "cf4efed6e9e19c26099a24e53875d87c05ddbf7a9d5f01632ac7bec5773e60af"
     },
     {
       "path": "dist/manifest.json",
@@ -165,7 +165,7 @@
     },
     {
       "path": "App.tsx",
-      "sha256": "4b74c7e2b528252d51b9ee487f7441bb3fcefcc33878475d8f3644fd092ee58c"
+      "sha256": "1dd64415ee85d8d575b0cf94b80c757360d64dc6faf208e9b65f21533448a9cc"
     },
     {
       "path": "LEIA-ME-PUBLICAR.md",
@@ -173,7 +173,7 @@
     },
     {
       "path": "Publicar-Portfolio.ps1",
-      "sha256": "77906204ba1283e73c8345049b60dac8b9290cf51fc985b71bc2e855c0d192b5"
+      "sha256": "53c9454ed3205d1fddae77fe88580e20a2cff4a22c116e96fcb87a1d8220005a"
     },
     {
       "path": "components/AutoPartsCaseStudy.tsx",
