@@ -82,12 +82,12 @@
                      "sha256":  "d8647464fead2b509b6f3ad1a2ba914cd38af3ebfc4b8d87e77060ca0a8c1af0"
                  },
                  {
-                     "path":  "dist/assets/index-BXlAUp5j.js",
-                     "sha256":  "162403a80348e3fe7d243daa1d3f5a1bc4c6ad1c509ae268aaa184f11c9b37a1"
+                     "path":  "dist/assets/index-Cyjzjnes.js",
+                     "sha256":  "4bf764466fa11d7267ec1bf48233b0f57320b3df93a58f2a651f93c2dce178ad"
                  },
                  {
-                     "path":  "dist/assets/index-bVHDxWYH.css",
-                     "sha256":  "83ce0666099f0251edd5083c1b7178b5a398991f24a0109a9d3a381609a7cf7f"
+                     "path":  "dist/assets/index-BuONWziP.css",
+                     "sha256":  "00cb623c0a7120f0c21fdafd4ad15537213212febdae37386dbb9b313d44a3b7"
                  },
                  {
                      "path":  "dist/banner-preview.png",
@@ -119,7 +119,7 @@
                  },
                  {
                      "path":  "dist/index.html",
-                     "sha256":  "c99cccae74977803a2cb9eec70c124352ccc4d63ab27e20083d3554c3d3bdcaf"
+                     "sha256":  "7f26425546f8350bffc0eca04caf64009349e5c83b4f9d9c7dfc9f0f25405f7c"
                  },
                  {
                      "path":  "dist/manifest.json",
@@ -165,7 +165,7 @@
                    },
                    {
                        "path":  "App.tsx",
-                       "sha256":  "1dd64415ee85d8d575b0cf94b80c757360d64dc6faf208e9b65f21533448a9cc"
+                       "sha256":  "4b74c7e2b528252d51b9ee487f7441bb3fcefcc33878475d8f3644fd092ee58c"
                    },
                    {
                        "path":  "LEIA-ME-PUBLICAR.md",
@@ -173,7 +173,7 @@
                    },
                    {
                        "path":  "Publicar-Portfolio.ps1",
-                       "sha256":  "41c7da71bb932c5f20c781e35dcae3154537c224f70deb885fba3982fb266767"
+                       "sha256":  "92874aa6fd7d6e9ae7ec5ed8661bc9e28631782e6c27a6c638521a0c66398aae"
                    },
                    {
                        "path":  "components/AutoPartsCaseStudy.tsx",
