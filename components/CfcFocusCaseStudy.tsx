@@ -1,3 +1,4 @@
+import CaseStatusNotice from './CaseStatusNotice';
 import React, { useEffect } from 'react';
 import { X, Trophy, GraduationCap, Car, ChevronRight, Bell, Battery, Wifi, Signal, SkipForward, UserPlus, LogIn, MapPin, Award, CheckCircle2, Layout, Type, MousePointerClick, Shield } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
@@ -32,6 +33,7 @@ const CfcFocusCaseStudy: React.FC<CfcFocusCaseStudyProps> = ({ onClose }) => {
             <div className="text-[#EEEEEE] font-mono font-bold text-lg tracking-wide">CFC <span className="text-[#02DA6D]">Focus</span></div>
         </div>
         <button 
+          aria-label="Fechar case CFC Focus"
           onClick={onClose}
           className="p-2 rounded-full bg-[#111] text-[#02DA6D] hover:bg-[#02DA6D] hover:text-[#000] transition-all border border-[#02DA6D]/30"
         >
@@ -40,6 +42,7 @@ const CfcFocusCaseStudy: React.FC<CfcFocusCaseStudyProps> = ({ onClose }) => {
       </div>
 
       <div className="max-w-7xl mx-auto pt-24 pb-20 px-6">
+        <CaseStatusNotice name="CFC Focus" />
         
         {/* HERO SECTION */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 min-h-[60vh] relative">
@@ -86,7 +89,7 @@ const CfcFocusCaseStudy: React.FC<CfcFocusCaseStudyProps> = ({ onClose }) => {
                 <div className="w-full h-full bg-gradient-to-b from-[#050A07] to-[#001F0F] relative flex flex-col">
                     {/* Skip Button */}
                     <div className="absolute top-14 right-6 z-20">
-                        <button className="text-white/60 text-xs font-medium hover:text-white flex items-center gap-1">
+                        <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="text-white/60 text-xs font-medium hover:text-white flex items-center gap-1">
                             Pular <SkipForward size={12} />
                         </button>
                     </div>
@@ -124,7 +127,7 @@ const CfcFocusCaseStudy: React.FC<CfcFocusCaseStudyProps> = ({ onClose }) => {
                         </div>
 
                         {/* CTA Button */}
-                        <button className="w-full bg-gradient-to-r from-[#01743A] to-[#02DA6D] text-white font-bold py-4 rounded-xl shadow-[0_4px_20px_rgba(1,116,58,0.4)] flex items-center justify-center gap-2 group">
+                        <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="w-full bg-gradient-to-r from-[#01743A] to-[#02DA6D] text-white font-bold py-4 rounded-xl shadow-[0_4px_20px_rgba(1,116,58,0.4)] flex items-center justify-center gap-2 group">
                             Comece agora
                             <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </button>
@@ -207,7 +210,7 @@ const CfcFocusCaseStudy: React.FC<CfcFocusCaseStudyProps> = ({ onClose }) => {
 
                 {/* Visual Representation of Buttons */}
                 <div className="flex flex-col items-center justify-center space-y-6 bg-[#000] p-12 rounded-3xl border border-[#1F2923] shadow-2xl">
-                    <button className="w-full max-w-xs bg-gradient-to-r from-[#01743A] to-[#02DA6D] text-white font-bold py-4 rounded-xl shadow-[0_4px_20px_rgba(1,116,58,0.4)] hover:scale-105 transition-transform flex justify-center items-center gap-2">
+                    <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="w-full max-w-xs bg-gradient-to-r from-[#01743A] to-[#02DA6D] text-white font-bold py-4 rounded-xl shadow-[0_4px_20px_rgba(1,116,58,0.4)] hover:scale-105 transition-transform flex justify-center items-center gap-2">
                         Cadastre-se Grátis <ChevronRight size={18} />
                     </button>
                     
@@ -217,7 +220,7 @@ const CfcFocusCaseStudy: React.FC<CfcFocusCaseStudyProps> = ({ onClose }) => {
                         <div className="h-px bg-[#333] flex-1"></div>
                     </div>
 
-                    <button className="w-full max-w-xs bg-transparent border-2 border-[#333] text-white font-bold py-4 rounded-xl hover:border-[#02DA6D] hover:text-[#02DA6D] transition-colors">
+                    <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="w-full max-w-xs bg-transparent border-2 border-[#333] text-white font-bold py-4 rounded-xl hover:border-[#02DA6D] hover:text-[#02DA6D] transition-colors">
                         Fazer Login
                     </button>
                 </div>

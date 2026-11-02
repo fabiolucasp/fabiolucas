@@ -1,3 +1,4 @@
+import CaseStatusNotice from './CaseStatusNotice';
 import React, { useEffect } from 'react';
 import { X, Smartphone, Globe, Laptop, Database, Map, FileSignature, MessageSquare, Zap, Link, Navigation, ShieldCheck, Code, Layers, Clock, Brain, TrendingUp, AlertTriangle, Users, Target, Megaphone, Lock, Unlock, BarChart3, CheckCircle2 } from 'lucide-react';
 
@@ -26,6 +27,7 @@ const ConperCaseStudy: React.FC<ConperCaseStudyProps> = ({ onClose }) => {
       <div className="fixed top-0 left-0 right-0 z-[101] bg-[#0F1218]/90 backdrop-blur-md border-b border-[#C5A47E]/20 px-6 py-4 flex justify-between items-center">
         <div className="text-[#C5A47E] font-mono font-bold text-xl tracking-widest">CONPER</div>
         <button 
+          aria-label="Fechar case CONPER"
           onClick={onClose}
           className="p-2 rounded-full bg-[#1A202C] text-[#C5A47E] hover:bg-[#C5A47E] hover:text-[#000] transition-all border border-[#C5A47E]/30"
         >
@@ -34,6 +36,7 @@ const ConperCaseStudy: React.FC<ConperCaseStudyProps> = ({ onClose }) => {
       </div>
 
       <div className="max-w-7xl mx-auto pt-24 pb-20 px-6">
+        <CaseStatusNotice name="CONPER" />
         
         {/* HERO SECTION */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 min-h-[70vh]">
@@ -212,7 +215,7 @@ const ConperCaseStudy: React.FC<ConperCaseStudyProps> = ({ onClose }) => {
                         <p className="text-[#888]">
                             Assinatura digital com validade jurídica integrada. O contrato sai do app direto para o e-mail das partes.
                         </p>
-                        <button className="px-8 py-3 bg-[#C5A47E] text-[#0F1218] font-bold rounded hover:bg-[#D4AF37] transition-colors w-full">
+                        <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="px-8 py-3 bg-[#C5A47E] text-[#0F1218] font-bold rounded hover:bg-[#D4AF37] transition-colors w-full">
                             Ver Fluxo de Assinatura
                         </button>
                     </div>

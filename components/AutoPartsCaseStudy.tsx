@@ -1,3 +1,4 @@
+import CaseStatusNotice from './CaseStatusNotice';
 import React, { useEffect } from 'react';
 import { X, Wrench, Smartphone, Server, Database, AlertCircle, ShoppingCart, Search, CreditCard, MapPin, Tag, Box, CheckCircle2, Store, ShieldCheck, Camera, Bike, Timer, Navigation, MessageSquare, Heart, Settings, Image as ImageIcon, DollarSign, Bell, BarChart, Layers, FileText, UploadCloud, QrCode, Lock, UserPlus, User, LogOut, HelpCircle, Key, Mail, Trash2, FileCheck, Zap } from 'lucide-react';
 
@@ -30,6 +31,7 @@ const AutoPartsCaseStudy: React.FC<AutoPartsCaseStudyProps> = ({ onClose }) => {
             <div className="text-[#EEEEEE] font-mono font-bold text-lg tracking-wide">AutoParts <span className="text-[#FFB600]">Guide</span></div>
         </div>
         <button 
+          aria-label="Fechar case AutoPartsGuide"
           onClick={onClose}
           className="p-2 rounded-full bg-[#212E3A] text-[#FFB600] hover:bg-[#FFB600] hover:text-[#000] transition-all border border-[#FFB600]/30"
         >
@@ -38,6 +40,7 @@ const AutoPartsCaseStudy: React.FC<AutoPartsCaseStudyProps> = ({ onClose }) => {
       </div>
 
       <div className="max-w-7xl mx-auto pt-24 pb-20 px-6">
+        <CaseStatusNotice name="AutoPartsGuide" />
         
         {/* HERO SECTION */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 min-h-[60vh]">
@@ -533,7 +536,7 @@ const AutoPartsCaseStudy: React.FC<AutoPartsCaseStudyProps> = ({ onClose }) => {
                     <div>
                         <h4 className="text-[#AAAAAA] uppercase tracking-wider text-sm mb-4">Componentes UI</h4>
                         <div className="flex flex-wrap gap-4">
-                            <button className="px-6 py-2 bg-[#FFB600] text-[#000] font-bold rounded hover:bg-[#ffc12e]">Botão Primário</button>
+                            <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="px-6 py-2 bg-[#FFB600] text-[#000] font-bold rounded hover:bg-[#ffc12e]">Botão Primário</button>
                             <div className="flex items-center gap-2 bg-[#15191E] px-4 py-2 rounded border border-[#333] text-[#EEE]">
                                 <div className="w-4 h-4 rounded-full border border-[#FFB600] flex items-center justify-center">
                                     <div className="w-2 h-2 bg-[#FFB600] rounded-full"></div>

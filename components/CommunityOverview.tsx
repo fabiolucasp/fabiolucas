@@ -19,17 +19,14 @@ const CommunityOverview: React.FC = () => {
           
           {/* CTA Discord Button */}
           <div className="mt-8">
-            <a 
-                href="https://discord.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
+            <span aria-disabled="true"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-[#5865F2] hover:bg-[#4752C4] text-white rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(88,101,242,0.4)]"
             >
                 <MessageSquare size={24} />
-                Entrar no Discord VIP
+                Convite ainda não configurado
                 <ExternalLink size={18} className="opacity-70" />
-            </a>
-            <p className="text-[#666] text-xs mt-3 font-mono">Acesso gratuito para alunos e leitores.</p>
+            </span>
+            <p className="text-[#666] text-xs mt-3 font-mono">Proposta de comunidade; canais e benefícios abaixo ainda não estão disponíveis nesta vitrine.</p>
           </div>
         </div>
 

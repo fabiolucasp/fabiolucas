@@ -63,6 +63,8 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button 
+          aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMobileMenuOpen}
           className="md:hidden text-[#EEEEEE] p-2 hover:text-[#44D62C]"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >

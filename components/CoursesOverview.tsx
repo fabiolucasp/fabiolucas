@@ -43,6 +43,7 @@ const CoursesOverview: React.FC = () => {
         <div className="bg-[#02569B] text-white px-6 py-4 sticky top-0 z-50 shadow-md flex justify-between items-center">
            <div className="flex items-center gap-4">
               <button 
+                aria-label="Voltar aos cursos"
                 onClick={() => setSelectedCourse(null)}
                 className="p-2 hover:bg-white/10 rounded-full transition-colors"
               >
@@ -74,7 +75,7 @@ const CoursesOverview: React.FC = () => {
                     </p>
                     <div className="flex flex-wrap gap-6 text-sm font-medium">
                         <div className="flex items-center gap-2"><Layers size={18} /> Módulo Iniciante</div>
-                        <div className="flex items-center gap-2"><Video size={18} /> 2 Aulas Disponíveis</div>
+                        <div className="flex items-center gap-2"><Video size={18} /> Prévia de conteúdo</div>
                         <div className="flex items-center gap-2"><Code2 size={18} /> Dart & Flutter SDK</div>
                     </div>
                 </div>
@@ -136,6 +137,7 @@ const CoursesOverview: React.FC = () => {
   // --- VISUALIZAÇÃO PADRÃO (DARK MODE) ---
   return (
     <section className="min-h-screen bg-[#000000] pb-20 pt-24 font-sans text-[#EEEEEE]">
+      <p className="container mx-auto px-6 py-4 text-sm text-[#AAA] border-b border-[#333]">Prévia de catálogo: matrículas, aulas em vídeo e agenda de mentorias ainda não estão disponíveis nesta vitrine.</p>
       
       {/* HERO SECTION */}
       <div className="relative overflow-hidden mb-20">
@@ -162,11 +164,11 @@ const CoursesOverview: React.FC = () => {
                 Não é apenas um curso de telas. É uma formação de Arquitetura de Software. Aprenda a criar clones perfeitos, manipular Cloud Functions, integrar IAs e dominar a infraestrutura da Google.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-                <button className="px-8 py-4 bg-[#44D62C] text-black font-bold rounded-lg hover:bg-[#5aff3d] transition-all shadow-[0_0_20px_rgba(68,214,44,0.4)] uppercase tracking-wider font-mono flex items-center gap-2">
+                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="px-8 py-4 bg-[#44D62C] text-black font-bold rounded-lg hover:bg-[#5aff3d] transition-all shadow-[0_0_20px_rgba(68,214,44,0.4)] uppercase tracking-wider font-mono flex items-center gap-2">
                     <Rocket size={20} />
                     Quero me Inscrever
                 </button>
-                <button className="px-8 py-4 bg-[#111] text-white border border-[#333] font-bold rounded-lg hover:border-[#44D62C] transition-all uppercase tracking-wider font-mono">
+                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="px-8 py-4 bg-[#111] text-white border border-[#333] font-bold rounded-lg hover:border-[#44D62C] transition-all uppercase tracking-wider font-mono">
                     Ver Ementa Completa
                 </button>
             </div>
@@ -186,12 +188,12 @@ const CoursesOverview: React.FC = () => {
                 <div className="flex-1">
                     <h3 className="text-2xl font-bold text-white mb-2 font-mono">Mentoria Ao Vivo Exclusiva</h3>
                     <p className="text-[#AAA] leading-relaxed">
-                        Além das aulas gravadas, realizamos <strong>Lives Semanais de Tira-Dúvidas</strong> apenas para assinantes. Traga seus erros, seus bugs e vamos debugar juntos em tempo real.
+                        Além das aulas gravadas, realizamos <strong>Lives Semanais de Tira-Dúvidas</strong> conforme disponibilidade a confirmar. Traga seus erros, seus bugs e vamos debugar juntos em tempo real.
                     </p>
                 </div>
                 <div className="text-center bg-[#1A1A1A] px-6 py-3 rounded-lg border border-[#333]">
-                    <span className="block text-xs text-[#888] uppercase tracking-widest mb-1">Próxima Sessão</span>
-                    <span className="block text-[#44D62C] font-bold text-lg font-mono">Quinta, 20:00h</span>
+                    <span className="block text-xs text-[#888] uppercase tracking-widest mb-1">Agenda a confirmar</span>
+                    <span className="block text-[#44D62C] font-bold text-lg font-mono">Sem data publicada</span>
                 </div>
             </div>
         </div>
@@ -213,7 +215,7 @@ const CoursesOverview: React.FC = () => {
                 icon={<Smartphone size={32} />}
                 title="Curso de Flutter"
                 subtitle="Iniciantes ao Avançado"
-                description="O curso definitivo. Da instalação do Android Studio à criação de layouts complexos com Widgets (Row, Column, Container). Clique para assistir as aulas disponíveis."
+                description="O curso definitivo. Da instalação do Android Studio à criação de layouts complexos com Widgets (Row, Column, Container). Clique para explorar a prévia do conteúdo."
                 techs={["Android Studio", "Widgets", "Dart", "Logic"]}
                 image="https://images.unsplash.com/photo-1617042375876-a13e36732a04?q=80&w=800&auto=format&fit=crop"
                 highlight
@@ -427,7 +429,8 @@ const CoursesOverview: React.FC = () => {
                 </div>
             </div>
         </div>
-    </div>
+
+      </div>
 
       {/* MODULE 4: ENTERPRISE INTEGRATIONS */}
       <div className="container mx-auto px-6 mb-32">

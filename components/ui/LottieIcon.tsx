@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import React, { useEffect, useState } from 'react';
+import { DotLottieReact, type DotLottie } from '@lottiefiles/dotlottie-react';
 
 interface LottieIconProps {
   src?: string;
@@ -20,9 +20,16 @@ const LottieIcon: React.FC<LottieIconProps> = ({
   playOnHover = false,
   className = "" 
 }) => {
-  const [dotLottie, setDotLottie] = useState<any>(null);
+  const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
   const [error, setError] = useState(false);
   
+  useEffect(() => { setError(false); }, [src]);
+  useEffect(() => {
+    const onLoadError = () => setError(true);
+    dotLottie?.addEventListener('loadError', onLoadError);
+    return () => dotLottie?.removeEventListener('loadError', onLoadError);
+  }, [dotLottie]);
+
   const effectiveAutoplay = playOnHover ? false : autoplay;
   const effectiveLoop = playOnHover ? true : loop;
 
@@ -70,7 +77,6 @@ const LottieIcon: React.FC<LottieIconProps> = ({
         loop={effectiveLoop}
         autoplay={effectiveAutoplay}
         dotLottieRefCallback={setDotLottie}
-        onError={() => setError(true)}
         renderConfig={{
             autoResize: true,
             devicePixelRatio: window.devicePixelRatio || 1,

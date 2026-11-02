@@ -3,8 +3,9 @@ import {
   X, Map, TrendingUp, Navigation, Database, CloudLightning, Wrench, 
   Droplet, Car, ShieldCheck, Zap, BarChart2, Coins, ArrowRight, 
   Layers, Code2, Cpu, Table, FileText, Layout, User, Eye, 
-  Settings, Terminal, Network, AlertTriangle
+  Settings, Terminal, Network, AlertTriangle, CheckCircle2
 } from 'lucide-react';
+import { PROJECT_EVIDENCE } from '../projectEvidence';
 
 interface GynMoveCaseStudyProps {
   onClose: () => void;
@@ -14,6 +15,7 @@ const GynMoveCaseStudy: React.FC<GynMoveCaseStudyProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState<'produto' | 'arquitetura' | 'dados'>('produto');
   const [activeArchSubTab, setActiveArchSubTab] = useState<'init' | 'nav' | 'notif'>('init');
   const [activeDbSubTab, setActiveDbSubTab] = useState<'global' | 'motorista' | 'passageiro' | 'volt'>('global');
+  const evidence = PROJECT_EVIDENCE.gynmove;
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -28,7 +30,7 @@ const GynMoveCaseStudy: React.FC<GynMoveCaseStudyProps> = ({ onClose }) => {
   // Secondary Dark: #0E1412
 
   return (
-    <div className="fixed inset-0 z-[100] bg-[#0E1412] overflow-y-auto font-sans selection:bg-[#13AC6F] selection:text-[#FFF] text-[#EEEEEE]">
+    <div role="dialog" aria-modal="true" aria-label="Case GynMove" className="fixed inset-0 z-[100] bg-[#0E1412] overflow-y-auto font-sans selection:bg-[#13AC6F] selection:text-[#FFF] text-[#EEEEEE]">
       
       {/* Floating Header */}
       <div className="fixed top-0 left-0 right-0 z-[101] bg-[#0E1412]/95 backdrop-blur-md border-b border-[#13AC6F]/20 px-6 py-4 flex justify-between items-center shadow-lg">
@@ -81,6 +83,7 @@ const GynMoveCaseStudy: React.FC<GynMoveCaseStudyProps> = ({ onClose }) => {
         </div>
 
         <button 
+          aria-label="Fechar case GynMove"
           onClick={onClose}
           className="p-2 rounded-full bg-[#1A2522] text-[#13AC6F] hover:bg-[#13AC6F] hover:text-[#FFF] transition-all border border-[#13AC6F]/30"
           title="Fechar Case Study"
@@ -122,6 +125,28 @@ const GynMoveCaseStudy: React.FC<GynMoveCaseStudyProps> = ({ onClose }) => {
 
       {/* Main Container */}
       <div className="max-w-7xl mx-auto pt-48 md:pt-32 pb-24 px-6">
+        {evidence && (
+          <div className="mb-12 rounded-2xl border border-[#13AC6F]/30 bg-[#121B18] p-6 md:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#13AC6F]/15 text-[#13AC6F] text-xs font-mono uppercase tracking-wider">
+                <CheckCircle2 size={14} /> {evidence.status}
+              </span>
+              <span className="text-xs font-mono text-gray-400">{evidence.headline}</span>
+            </div>
+            <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6">{evidence.audience}</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              {evidence.benefits.map((b) => (
+                <div key={b.title} className="bg-[#0E1412] border border-[#13AC6F]/15 rounded-xl p-4">
+                  <h3 className="text-sm font-bold text-[#EEEEEE] font-mono mb-1">{b.title}</h3>
+                  <p className="text-xs text-gray-400 leading-relaxed">{b.detail}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-gray-400 border-t border-[#13AC6F]/15 pt-4 font-mono">
+              <strong className="text-[#13AC6F]">Status de produção e escopo:</strong> {evidence.limits}
+            </p>
+          </div>
+        )}
         
         {/* ========================================== */}
         {/* TAB 1: PRODUTO & ALGORITMO */}

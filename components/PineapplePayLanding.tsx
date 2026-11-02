@@ -1,3 +1,5 @@
+import CaseStatusNotice from './CaseStatusNotice';
+import SectionLink from './SectionLink';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Store, UserPlus, ShoppingCart, Receipt, Gift, Trophy, ArrowRight, Smartphone, Building2, Heart } from 'lucide-react';
@@ -21,12 +23,12 @@ const PineapplePayLanding: React.FC = () => {
                 </div>
             </div>
             <div className="hidden md:flex gap-6 text-sm font-medium text-gray-300">
-                <a href="#como-funciona" className="hover:text-[#FFAB00] transition-colors">Como Funciona</a>
-                <a href="#b2b" className="hover:text-[#00B54B] transition-colors">Para Lojistas</a>
-                <a href="#b2c" className="hover:text-[#E91482] transition-colors">Para Padrinhos</a>
+                <SectionLink id="como-funciona" className="hover:text-[#FFAB00] transition-colors">Como Funciona</SectionLink>
+                <SectionLink id="b2b" className="hover:text-[#00B54B] transition-colors">Para Lojistas</SectionLink>
+                <SectionLink id="b2c" className="hover:text-[#E91482] transition-colors">Para Padrinhos</SectionLink>
             </div>
-            <button className="bg-[#E91482] hover:bg-[#C2185B] text-white px-6 py-2 rounded-full font-bold text-sm transition-all shadow-lg shadow-[#E91482]/20 font-ubuntu">
-                Baixar App
+            <button disabled title="Acesso indisponível nesta apresentação" className="bg-[#E91482] hover:bg-[#C2185B] text-white px-6 py-2 rounded-full font-bold text-sm transition-all shadow-lg shadow-[#E91482]/20 font-ubuntu">
+                Acesso indisponível
             </button>
         </div>
       </nav>
@@ -37,6 +39,7 @@ const PineapplePayLanding: React.FC = () => {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#E91482]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="container mx-auto text-center relative z-10">
+            <CaseStatusNotice name="PineapplePay" />
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -52,8 +55,8 @@ const PineapplePayLanding: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-5xl md:text-7xl font-bold text-white leading-tight font-ubuntu mb-6"
             >
-                Pineapple Pay chegou para <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFAB00] via-[#E91482] to-[#FFAB00]">te dar dinheiro!</span>
+                Uma proposta para <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFAB00] via-[#E91482] to-[#FFAB00]">conectar compras e educação!</span>
             </motion.h1>
             
             <motion.p 
@@ -62,7 +65,7 @@ const PineapplePayLanding: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 font-light"
             >
-                Transforme suas compras do dia a dia em sonhos realizados. O único app onde você ajuda universitários a se formarem apenas comprando no comércio local.
+                Transforme suas compras do dia a dia em sonhos realizados. Conceito de aplicativo que propõe aproximar comércio local e apoio à formação universitária.
             </motion.p>
 
             <motion.div 
@@ -111,7 +114,7 @@ const PineapplePayLanding: React.FC = () => {
                             <span>Fidelize milhares de estudantes e suas famílias.</span>
                         </li>
                     </ul>
-                    <button className="text-[#00B54B] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
+                    <button disabled title="Acesso indisponível nesta apresentação" className="text-[#00B54B] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
                         Cadastrar Empresa <ArrowRight size={16} />
                     </button>
                 </div>
@@ -147,7 +150,7 @@ const PineapplePayLanding: React.FC = () => {
                             <span>Concorra a prêmios incríveis (Carros, Iphones).</span>
                         </li>
                     </ul>
-                    <button className="text-[#E91482] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
+                    <button disabled title="Acesso indisponível nesta apresentação" className="text-[#E91482] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
                         Quero ser Padrinho <ArrowRight size={16} />
                     </button>
                 </div>
@@ -228,8 +231,7 @@ const PineapplePayLanding: React.FC = () => {
                 </div>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">
                     Cleimes, Azevedo e Novaes LTDA.<br/>
-                    CNPJ: 34.123.456/0001-00<br/>
-                    Av. JK, 104 Norte, Cj. 02 Lt. 19 - Palmas, TO
+                    Apresentação conceitual. Dados empresariais e canais de atendimento não publicados nesta vitrine.
                 </p>
                 <div className="flex gap-4">
                     <SocialIcon color="#E91482" />
@@ -241,9 +243,9 @@ const PineapplePayLanding: React.FC = () => {
             <div>
                 <h4 className="text-white font-bold mb-6 font-ubuntu">Legal</h4>
                 <ul className="space-y-3 text-sm text-gray-500">
-                    <li><a href="#" className="hover:text-white transition-colors">Termos de Uso</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Privacidade</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Regulamento de Sorteios</a></li>
+                    <li><span aria-disabled="true" title="Disponível em versão futura" className="hover:text-white transition-colors">Termos de Uso</span></li>
+                    <li><span aria-disabled="true" title="Disponível em versão futura" className="hover:text-white transition-colors">Privacidade</span></li>
+                    <li><span aria-disabled="true" title="Disponível em versão futura" className="hover:text-white transition-colors">Regulamento de Sorteios</span></li>
                 </ul>
             </div>
 
@@ -294,7 +296,7 @@ const StoreButton = ({ store, small }: { store: 'apple' | 'google', small?: bool
     const padding = small ? 'px-4 py-2' : 'px-6 py-3';
     
     return (
-      <button className={`flex items-center justify-center gap-3 ${padding} bg-white hover:bg-gray-200 text-[#101820] rounded-xl transition-transform hover:-translate-y-1 active:scale-95 shadow-lg group relative overflow-hidden`}>
+      <button disabled title="Acesso indisponível nesta apresentação" className={`flex items-center justify-center gap-3 ${padding} bg-white hover:bg-gray-200 text-[#101820] rounded-xl transition-transform hover:-translate-y-1 active:scale-95 shadow-lg group relative overflow-hidden`}>
         {isApple ? (
           <svg viewBox="0 0 384 512" width="20" height="20" fill="currentColor">
              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 46.9 126.7 98.6 126.7 25.8 0 32.2-19.1 75.5-19.1 42.9 0 49.3 19.1 75.9 19.1 50.7 0 85.9-92.3 97.4-126.3-43.6-15.6-70.4-53.5-70.4-90.4zm-64.3-157c19.5-22.1 33-53 28-82.9-29.2 1.4-60.7 20.2-80.1 44.2-16.7 20.7-32.2 53-27.4 82.5 31.8 2.3 61.8-22 79.5-43.8z"/>

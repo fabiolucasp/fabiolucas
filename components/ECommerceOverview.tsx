@@ -1251,11 +1251,11 @@ const ECommerceOverview: React.FC<ECommerceOverviewProps> = ({ type }) => {
                 <div className="flex items-center gap-4">
                     <span className="text-[#EEE] font-mono text-sm font-bold hidden md:inline truncate max-w-[200px]">{selectedBook.title}</span>
                     <button 
-                        onClick={() => alert("O download do PDF foi iniciado! (Simulação)")}
+                        disabled aria-label="PDF indisponível: arquivo não configurado" title="Arquivo PDF não configurado"
                         className="flex items-center gap-2 bg-[#44D62C] text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-[#5aff3d] transition-transform hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(68,214,44,0.3)]"
                     >
                         <Download size={16} />
-                        <span className="hidden sm:inline">Baixar PDF</span>
+                        <span className="hidden sm:inline">PDF indisponível</span>
                     </button>
                 </div>
             </div>
@@ -1339,11 +1339,11 @@ const ECommerceOverview: React.FC<ECommerceOverviewProps> = ({ type }) => {
                     <h3 className="text-2xl font-bold text-[#EEE] mb-2">Pronto para o próximo nível?</h3>
                     <p className="text-[#888] mb-6">Este foi apenas o começo. Baixe o PDF completo para ter acesso offline.</p>
                     <button 
-                        onClick={() => alert("Download iniciado!")}
+                        disabled aria-label="PDF indisponível: arquivo não configurado" title="Arquivo PDF não configurado"
                         className="inline-flex items-center gap-2 bg-[#EEE] text-black px-8 py-3 rounded-full font-bold hover:bg-[#44D62C] transition-colors"
                     >
                         <Download size={20} />
-                        Download E-book PDF
+                        Arquivo PDF não configurado
                     </button>
                 </div>
 

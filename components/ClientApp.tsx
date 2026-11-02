@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { GitCommit, Bell, CalendarDays, Video, Smartphone } from 'lucide-react';
 import LottieIcon from './ui/LottieIcon';
 
@@ -19,7 +20,7 @@ const ClientPortal: React.FC = () => {
                 <div className="mr-2 w-4 h-4 flex items-center justify-center">
                     <Smartphone size={16} />
                 </div>
-                Experiência Exclusiva
+                FounderOS · Prévia do portal
               </div>
 
               <div>
@@ -27,9 +28,11 @@ const ClientPortal: React.FC = () => {
                   Acompanhe o desenvolvimento <span className="text-[#44D62C]">em tempo real</span>.
                 </h2>
                 <p className="text-[#AAAAAA] text-lg font-sans leading-relaxed">
-                  Transparência total e controle na palma da sua mão. Baixe o aplicativo exclusivo para clientes e receba notificações automáticas a cada avanço do projeto, agende reuniões e acesse transcrições.
+                  O aplicativo do cliente está em desenvolvimento em Flutter, com distribuição prevista pela App Store e Google Play. O escopo inicial reúne projetos, etapas, tarefas e progresso; ele é separado da central interna da agência. Esta tela é uma demonstração visual: notificações, reuniões, IA e integrações abaixo são possibilidades futuras, não serviços já ativos.
                 </p>
               </div>
+
+              <Link to="/login" className="inline-block px-6 py-3 rounded-lg bg-[#44D62C] text-black font-bold">Consultar acesso ao portal</Link>
 
               {/* Features List */}
               <div className="space-y-4">
@@ -73,7 +76,7 @@ const ClientPortal: React.FC = () => {
                     <div className="w-full h-full bg-[#0A0A0A] pt-12 px-4 flex flex-col relative">
                         {/* Header App */}
                         <div className="flex items-center justify-between mb-8">
-                            <span className="text-[#44D62C] font-mono font-bold text-lg">F/L App</span>
+                            <span className="text-[#44D62C] font-mono font-bold text-lg">Prévia ilustrativa</span>
                             <div className="w-8 h-8 rounded-full bg-[#222] flex items-center justify-center overflow-hidden text-[#44D62C]">
                                 <Smartphone size={20} />
                             </div>
@@ -145,7 +148,7 @@ const StoreButton = ({ store }: { store: 'apple' | 'google' }) => {
   const isApple = store === 'apple';
   
   return (
-    <button className="flex items-center justify-center gap-3 px-6 py-3 bg-[#EEEEEE] hover:bg-[#FFFFFF] text-black rounded-xl transition-transform hover:-translate-y-1 active:scale-95 shadow-lg group relative overflow-hidden">
+    <button disabled aria-label={isApple ? "App Store: aplicativo em desenvolvimento" : "Google Play: aplicativo em desenvolvimento"} className="opacity-60 cursor-not-allowed flex items-center justify-center gap-3 px-6 py-3 bg-[#EEEEEE] hover:bg-[#FFFFFF] text-black rounded-xl transition-transform hover:-translate-y-1 active:scale-95 shadow-lg group relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
       {isApple ? (
         <svg viewBox="0 0 384 512" width="24" height="24" fill="currentColor">
@@ -158,7 +161,7 @@ const StoreButton = ({ store }: { store: 'apple' | 'google' }) => {
       )}
       <div className="text-left relative z-10">
         <div className="text-[10px] uppercase font-bold tracking-wider opacity-60 font-sans">
-          {isApple ? 'Download on the' : 'GET IT ON'}
+          Aplicativo em desenvolvimento
         </div>
         <div className="text-sm font-bold font-sans leading-none">
           {isApple ? 'App Store' : 'Google Play'}

@@ -3,6 +3,7 @@ import { ArrowDown, Github, Linkedin, Smartphone, Book, GraduationCap, Code2, Te
 import { NavLink } from 'react-router-dom';
 import { PROFILE } from '../constants';
 import LottieIcon from './ui/LottieIcon';
+import SectionLink from './SectionLink';
 
 const Hero: React.FC = () => {
   return (
@@ -135,11 +136,11 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <a href="#about" className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#666] hover:text-[#44D62C] transition-colors animate-bounce">
+      <SectionLink id="skills" aria-label="Ir para Tecnologias e Skills" className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#666] hover:text-[#44D62C] transition-colors animate-bounce">
         <div className="w-8 h-8 flex items-center justify-center">
             <ArrowDown size={32} />
         </div>
-      </a>
+      </SectionLink>
       
     </section>
   );

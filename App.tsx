@@ -17,6 +17,7 @@ import WebDevelopmentLanding from './components/WebDevelopmentLanding';
 import LoginScreen from './components/LoginScreen';
 import BichoMimadoLanding from './components/BichoMimadoLanding';
 import PineapplePayLanding from './components/PineapplePayLanding';
+import ScrollToTop from './components/ScrollToTop';
 
 // Main Portfolio sections component
 const PortfolioPage: React.FC = () => (
@@ -40,6 +41,7 @@ function App() {
           A lógica de navegação e exibição da Navbar agora é centralizada no MainLayout 
           para evitar duplicação de componentes no DOM.
       */}
+      <ScrollToTop />
       <MainLayout />
     </Router>
   );
@@ -67,6 +69,7 @@ const MainLayout = () => {
                     <Route path="/ebooks" element={<ECommerceOverview type="ebooks" />} />
                     <Route path="/cursos" element={<CoursesOverview />} />
                     <Route path="/comunidade" element={<CommunityOverview />} />
+                    <Route path="/cliente" element={<ClientPortal />} />
                     <Route path="/login" element={<LoginScreen />} />
                     <Route path="/bicho-mimado-app" element={<BichoMimadoLanding />} />
                     <Route path="/pineapple-pay" element={<PineapplePayLanding />} />

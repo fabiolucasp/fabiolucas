@@ -1,3 +1,4 @@
+import CaseStatusNotice from './CaseStatusNotice';
 import React, { useEffect, useState } from 'react';
 import { X, Smartphone, CreditCard, Ticket, MapPin, Gift, PieChart, Wallet, ShoppingBag, ArrowRight, User, Bell, ShieldAlert, Crown, Users, Plane, Anchor, Building2, Lock, LayoutDashboard, FileText, Receipt, UserCheck, BarChart3, Settings, Key, CheckCircle, Database, Globe, Trophy, Store, Heart, UserPlus, ShoppingCart, Eye, EyeOff, ArrowUp, ArrowDown, Calendar, PlusCircle, Percent, MoreVertical, BarChart2, Layers, Search, Pin, Tag, Package, Plus, Megaphone, Star, ListOrdered, Target, School, Landmark, PartyPopper, AlertTriangle, TrendingDown, DollarSign, Power, Activity, Sliders, FileCode, Shield, Download, RefreshCw, ShieldCheck, Send, Filter, UserCog, Ban, History, FileSignature, Laptop, Radio, CheckSquare, ServerCrash, Check, Menu, Image, ArrowLeft, Utensils, Share2, Layout } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
@@ -34,13 +35,14 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
         <div className="flex gap-4">
             <NavLink 
                 to="/pineapple-pay" 
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
                 className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#E91482]/10 text-[#E91482] rounded-full text-xs font-bold hover:bg-[#E91482] hover:text-white transition-colors"
             >
                 <Globe size={14} /> Ver Landing Page Full
             </NavLink>
             <button 
-            onClick={onClose}
+            aria-label="Fechar case PineapplePay"
+          onClick={onClose}
             className="p-2 rounded-full bg-[#1A1A1A] text-[#E91482] hover:bg-[#E91482] hover:text-[#FFF] transition-all border border-[#E91482]/30"
             >
             <X size={24} />
@@ -49,6 +51,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
       </div>
 
       <div className="max-w-7xl mx-auto pt-24 pb-20 px-6">
+        <CaseStatusNotice name="PineapplePay" />
         
         {/* HERO SECTION (CASE STUDY CONTEXT) */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 min-h-[60vh]">
@@ -161,7 +164,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                     <p className="text-xs font-bold text-gray-800">Contrato: Buffet Premium</p>
                                     <p className="text-[10px] text-gray-500">Enviado por: Cerimonial</p>
                                 </div>
-                                <button className="text-[10px] bg-[#00C853] text-white px-3 py-1 rounded">Votar</button>
+                                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="text-[10px] bg-[#00C853] text-white px-3 py-1 rounded">Votar</button>
                             </div>
                         </div>
                     </div>
@@ -289,7 +292,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                 <p className="text-gray-300 mb-6 leading-relaxed">
                                     Pare de gastar com panfletos. No Pineapple Pay, você faz <strong>Marketing Pré-Pago</strong>.
                                 </p>
-                                <button className="text-[#00B54B] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
+                                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="text-[#00B54B] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
                                     Cadastrar Empresa <ArrowRight size={16} />
                                 </button>
                             </div>
@@ -314,7 +317,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                 <p className="text-gray-300 mb-6 leading-relaxed">
                                     Pequenos descontos viram sonhos realizados para universitários.
                                 </p>
-                                <button className="text-[#E91482] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
+                                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="text-[#E91482] font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:gap-4 transition-all">
                                     Quero ser Padrinho <ArrowRight size={16} />
                                 </button>
                             </div>
@@ -524,10 +527,10 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                             </div>
                             
                             <div className="grid grid-cols-2 gap-4">
-                                <button className="flex items-center justify-center gap-2 bg-[#00C853]/10 text-[#00C853] py-2 rounded-lg font-bold text-xs border border-[#00C853]/20 hover:bg-[#00C853]/20 transition-colors">
+                                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="flex items-center justify-center gap-2 bg-[#00C853]/10 text-[#00C853] py-2 rounded-lg font-bold text-xs border border-[#00C853]/20 hover:bg-[#00C853]/20 transition-colors">
                                     <ArrowUp size={14} /> Receitas
                                 </button>
-                                <button className="flex items-center justify-center gap-2 bg-[#FF4444]/10 text-[#FF4444] py-2 rounded-lg font-bold text-xs border border-[#FF4444]/20 hover:bg-[#FF4444]/20 transition-colors">
+                                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="flex items-center justify-center gap-2 bg-[#FF4444]/10 text-[#FF4444] py-2 rounded-lg font-bold text-xs border border-[#FF4444]/20 hover:bg-[#FF4444]/20 transition-colors">
                                     <ArrowDown size={14} /> Despesas
                                 </button>
                             </div>
@@ -861,11 +864,11 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
 
                             {/* Actions Row */}
                             <div className="grid grid-cols-2 gap-3">
-                                <button className="bg-[#1A1A1A] p-3 rounded-xl border border-[#333] flex items-center justify-center gap-2 hover:bg-[#222]">
+                                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="bg-[#1A1A1A] p-3 rounded-xl border border-[#333] flex items-center justify-center gap-2 hover:bg-[#222]">
                                     <Megaphone size={16} className="text-blue-400" />
                                     <span className="text-[10px] text-white font-bold">Enviar Aviso</span>
                                 </button>
-                                <button className="bg-[#1A1A1A] p-3 rounded-xl border border-[#333] flex items-center justify-center gap-2 hover:bg-[#222]">
+                                <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="bg-[#1A1A1A] p-3 rounded-xl border border-[#333] flex items-center justify-center gap-2 hover:bg-[#222]">
                                     <Users size={16} className="text-[#FFAB00]" />
                                     <span className="text-[10px] text-white font-bold">Gerir Grupos</span>
                                 </button>
@@ -1176,10 +1179,10 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                 </h2>
                                 
                                 <div className="flex justify-center gap-4">
-                                    <button className="flex items-center gap-2 px-4 py-2 bg-[#00C853]/10 text-[#00C853] rounded-lg border border-[#00C853]/30 text-xs font-bold hover:bg-[#00C853]/20">
+                                    <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="flex items-center gap-2 px-4 py-2 bg-[#00C853]/10 text-[#00C853] rounded-lg border border-[#00C853]/30 text-xs font-bold hover:bg-[#00C853]/20">
                                         <ArrowUp size={14} /> Injetar
                                     </button>
-                                    <button className="flex items-center gap-2 px-4 py-2 bg-[#FF4444]/10 text-[#FF4444] rounded-lg border border-[#FF4444]/30 text-xs font-bold hover:bg-[#FF4444]/20">
+                                    <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="flex items-center gap-2 px-4 py-2 bg-[#FF4444]/10 text-[#FF4444] rounded-lg border border-[#FF4444]/30 text-xs font-bold hover:bg-[#FF4444]/20">
                                         <ArrowDown size={14} /> Sangria
                                     </button>
                                 </div>
@@ -1301,7 +1304,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                 <div className="flex justify-between items-center mb-1">
                                     <p className="text-[#94A3B8] text-[10px] uppercase font-bold tracking-widest">Saldo Global Consolidado</p>
                                     <div className="flex gap-2">
-                                        <button className="p-1 bg-[#0F172A] rounded border border-[#334155] hover:border-[#6366F1]"><Settings size={12} className="text-[#94A3B8]" /></button>
+                                        <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="p-1 bg-[#0F172A] rounded border border-[#334155] hover:border-[#6366F1]"><Settings size={12} className="text-[#94A3B8]" /></button>
                                     </div>
                                 </div>
                                 <h2 className="text-3xl font-bold text-white font-mono mb-4 group-hover:text-[#6366F1] transition-colors">R$ 1.842.390,00</h2>
@@ -1377,7 +1380,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                                 <p className="text-[9px] text-[#94A3B8]">Turma Eng. Civil • Motivo: Limite</p>
                                             </div>
                                         </div>
-                                        <button className="text-[#6366F1] text-[9px] border border-[#6366F1] px-2 py-1 rounded hover:bg-[#6366F1] hover:text-white transition-colors">Liberar</button>
+                                        <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="text-[#6366F1] text-[9px] border border-[#6366F1] px-2 py-1 rounded hover:bg-[#6366F1] hover:text-white transition-colors">Liberar</button>
                                     </div>
                                     <div className="p-3 flex justify-between items-center hover:bg-[#252f45] transition-colors">
                                         <div className="flex items-center gap-3">
@@ -1549,7 +1552,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                                 <span className="text-[#00C853] text-xs font-bold">R$ 49,90</span>
                                                 <span className="text-[#666] text-[10px] line-through">R$ 65</span>
                                             </div>
-                                            <button className="w-full mt-2 bg-[#E91482] text-white text-[10px] font-bold py-1.5 rounded">ADICIONAR</button>
+                                            <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="w-full mt-2 bg-[#E91482] text-white text-[10px] font-bold py-1.5 rounded">ADICIONAR</button>
                                         </div>
                                     </div>
                                     {/* Item 2 */}
@@ -1562,7 +1565,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                             <div className="flex items-center gap-2 mt-1">
                                                 <span className="text-white text-xs font-bold">R$ 55,90</span>
                                             </div>
-                                            <button className="w-full mt-2 border border-[#E91482] text-[#E91482] text-[10px] font-bold py-1.5 rounded hover:bg-[#E91482] hover:text-white transition-colors">ADICIONAR</button>
+                                            <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="w-full mt-2 border border-[#E91482] text-[#E91482] text-[10px] font-bold py-1.5 rounded hover:bg-[#E91482] hover:text-white transition-colors">ADICIONAR</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1580,7 +1583,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                         <p className="text-[#888] text-[10px] leading-tight mt-1 line-clamp-2">Catupiry original, frango desfiado, milho, bacon crocante e azeitonas.</p>
                                         <div className="flex justify-between items-center mt-2">
                                             <span className="text-[#00C853] text-xs font-bold">R$ 62,90</span>
-                                            <button className="text-[#E91482] text-[10px] font-bold uppercase">Adicionar</button>
+                                            <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="text-[#E91482] text-[10px] font-bold uppercase">Adicionar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1593,7 +1596,7 @@ const PineapplePayCaseStudy: React.FC<PineapplePayCaseStudyProps> = ({ onClose }
                                         <p className="text-[#888] text-[10px] leading-tight mt-1 line-clamp-2">Muçarela, creme de milho especial e fatias de bacon.</p>
                                         <div className="flex justify-between items-center mt-2">
                                             <span className="text-white text-xs font-bold">R$ 58,90</span>
-                                            <button className="text-[#E91482] text-[10px] font-bold uppercase">Adicionar</button>
+                                            <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="text-[#E91482] text-[10px] font-bold uppercase">Adicionar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1778,7 +1781,7 @@ const LandingStoreButton = ({ store }: { store: 'apple' | 'google' }) => {
     const isApple = store === 'apple';
     
     return (
-      <button className={`flex items-center justify-center gap-3 px-6 py-3 bg-white hover:bg-gray-200 text-[#101820] rounded-xl transition-transform hover:-translate-y-1 active:scale-95 shadow-lg group relative overflow-hidden`}>
+      <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className={`flex items-center justify-center gap-3 px-6 py-3 bg-white hover:bg-gray-200 text-[#101820] rounded-xl transition-transform hover:-translate-y-1 active:scale-95 shadow-lg group relative overflow-hidden`}>
         {isApple ? (
           <svg viewBox="0 0 384 512" width="20" height="20" fill="currentColor">
              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 46.9 126.7 98.6 126.7 25.8 0 32.2-19.1 75.5-19.1 42.9 0 49.3 19.1 75.9 19.1 50.7 0 85.9-92.3 97.4-126.3-43.6-15.6-70.4-53.5-70.4-90.4zm-64.3-157c19.5-22.1 33-53 28-82.9-29.2 1.4-60.7 20.2-80.1 44.2-16.7 20.7-32.2 53-27.4 82.5 31.8 2.3 61.8-22 79.5-43.8z"/>

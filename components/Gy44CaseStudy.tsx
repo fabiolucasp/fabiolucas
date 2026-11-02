@@ -1,3 +1,4 @@
+import CaseStatusNotice from './CaseStatusNotice';
 import React, { useEffect } from 'react';
 import { X, ShoppingBag, Map, MessageCircle, Layers, Star, Navigation, Camera, Smartphone, Box, Grid, Search, Brain, ScanFace, Share2, ShieldCheck, Globe, Target, Zap, Layout } from 'lucide-react';
 
@@ -30,6 +31,7 @@ const Gy44CaseStudy: React.FC<Gy44CaseStudyProps> = ({ onClose }) => {
             <div className="text-[#EEEEEE] font-mono font-bold text-lg tracking-widest">44<span className="text-[#EF4B81]">GYN</span></div>
         </div>
         <button 
+          aria-label="Fechar case 44GYN"
           onClick={onClose}
           className="p-2 rounded-full bg-[#1A1A1A] text-[#EF4B81] hover:bg-[#EF4B81] hover:text-[#FFF] transition-all border border-[#EF4B81]/30"
         >
@@ -38,6 +40,7 @@ const Gy44CaseStudy: React.FC<Gy44CaseStudyProps> = ({ onClose }) => {
       </div>
 
       <div className="max-w-7xl mx-auto pt-24 pb-20 px-6">
+        <CaseStatusNotice name="44GYN" />
         
         {/* HERO SECTION */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 min-h-[60vh] relative">

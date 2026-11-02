@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { PROJECTS } from '../constants';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ConperCaseStudy from './ConperCaseStudy';
 import AutoPartsCaseStudy from './AutoPartsCaseStudy';
 import Gy44CaseStudy from './Gy44CaseStudy';
 import PineapplePayCaseStudy from './PineapplePayCaseStudy';
 import GynMoveCaseStudy from './GynMoveCaseStudy';
+import EvidenceCaseStudy from './EvidenceCaseStudy';
+import TechnicalStudies from './TechnicalStudies';
+import { PROJECT_EVIDENCE } from '../projectEvidence';
 import SmartDropCaseStudy from './SmartDropCaseStudy';
-import BichoMimadoCaseStudy from './BichoMimadoCaseStudy';
 import CfcFocusCaseStudy from './CfcFocusCaseStudy';
 
 const Projects: React.FC = () => {
@@ -27,14 +29,14 @@ const Projects: React.FC = () => {
   }, [selectedProject]);
 
   const handleOpenProject = (id: string) => {
-    if (['conper', 'autoparts', '44gyn', 'pineapple', 'gynmove', 'smartdrop', 'bicho-mimado', 'cfc-focus'].includes(id)) {
+    if (PROJECTS.some(project => project.id === id)) {
       setSelectedProject(id);
     }
   };
 
-  const handleCloseProject = () => {
+  const handleCloseProject = useCallback(() => {
     setSelectedProject(null);
-  };
+  }, []);
 
   return (
     <section id="projects" className="py-20 bg-[#000000]">
@@ -48,13 +50,17 @@ const Projects: React.FC = () => {
           {PROJECTS.map((project) => (
             <div 
               key={project.id}
+              role="button"
+              tabIndex={0}
+              aria-label={`Ver case ${project.title}`}
+              onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); handleOpenProject(project.id); } }}
               className="group bg-[#0A0A0A] rounded-2xl overflow-hidden border border-[#333] hover:border-[#44D62C] transition-all duration-300 hover:shadow-[0_0_15px_rgba(68,214,44,0.1)] flex flex-col cursor-pointer"
               onClick={() => handleOpenProject(project.id)}
             >
               {/* Image Container */}
               <div className="h-64 overflow-hidden relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent z-10 opacity-60"></div>
-                <img 
+                <img loading="lazy"
                   src={project.imageUrl} 
                   alt={project.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0"
@@ -71,11 +77,12 @@ const Projects: React.FC = () => {
                         {project.title}
                     </h3>
                     <div className="text-[#666] group-hover:text-[#44D62C] p-2 transition-colors">
-                        {['conper', 'autoparts', '44gyn', 'pineapple', 'gynmove', 'smartdrop', 'bicho-mimado', 'cfc-focus'].includes(project.id) ? <ArrowRight size={20} /> : <ExternalLink size={20} />}
+                        <ArrowRight size={20} />
                     </div>
                 </div>
                 
-                <p className="text-[#AAAAAA] mb-6 line-clamp-3 leading-relaxed font-sans">
+                <p className="text-xs text-[#44D62C] mb-3 font-mono">{PROJECT_EVIDENCE[project.id]?.status ?? "Apresentação · validação técnica pendente"}</p>
+                <p className="text-[#AAAAAA] mb-6 leading-relaxed font-sans">
                   {project.description}
                 </p>
 
@@ -93,6 +100,7 @@ const Projects: React.FC = () => {
             </div>
           ))}
         </div>
+        <TechnicalStudies />
       </div>
 
       {/* Case Study Modals */}
@@ -116,12 +124,12 @@ const Projects: React.FC = () => {
         <GynMoveCaseStudy onClose={handleCloseProject} />
       )}
 
-      {selectedProject === 'smartdrop' && (
-        <SmartDropCaseStudy onClose={handleCloseProject} />
+      {selectedProject && selectedProject !== 'gynmove' && PROJECT_EVIDENCE[selectedProject] && (
+        <EvidenceCaseStudy projectId={selectedProject} onClose={handleCloseProject} />
       )}
 
-      {selectedProject === 'bicho-mimado' && (
-        <BichoMimadoCaseStudy onClose={handleCloseProject} />
+      {selectedProject === 'smartdrop' && (
+        <SmartDropCaseStudy onClose={handleCloseProject} />
       )}
 
       {selectedProject === 'cfc-focus' && (

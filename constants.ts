@@ -48,9 +48,9 @@ export const EXPERIENCE: Experience[] = [
     period: "2021 – Atual",
     description: "Desenvolvimento de soluções mobile e web complexas com foco em e-commerce e automação.",
     projects: [
-      { name: "GynMove", details: "App de mobilidade com cálculo de lucro real baseado em relevo e manutenção veicular." },
-      { name: "AutoPartsGuide", details: "Marketplace de autopeças com busca em tempo real, filtros complexos e mais de 400 mil itens testados." },
-      { name: "PineapplePay", details: "Sistema de pagamento mobile com integração Pagar.me, mais de 20 fluxos de login e 600 telas." },
+      { name: "GynMove", details: "Planejamento de viagens, fila de solicitações e consulta de registros de corridas." },
+      { name: "AutoPartsGuide", details: "Projeto de marketplace de autopeças descrito no portfólio; código e escala ainda não verificados." },
+      { name: "PineapplePay", details: "Projeto de experiência de pagamentos mobile; integrações ainda não verificadas nesta revisão." },
       { name: "44GYN", details: "E-Commerce para a região da 44 em Goiânia com chat integrado ao WhatsApp e rotas de entrega." }
     ]
   },
@@ -59,7 +59,7 @@ export const EXPERIENCE: Experience[] = [
     company: "Machado & Pereira",
     role: "Analista de TI",
     period: "2021 – 2022",
-    description: "Desenvolvimento de App de gestão de contratos (ConPer) e automação de atendimento via WhatsApp Business API com Cloud Functions (+110k linhas de código).",
+    description: "Desenvolvimento de App de gestão de contratos (ConPer) e automação de atendimento; relato profissional preservado, com integrações ainda não verificadas nesta revisão.",
   },
   {
     id: "3",
@@ -81,65 +81,84 @@ export const PROJECTS: Project[] = [
   {
     id: "bicho-mimado",
     title: "Bicho Mimado",
-    description: "Ecossistema completo para Clínica Veterinária. ERP de gestão, App do Cliente com Taxi Dog (Rastreamento em Tempo Real) e Automação de Agendamentos via WhatsApp.",
-    tags: ["Flutter", "Maps Tracking", "WhatsApp API", "ERP Completo"],
+    description: "Agende cuidados, organize compras e, nas clínicas habilitadas, solicite a busca do pet e acompanhe o caminho até a clínica.",
+    tags: ["Flutter", "Agenda", "TaxiDog", "Firebase"],
     role: "Lead Developer",
     imageUrl: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "gynmove",
     title: "GynMove",
-    description: "Mobilidade Urbana com inteligência financeira. Algoritmos de geolocalização que calculam consumo de combustível baseado em relevo e custos de manutenção.",
-    tags: ["Flutter", "Maps Routes API", "Elevation API", "Cloud Functions"],
+    description: "Compare trajetos e estimativas antes da viagem. Para motoristas, organize solicitações e consulte os registros financeiros das corridas.",
+    tags: ["Flutter", "Rotas", "Fila de solicitações", "Firebase"],
     role: "Lead Developer",
     imageUrl: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "conper",
     title: "CONPER",
-    description: "Sistema completo de Gestão de Contratos e Automação Jurídica. Multiplataforma (Web, iOS, Android, MacOS) com integrações profundas.",
-    tags: ["Flutter", "Firebase", "DocuSign", "WhatsApp API", "Google Maps"],
+    description: "Apresentação de uma proposta de gestão de contratos e organização do atendimento jurídico. Implementação e integrações aguardam validação técnica.",
+    tags: ["Gestão de contratos", "Apresentação"],
     role: "Lead Developer",
     imageUrl: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "autoparts",
     title: "AutoPartsGuide",
-    description: "Marketplace robusto para indústria de autopeças. Sistema complexo de filtros em tempo real e busca avançada.",
-    tags: ["Flutter", "Firebase", "Node.js", "GCP"],
+    description: "Proposta de marketplace para encontrar autopeças por catálogo e filtros. Código-fonte ainda não disponível nesta revisão; funcionalidades e escala não verificadas.",
+    tags: ["Autopeças", "Catálogo", "Apresentação"],
     role: "Full-Stack",
     imageUrl: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "smartdrop",
     title: "SmartDrop",
-    description: "Dropshipping automatizado com Scraper diário via Cloud Functions e parcelamento nacional para compras internacionais.",
-    tags: ["Flutter", "Cloud Functions", "Scraping", "Fintech"],
+    description: "Apresentação de uma proposta de organização de catálogo e compras internacionais. Automação, pagamentos e operação ainda não verificados.",
+    tags: ["E-commerce", "Apresentação"],
     role: "Full-Stack",
     imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "pineapple",
     title: "PineapplePay",
-    description: "Fintech mobile com mais de 600 telas. Integração completa de pagamentos e segurança.",
-    tags: ["Flutter", "Pagar.me", "Security", "UX/UI"],
+    description: "Apresentação de uma experiência de pagamentos mobile. Fluxos, integrações e disponibilidade operacional aguardam validação técnica.",
+    tags: ["Pagamentos", "UX/UI", "Apresentação"],
     role: "Lead Developer",
     imageUrl: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "44gyn",
     title: "44GYN",
-    description: "Solução de E-commerce para o polo de moda 44. Geolocalização e Chatbot WhatsApp integrado.",
-    tags: ["Flutter", "WhatsApp API", "Maps API"],
+    description: "Proposta de e-commerce para o polo de moda 44, aproximando catálogo e jornada de compra. Integrações e operação ainda não verificadas.",
+    tags: ["E-commerce", "Moda", "Apresentação"],
     role: "Full-Stack",
     imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "cfc-focus",
     title: "CFC Focus",
-    description: "Plataforma gamificada para autoescolas. Onboarding engajador, acompanhamento de aulas e foco na aprovação do aluno.",
-    tags: ["Flutter", "Gamification", "Detran API", "UI/UX"],
+    description: "Apresentação de uma jornada digital para alunos de autoescolas. Gamificação, aulas e integrações aguardam validação técnica.",
+    tags: ["Educação", "UI/UX", "Apresentação"],
     role: "UI/UX Designer & Dev",
     imageUrl: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=800&auto=format&fit=crop"
-  }
+  },
+  {
+    id: "voltfinance", title: "VoltFinance",
+    description: "Visualize entradas, despesas e categorias em painéis pessoais e da operação. Metas e telemetria incluem áreas demonstrativas.",
+    tags: ["Flutter", "Finanças", "Painéis"], role: "Projeto de aplicativo",
+    imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    id: "multasipva", title: "MultasIPVA",
+    description: "Organize veículos, referências de documentos e roteiros de acesso a portais oficiais. Sem promessa de auditoria ou defesa automática.",
+    tags: ["Flutter", "Veículos", "Organização"], role: "Projeto de aplicativo",
+    imageUrl: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    id: "brigaelo", title: "Brigaelo",
+    description: "Protótipo que reúne pedido, entrega ou retirada e etapas de preparação para uma doceria. Sincronização operacional ainda a completar.",
+    tags: ["Flutter", "Pedidos", "Protótipo"], role: "Projeto de aplicativo",
+    imageUrl: "https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=800&auto=format&fit=crop"
+  },
+
 ];

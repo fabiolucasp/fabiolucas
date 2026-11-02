@@ -23,7 +23,7 @@ const getSkillIcon = (skillName: string) => {
 
 const Skills: React.FC = () => {
   return (
-    <section className="py-20 bg-[#050505]">
+    <section id="skills" className="py-20 bg-[#050505]">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <div className="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-[#111] rounded-full border border-[#333] text-[#44D62C]">

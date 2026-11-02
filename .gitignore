@@ -16,6 +16,8 @@ dist-ssr
 *.webarchive
 backup/
 arquivosexemplo/
+test-results/
+playwright-report/
 
 # Editor directories and files
 .vscode/*

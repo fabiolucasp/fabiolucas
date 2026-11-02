@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
                         </div>
                         <div>
                             <p className="text-sm text-[#666] font-mono">Telefone / WhatsApp</p>
-                            <a href={`tel:${PROFILE.phone}`} className="text-[#EEEEEE] font-medium hover:text-[#44D62C] transition-colors font-mono">{PROFILE.phone}</a>
+                            <a href={`tel:+55${PROFILE.phone.replace(/\D/g, "")}`} className="text-[#EEEEEE] font-medium hover:text-[#44D62C] transition-colors font-mono">{PROFILE.phone}</a>
                         </div>
                     </div>
 
@@ -49,23 +49,10 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="bg-[#0A0A0A] p-8 rounded-2xl border border-[#333]">
-                <form className="space-y-6">
-                    <div>
-                        <label className="block text-sm font-medium text-[#AAAAAA] mb-2 font-mono">Seu Nome</label>
-                        <input type="text" className="w-full bg-[#000] border border-[#333] rounded-lg px-4 py-3 text-[#EEEEEE] focus:outline-none focus:border-[#44D62C] focus:ring-1 focus:ring-[#44D62C] transition-all font-mono" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-[#AAAAAA] mb-2 font-mono">Email</label>
-                        <input type="email" className="w-full bg-[#000] border border-[#333] rounded-lg px-4 py-3 text-[#EEEEEE] focus:outline-none focus:border-[#44D62C] focus:ring-1 focus:ring-[#44D62C] transition-all font-mono" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-[#AAAAAA] mb-2 font-mono">Mensagem</label>
-                        <textarea rows={4} className="w-full bg-[#000] border border-[#333] rounded-lg px-4 py-3 text-[#EEEEEE] focus:outline-none focus:border-[#44D62C] focus:ring-1 focus:ring-[#44D62C] transition-all font-mono"></textarea>
-                    </div>
-                    <button type="submit" className="w-full bg-[#44D62C] text-[#000000] font-bold py-4 rounded-lg hover:bg-[#5aff3d] transition-colors uppercase tracking-widest text-sm font-mono">
-                        Enviar Mensagem
-                    </button>
-                </form>
+                <h3 className="text-2xl font-bold text-[#EEE] mb-4">Conte sobre seu projeto</h3>
+                <p className="text-[#AAA] mb-6 leading-relaxed">Envie uma mensagem pelo seu aplicativo de email. Este site não armazena dados de contato nem envia formulários automaticamente.</p>
+                <a href={`mailto:${PROFILE.email}?subject=Conversa%20sobre%20um%20projeto`} className="block text-center w-full bg-[#44D62C] text-black font-bold py-4 rounded-lg hover:bg-[#5aff3d] font-mono">Abrir aplicativo de email</a>
+                <p className="text-sm text-[#AAA] mt-4">Se o aplicativo não abrir, escreva para {PROFILE.email}.</p>
             </div>
 
         </div>

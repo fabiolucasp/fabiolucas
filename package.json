@@ -1,27 +1,37 @@
 {
-  "name": "portfólio-fábio-lucas",
+  "name": "founderos-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run typecheck && vite build",
     "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
     "deploy": "npm run build && npx firebase deploy"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "0.20.0",
+    "framer-motion": "^11.0.8",
+    "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "firebase": "^12.8.0",
-    "lucide-react": "^0.562.0",
-    "react-router-dom": "^6.25.1",
-    "@lottiefiles/dotlottie-react": "^1.6.0",
-    "framer-motion": "^11.0.8"
+    "react-router-dom": "^7.18.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@types/node": "^22.14.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

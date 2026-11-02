@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "portifolio-66eb2"
-  }
+  },
+  "targets": {
+    "portifolio-66eb2": {
+      "hosting": {
+        "portfolio-public": [
+          "portifolio-66eb2"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

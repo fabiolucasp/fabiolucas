@@ -1,3 +1,4 @@
+import CaseStatusNotice from './CaseStatusNotice';
 import React, { useEffect } from 'react';
 import { X, ShoppingBag, RefreshCw, CreditCard, Video, Search, Globe, TrendingUp, Truck, ShieldCheck, Server, AlertTriangle, MonitorPlay } from 'lucide-react';
 
@@ -26,6 +27,7 @@ const SmartDropCaseStudy: React.FC<SmartDropCaseStudyProps> = ({ onClose }) => {
             <div className="text-[#EEEEEE] font-mono font-bold text-lg tracking-wide">Smart<span className="text-[#8B5CF6]">Drop</span></div>
         </div>
         <button 
+          aria-label="Fechar case SmartDrop"
           onClick={onClose}
           className="p-2 rounded-full bg-[#1A1A1E] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-[#FFF] transition-all border border-[#8B5CF6]/30"
         >
@@ -34,6 +36,7 @@ const SmartDropCaseStudy: React.FC<SmartDropCaseStudyProps> = ({ onClose }) => {
       </div>
 
       <div className="max-w-7xl mx-auto pt-24 pb-20 px-6">
+        <CaseStatusNotice name="SmartDrop" />
         
         {/* HERO SECTION */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 min-h-[60vh]">
@@ -87,7 +90,7 @@ const SmartDropCaseStudy: React.FC<SmartDropCaseStudyProps> = ({ onClose }) => {
                              </div>
                          </div>
                          
-                         <button className="w-full bg-[#8B5CF6] text-white py-3 rounded-xl font-bold shadow-lg shadow-purple-900/50">
+                         <button disabled title="Demonstração visual: ação indisponível nesta vitrine" className="w-full bg-[#8B5CF6] text-white py-3 rounded-xl font-bold shadow-lg shadow-purple-900/50">
                              Comprar Agora
                          </button>
                      </div>

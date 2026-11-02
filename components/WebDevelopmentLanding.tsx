@@ -1,3 +1,5 @@
+import { PROFILE } from '../constants';
+import SectionLink from './SectionLink';
 import React from 'react';
 import { Rocket, CheckCircle2, Zap, Brain, Layout, CreditCard, Calendar, Smartphone, Lock, ArrowRight, ShieldCheck, Star, Code2, BookOpen, Layers } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
@@ -33,13 +35,13 @@ const WebDevelopmentLanding: React.FC = () => {
             </p>
 
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#pricing" className="px-8 py-4 bg-[#44D62C] text-black font-bold rounded-lg hover:bg-[#5aff3d] transition-all shadow-[0_0_20px_rgba(68,214,44,0.4)] uppercase tracking-wider font-mono flex items-center justify-center gap-2">
+                <SectionLink id="pricing" className="px-8 py-4 bg-[#44D62C] text-black font-bold rounded-lg hover:bg-[#5aff3d] transition-all shadow-[0_0_20px_rgba(68,214,44,0.4)] uppercase tracking-wider font-mono flex items-center justify-center gap-2">
                     <Rocket size={20} />
                     Contratar Agora
-                </a>
-                <a href="#process" className="px-8 py-4 bg-[#111] text-white border border-[#333] font-bold rounded-lg hover:border-[#44D62C] transition-all uppercase tracking-wider font-mono">
+                </SectionLink>
+                <SectionLink id="process" className="px-8 py-4 bg-[#111] text-white border border-[#333] font-bold rounded-lg hover:border-[#44D62C] transition-all uppercase tracking-wider font-mono">
                     Como Funciona?
-                </a>
+                </SectionLink>
             </div>
         </div>
       </section>
@@ -93,7 +95,7 @@ const WebDevelopmentLanding: React.FC = () => {
       </section>
 
       {/* DIFFERENTIAL: O Sistema de Gestão (Mandatory) */}
-      <section className="py-24 px-6 relative overflow-hidden">
+      <section id="process" className="py-24 px-6 relative overflow-hidden">
          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#44D62C]/5 rounded-full blur-[120px] pointer-events-none"></div>
          
          <div className="container mx-auto max-w-6xl">
@@ -101,23 +103,23 @@ const WebDevelopmentLanding: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
                     <div>
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#44D62C]/10 text-[#44D62C] rounded-lg text-xs font-bold uppercase tracking-widest mb-6 border border-[#44D62C]/20">
-                            <Lock size={14} /> Acesso Exclusivo
+                            <Lock size={14} /> Aplicativo em desenvolvimento
                         </div>
                         <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-mono">
-                            Transparência Radical com <span className="text-[#44D62C]">Meu Sistema Próprio</span>
+                            Acompanhe seu projeto no <span className="text-[#44D62C]">Portal do Cliente</span>
                         </h2>
                         <p className="text-[#AAA] text-lg mb-8 leading-relaxed">
-                            Ao me contratar, você não fica no escuro. Você recebe acesso imediato ao meu <strong>Portal do Cliente</strong> (App Web & Mobile).
+                            A vitrine é o ponto de atendimento da agência. O <strong>aplicativo do cliente</strong> está em desenvolvimento para distribuição nas lojas; uma opção web poderá ser configurada futuramente. A central interna de gestão é separada.
                         </p>
                         <ul className="space-y-4">
                             <li className="flex items-center gap-3 text-white">
-                                <CheckCircle2 className="text-[#44D62C]" /> Monitoramento de Commits (GitHub) em Tempo Real
+                                <CheckCircle2 className="text-[#44D62C]" /> Escopo inicial: projetos, etapas, tarefas e progresso
                             </li>
                             <li className="flex items-center gap-3 text-white">
-                                <CheckCircle2 className="text-[#44D62C]" /> Agendamento de Reuniões Automático
+                                <CheckCircle2 className="text-[#44D62C]" /> Acesso sujeito à disponibilização do aplicativo
                             </li>
                             <li className="flex items-center gap-3 text-white">
-                                <CheckCircle2 className="text-[#44D62C]" /> Transcrição de Reuniões via IA (TensorFlow)
+                                <CheckCircle2 className="text-[#44D62C]" /> Integrações de reuniões e IA: possibilidades futuras
                             </li>
                         </ul>
                         <div className="mt-8">
@@ -147,7 +149,7 @@ const WebDevelopmentLanding: React.FC = () => {
       </section>
 
       {/* PRICING & AUTOMATIC HIRING (Mandatory) */}
-      <section id="pricing" className="py-24 bg-[#050505]">
+      <section aria-label="Referências de proposta — contratação mediante confirmação" id="pricing" className="py-24 bg-[#050505]">
         <div className="container mx-auto px-6">
             <div className="text-center mb-16">
                 <span className="text-[#44D62C] font-mono tracking-wider uppercase text-sm">Contratação Automática</span>
@@ -187,18 +189,18 @@ const WebDevelopmentLanding: React.FC = () => {
                             <CheckCircle2 size={16} className="text-white" /> Planejamento de Roadmap
                         </li>
                         <li className="flex items-center gap-3 text-[#CCC] text-sm">
-                            <CheckCircle2 size={16} className="text-white" /> Gravação + Transcrição IA inclusa
+                            <CheckCircle2 size={16} className="text-white" /> Gravação e transcrição sob consulta
                         </li>
                     </ul>
 
                     <button 
-                        onClick={() => alert("Redirecionando para gateway de pagamento (Stripe/Pagar.me)...")}
+                        onClick={() => { window.location.href = `mailto:${PROFILE.email}?subject=Solicitar%20proposta`; }}
                         className="w-full py-4 bg-[#222] text-white font-bold rounded-xl hover:bg-white hover:text-black transition-all border border-[#333] flex items-center justify-center gap-2"
                     >
-                        Agendar Reunião
+                        Consultar agenda por email
                         <ArrowRight size={16} />
                     </button>
-                    <p className="text-center text-[#444] text-[10px] mt-3 font-mono uppercase">Pagamento Prévio Obrigatório</p>
+                    <p className="text-center text-[#444] text-[10px] mt-3 font-mono uppercase">Condições e agenda a confirmar</p>
                 </div>
 
                 {/* CARD 2: WEBSITE EXPRESS (AUTOMATIC HIRING) */}
@@ -234,18 +236,18 @@ const WebDevelopmentLanding: React.FC = () => {
                             <CheckCircle2 size={16} className="text-[#44D62C]" /> <strong className="text-white">Integração WhatsApp:</strong> Botão de ação flutuante
                         </li>
                         <li className="flex items-center gap-3 text-[#EEEEEE] text-sm">
-                            <CheckCircle2 size={16} className="text-[#44D62C]" /> Acesso ao <strong>Portal do Cliente</strong>
+                            <CheckCircle2 size={16} className="text-[#44D62C]" /> <strong>Portal do Cliente</strong> sujeito à disponibilização
                         </li>
                     </ul>
 
                     <button 
-                        onClick={() => alert("Abrindo Modal de Cartão de Crédito...")}
+                        onClick={() => { window.location.href = `mailto:${PROFILE.email}?subject=Solicitar%20proposta`; }}
                         className="w-full py-4 bg-[#44D62C] text-black font-bold rounded-xl hover:bg-[#5aff3d] transition-all shadow-lg shadow-[#44D62C]/20 flex items-center justify-center gap-2"
                     >
                         <CreditCard size={18} />
-                        Contratar & Pagar Agora
+                        Solicitar proposta por email
                     </button>
-                    <p className="text-center text-[#666] text-[10px] mt-3 font-mono">Compra Segura • Início Imediato</p>
+                    <p className="text-center text-[#666] text-[10px] mt-3 font-mono">Sem cobrança pelo site • Prazo a combinar</p>
                 </div>
 
             </div>
