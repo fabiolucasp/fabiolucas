@@ -82,12 +82,12 @@
                      "sha256":  "d8647464fead2b509b6f3ad1a2ba914cd38af3ebfc4b8d87e77060ca0a8c1af0"
                  },
                  {
-                     "path":  "dist/assets/index-Cyjzjnes.js",
-                     "sha256":  "4bf764466fa11d7267ec1bf48233b0f57320b3df93a58f2a651f93c2dce178ad"
+                     "path":  "dist/assets/index-CqjmrsVV.js",
+                     "sha256":  "62467a8fec13d435bee7847eb67a182fc0927fc48e17d4df33aa303172d0c085"
                  },
                  {
-                     "path":  "dist/assets/index-BuONWziP.css",
-                     "sha256":  "00cb623c0a7120f0c21fdafd4ad15537213212febdae37386dbb9b313d44a3b7"
+                     "path":  "dist/assets/index-OoZF4NRL.css",
+                     "sha256":  "bd9e810881c10ee9a18d93e010f9df33fb0c722c3e3fbc11af26f27b0d9665ab"
                  },
                  {
                      "path":  "dist/banner-preview.png",
@@ -119,7 +119,7 @@
                  },
                  {
                      "path":  "dist/index.html",
-                     "sha256":  "7f26425546f8350bffc0eca04caf64009349e5c83b4f9d9c7dfc9f0f25405f7c"
+                     "sha256":  "199bc12599a6d81c3ff5d3cd8376bd9393d11dd697415bddc0fe5bf43a09f924"
                  },
                  {
                      "path":  "dist/manifest.json",
@@ -173,7 +173,7 @@
                    },
                    {
                        "path":  "Publicar-Portfolio.ps1",
-                       "sha256":  "92874aa6fd7d6e9ae7ec5ed8661bc9e28631782e6c27a6c638521a0c66398aae"
+                       "sha256":  "cd324cecee48d59d575b1a5ce64a2f94dc1451080877afd06653e3764843bed0"
                    },
                    {
                        "path":  "components/AutoPartsCaseStudy.tsx",
@@ -225,7 +225,7 @@
                    },
                    {
                        "path":  "components/EvidenceCaseStudy.tsx",
-                       "sha256":  "e64535122ae74e474085db046dce094c7c265d7f0495b55bb9308c37f1692169"
+                       "sha256":  "77234a61e6c6842c24563c0a7a343c5be9aa6119f8d6f8cd1db522141c21acb8"
                    },
                    {
                        "path":  "components/Experience.tsx",
@@ -301,7 +301,7 @@
                    },
                    {
                        "path":  "constants.ts",
-                       "sha256":  "b576d307834a7cc2e891eba7e54d9feaa7120f89029cbe4c4705f5bc447e3d88"
+                       "sha256":  "9ae706e6b0a4bbfc11b512439d41e4787ecc963feaa09a5cff6beee088ab55c8"
                    },
                    {
                        "path":  "firebase.json",
@@ -337,7 +337,7 @@
                    },
                    {
                        "path":  "projectEvidence.ts",
-                       "sha256":  "b0b8f11c2a36b52a21f765337dfd95a56598994cae1da8bd03b052f294c2e84b"
+                       "sha256":  "846f042c4c550a6ab81a88d6233f40cd28a13826f910bbbb4e2cd9a2f11ec8ee"
                    },
                    {
                        "path":  "public/robots.txt",

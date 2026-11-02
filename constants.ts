@@ -181,20 +181,12 @@ export const PROJECTS: Project[] = [
     imageUrl: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&auto=format&fit=crop"
   },
   {
-    id: "autopartsguide",
-    title: "AutoParts Guide (Clientes)",
-    description: "Marketplace automotivo em Flutter implementado sobre o Design System Figma New-Style-APG, com busca por modal veicular, carteira digital de cartões e módulo My Car de revisões preventivas.",
-    tags: ["Flutter", "Marketplace", "Design System Figma", "My Car", "Firebase Spark"],
-    role: "Mobile Developer & UI/UX",
+    id: "autoparts",
+    title: "AutoParts Guide",
+    description: "Marketplace automotivo completo em Flutter unificando a experiência de compra do cliente e a gestão do lojista (App do Cliente e Painel do Lojista). Conecta motoristas e autopeças na Vila Canaã com validação cadastral rigorosa, busca por modal veicular, controle de estoque, checkout integrado (Cartão até 12x/Pix) e módulo My Car de revisões preventivas. Código-fonte ainda não disponível nesta revisão; funcionalidades e escala não verificadas.",
+    tags: ["Flutter", "Marketplace", "Design System Figma", "App Cliente & Lojista", "Vila Canaã", "My Car"],
+    role: "Lead Mobile Developer & UI/UX",
     imageUrl: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    id: "autopartsguide_lojista",
-    title: "AutoParts Guide (Lojistas)",
-    description: "Aplicativo Flutter para administração de lojas de autopeças com publicação de stories e catálogo, chat em tempo real, controle de despachos e checkout de planos de assinatura (Cartão até 12x/Pix).",
-    tags: ["Flutter", "Gestão de Loja", "Assinatura de Planos", "Checkout", "Stories"],
-    role: "Mobile Developer",
-    imageUrl: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "bicho-mimado",
@@ -203,14 +195,6 @@ export const PROJECTS: Project[] = [
     tags: ["Flutter", "TaxiDog", "Google Navigation SDK", "Firebase Functions", "Stitch"],
     role: "Lead Mobile Developer",
     imageUrl: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    id: "autoparts",
-    title: "AutoPartsGuide (Conceito Original)",
-    description: "Proposta de marketplace para encontrar autopeças por catálogo e filtros. Código-fonte ainda não disponível nesta revisão; funcionalidades e escala não verificadas.",
-    tags: ["Autopeças", "Catálogo", "Apresentação"],
-    role: "Full-Stack",
-    imageUrl: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "brigaelo",

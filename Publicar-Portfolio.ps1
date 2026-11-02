@@ -44,7 +44,7 @@ Write-Host 'CLI informou deploy concluido. Agora confira o dominio e as rotas no
 try {
   $page = Invoke-WebRequest -Uri 'https://fabiolucas.com/' -UseBasicParsing -Headers @{ 'Cache-Control'='no-cache' }
   if ($page.StatusCode -ne 200) { throw "HTTP $($page.StatusCode)" }
-  if (-not $page.Content.Contains('index-Cyjzjnes.js')) { Write-Warning 'Dominio ainda nao apresenta o identificador deste build. Confira cache, site vinculado e status do dominio no Console; nao publique em outro site por tentativa.' }
+  if (-not $page.Content.Contains('index-CqjmrsVV.js')) { Write-Warning 'Dominio ainda nao apresenta o identificador deste build. Confira cache, site vinculado e status do dominio no Console; nao publique em outro site por tentativa.' }
   else { Write-Host 'HTTP 200 e identificador do novo build confirmados no dominio.' }
 } catch { Write-Warning "Nao foi possivel confirmar o HTTP do dominio: $($_.Exception.Message)" }
 Start-Process 'https://fabiolucas.com/'
