@@ -10,14 +10,22 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.env
+.env*.local
 *.local
 .firebase
 *.zip
 *.webarchive
+*.pdf
+curriculo/
 backup/
 arquivosexemplo/
 test-results/
 playwright-report/
+*.pem
+*.key
+*.keystore
+*.jks
 
 # Editor directories and files
 .vscode/*
