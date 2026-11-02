@@ -1,6 +1,6 @@
 import React from 'react';
-import { EXPERIENCE } from '../constants';
-import { Briefcase } from 'lucide-react';
+import { EXPERIENCE, EDUCATION } from '../constants';
+import { Briefcase, GraduationCap, Award } from 'lucide-react';
 
 const Experience: React.FC = () => {
   return (
@@ -48,6 +48,48 @@ const Experience: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Academic Education Section */}
+        <div className="mt-20 max-w-4xl mx-auto">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <GraduationCap className="text-[#44D62C]" size={28} />
+            <h3 className="text-2xl md:text-3xl font-bold text-[#EEEEEE] font-mono text-center">
+              Formação Acadêmica & Pesquisa
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {EDUCATION.map((edu) => (
+              <div
+                key={edu.id}
+                className="bg-[#000000] p-6 rounded-xl border border-[#333] hover:border-[#44D62C] transition-colors group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Award size={16} className="text-[#44D62C]" />
+                    <span className="text-sm text-[#888] font-mono">{edu.period}</span>
+                  </div>
+                  <h4 className="text-lg font-bold text-[#EEEEEE] group-hover:text-[#44D62C] transition-colors font-mono">
+                    {edu.degree}
+                  </h4>
+                  <p className="text-[#CCCCCC] text-sm font-mono mb-3">{edu.institution}</p>
+                  <p className="text-[#999] text-sm mb-4 leading-relaxed font-sans">
+                    {edu.description}
+                  </p>
+                </div>
+                {edu.highlights && (
+                  <div className="space-y-1.5 pt-3 border-t border-[#333]">
+                    {edu.highlights.map((item, idx) => (
+                      <div key={idx} className="text-xs text-[#AAAAAA] flex items-start gap-2">
+                        <span className="text-[#44D62C] font-bold">✓</span>
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

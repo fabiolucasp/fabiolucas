@@ -1,4 +1,4 @@
-import { Profile, Experience, Project } from './types';
+import { Profile, Experience, Education, Project } from './types';
 
 export const PROFILE: Profile = {
   name: "Fábio Lucas Pereira Ferreira",
@@ -46,35 +46,96 @@ export const EXPERIENCE: Experience[] = [
     company: "Fábio Lucas Dev",
     role: "Fundador e Desenvolvedor Flutter / Full-Stack",
     period: "2021 – Atual",
-    description: "Desenvolvimento de ecossistemas mobile completos em Flutter com backends em Firebase, Cloud Functions e integração com gateways de pagamento.",
+    description: "Desenvolvimento de ecossistemas mobile e web de ponta a ponta, arquiteturas escaláveis em nuvem com Firebase e GCP, engenharia reversa de APIs, automação de fluxos corporativos e design systems modernos.",
     projects: [
-      { name: "GynMove & GynMove Motorista", details: "Aplicativos de mobilidade em Flutter com prova de vida biométrica em 7 etapas, rotas dinâmicas e telemetria veicular." },
-      { name: "AutoParts Guide (Clientes & Lojistas)", details: "Dois aplicativos Flutter sobre o Design System Figma New-Style-APG, checkout de planos (Cartão/Pix) e módulo My Car." },
-      { name: "Bicho Mimado", details: "Super app de Pet Care com TaxiDog nativo via Google Navigation SDK turn-by-turn e agendamento veterinário." },
-      { name: "Pineapple Pay", details: "Ecossistema multi-perfil de pagamentos e cashback para formaturas e comércio local." },
-      { name: "VoltFinance & Multas IPVA", details: "Aplicativos Flutter de inteligência financeira com IoT automotivo e auditoria veicular de trânsito." }
+      { name: "AutoParts Guide (Clientes & Lojistas)", details: "Dois aplicativos Flutter sobre o Design System Figma New-Style-APG, checkout de planos (Cartão até 12x / Pix), chat em tempo real, controle de despachos e módulo My Car para manutenções veiculares preventivas." },
+      { name: "GynMove & GynMove Motorista", details: "Aplicativos de mobilidade urbana em Flutter com prova de vida biométrica em 7 etapas, roteamento dinâmico, telemetria veicular contínua e rastreamento em tempo real." },
+      { name: "Bicho Mimado", details: "Super app de Pet Care com mais de 100 telas em Flutter, motor exclusivo de TaxiDog com navegação turn-by-turn nativa via Google Navigation SDK e agendamento veterinário." },
+      { name: "Pineapple Pay", details: "Ecossistema multi-perfil de pagamentos digitais e cashback para comissões de formatura, eventos e rede de comércios parceiros." },
+      { name: "VoltFinance & Multas IPVA", details: "Soluções mobile Flutter voltadas para inteligência financeira com telemetria automotiva e auditoria de débitos veiculares e trânsito." },
+      { name: "44GYN & CFC Focus", details: "Plataformas digitais para comércio atacadista da Região da 44 e modernização da jornada de aprendizagem para centros de formação de condutores." }
     ]
   },
   {
     id: "2",
     company: "Machado & Pereira",
-    role: "Analista de TI",
+    role: "Analista de TI & Desenvolvedor Full-Stack",
     period: "2021 – 2022",
-    description: "Desenvolvimento de App de gestão de contratos (ConPer) e automação de atendimento; relato profissional preservado, com integrações ainda não verificadas nesta revisão.",
+    description: "Desenvolvimento de soluções tecnológicas corporativas de alta disponibilidade para área jurídica, arquitetura em nuvem (GCP/Firebase), integração com APIs globais de pagamento e assinaturas digitais, além de automação avançada de mensageria.",
+    projects: [
+      { name: "Projeto ConPer", details: "Aplicativo mobile em Flutter (arquitetura Provider) e backend serverless na Google Cloud Platform com Cloud Functions (TypeScript/Node.js) e Cloud Firestore. Integração completa com DocuSign API para assinaturas de contratos com validade jurídica e Pagar.me para split de pagamentos e checkout seguro." },
+      { name: "Automação de Atendimento WhatsApp Business", details: "Arquitetura de microserviços e webhooks escaláveis com mais de 110.000 linhas de código desenvolvidas em Cloud Functions e Cloud Firestore, conectada à API oficial do WhatsApp Business Cloud API. Sistema com 10 níveis de navegação e autoatendimento, triagem inteligente de processos e roteamento direto para advogados especialistas." }
+    ]
   },
   {
     id: "3",
     company: "RedCake",
-    role: "Estagiário",
+    role: "Estagiário de Desenvolvimento Web & UI/UX",
     period: "2020 – 2021",
-    description: "Desenvolvimento de sites responsivos e personalizados utilizando WordPress, PHP e JavaScript.",
+    description: "Desenvolvimento e manutenção de websites corporativos de alta performance, e-commerces e landing pages institucionais com foco em responsividade, SEO técnico e experiência do usuário.",
+    projects: [
+      { name: "Desenvolvimento Web & Temas Customizados", details: "Criação de temas e plugins personalizados utilizando WordPress, PHP, HTML5 semântico, Sass/CSS3 e JavaScript (ES6+), garantindo fidelidade visual e tempo de carregamento otimizado." },
+      { name: "Prototipagem UI/UX no Figma", details: "Concepção de interfaces modernas, wireframes navegáveis e design systems para validação com clientes antes da implementação em código." }
+    ]
   },
   {
     id: "4",
-    company: "Controladoria Geral do Estado de Goiás",
-    role: "Funcionário Público / Estagiário",
+    company: "Controladoria Geral do Estado de Goiás (CGE-GO)",
+    role: "Funcionário Público / Estagiário de Desenvolvimento de Sistemas",
     period: "2018 – 2020",
-    description: "Desenvolvimento do sistema 'Estudantes de Atitude' (PHP/Bootstrap) e início do projeto CORA (IA para análise de folha de pagamento). Suporte técnico e infraestrutura.",
+    description: "Atuação na Assessoria de Tecnologia da Informação do órgão central de controle interno estadual. Desenvolvimento de sistemas corporativos governamentais de grande escala, pesquisa e aplicação de Inteligência Artificial para auditoria pública e gestão de infraestrutura de TI.",
+    projects: [
+      { name: "Projeto Estudantes de Atitude", details: "Sistema web com mais de 10.000 linhas de código em PHP, MySQL e Bootstrap, integrado aos sistemas da Secretaria da Economia (SEFAZ-GO). Responsável pelo gerenciamento de tarefas cívicas, auditoria de pontuações e emissão automatizada de certificados para milhares de alunos e professores da rede estadual de ensino." },
+      { name: "Projeto CORA (Inteligência Artificial)", details: "Pesquisa e implementação de modelos de Machine Learning e Visão Computacional com Python, TensorFlow e OpenCV para detecção de anomalias em folhas de pagamento do funcionalismo público e suporte à conformidade com a Lei de Acesso à Informação." },
+      { name: "Infraestrutura & Suporte Corporativo", details: "Gerenciamento de servidores corporativos Windows Server, Active Directory (AD), políticas de rede e suporte técnico a auditores fiscais e equipes da Controladoria." }
+    ]
+  },
+  {
+    id: "5",
+    company: "PrimeSoftware",
+    role: "Estagiário de Suporte Técnico & Qualidade de Software",
+    period: "2018 – 2019",
+    description: "Suporte técnico especializado e garantia de qualidade de software de gestão (ERP) voltado para o setor farmacêutico, farmácias de manipulação e drogarias.",
+    projects: [
+      { name: "Suporte & Homologação de ERP Farmacêutico", details: "Atendimento especializado a clientes de farmácias de manipulação e drogarias, validação de regras de negócio de manipulação de fórmulas, controle de estoque crítico, tributações e homologação de novos builds do sistema." }
+    ]
+  },
+  {
+    id: "6",
+    company: "SgSystem",
+    role: "Estagiário de Desenvolvimento de Software",
+    period: "2017 – 2018",
+    description: "Desenvolvimento e manutenção contínua de ERP comercial voltado para grandes atacadistas, distribuidores e logística de transporte rodoviário de cargas.",
+    projects: [
+      { name: "Desenvolvimento em Delphi & Integração SEFAZ", details: "Programação em Delphi / Object Pascal, bancos de dados relacionais SQL e versionamento de código com Git. Manutenção e atualização contínua de rotinas críticas de emissão de Nota Fiscal Eletrônica (NF-e) integradas à SEFAZ para liberação de carregamento e trânsito de caminhões." }
+    ]
+  }
+];
+
+export const EDUCATION: Education[] = [
+  {
+    id: "edu-1",
+    institution: "UNIFASAM – Centro Universitário Sul-Americano",
+    degree: "Bacharelado em Sistemas de Informação",
+    period: "2017 – 2021",
+    description: "Graduação com sólida formação em Engenharia de Software, Arquitetura de Sistemas, Estruturas de Dados Avançadas, Banco de Dados Relacional e NoSQL, Redes e Inteligência Artificial.",
+    highlights: [
+      "Engenharia de Software e Padrões de Projeto (Design Patterns)",
+      "Desenvolvimento de Aplicações Distribuídas e Microsserviços",
+      "Modelagem e Otimização de Bancos de Dados (SQL & NoSQL)"
+    ]
+  },
+  {
+    id: "edu-2",
+    institution: "Universidade Federal de Goiás (UFG) / PIBIC-CNPq",
+    degree: "Projeto de Extensão & Iniciação Científica",
+    period: "2017 – 2018",
+    description: "Pesquisa acadêmica aplicada com bolsa institucional PIBIC/CNPq, desenvolvendo modelos matemáticos e analíticos para tratamento de dados complexos.",
+    highlights: [
+      "Estatística Aplicada e Probabilidade Avançada",
+      "Modelagem Matemática e Algoritmos de Otimização",
+      "Análise Quantitativa e Tratamento de Dados"
+    ]
   }
 ];
 

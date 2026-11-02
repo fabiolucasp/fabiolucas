@@ -26,6 +26,15 @@ export interface Experience {
   }[];
 }
 
+export interface Education {
+  id: string;
+  institution: string;
+  degree: string;
+  period: string;
+  description: string;
+  highlights?: string[];
+}
+
 export interface Profile {
   name: string;
   title: string;

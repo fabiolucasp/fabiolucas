@@ -1,390 +1,390 @@
-{
-  "build": "portfolio-react-publico-2026-10-30",
-  "dist": [
-    {
-      "path": "dist/.nojekyll",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "path": "dist/44gyn/logo.jpg",
-      "sha256": "ff33d71aeda78943730571f9dacf56484722ce2b488fc2fafa40afc378d88751"
-    },
-    {
-      "path": "dist/android-icon-144x144.png",
-      "sha256": "c0ef4822437382842c192cbb7c96f147bcbfa174f9f7c311056792e6322b839e"
-    },
-    {
-      "path": "dist/android-icon-192x192.png",
-      "sha256": "4f5013011f09e5e073ae39488a5a7f5da5ef9d6ba25843aa3adb007185e9efc2"
-    },
-    {
-      "path": "dist/android-icon-36x36.png",
-      "sha256": "68776a7c42f173b6ebc5fa88961ef2e1b57c3d6f2682900a2c2882d10e6a7333"
-    },
-    {
-      "path": "dist/android-icon-48x48.png",
-      "sha256": "dd77db3d9f68220ed03ecbee3c1cd4a3e51eb8b26a18aec6509f4eb3f7b16389"
-    },
-    {
-      "path": "dist/android-icon-72x72.png",
-      "sha256": "445058b11159638d59e841da143c8a4862ac6d7ff2d9c16f6081d1a1901268b6"
-    },
-    {
-      "path": "dist/android-icon-96x96.png",
-      "sha256": "c2a1b6131476850fa873d8182064a9c22bff5fbbc84a652ebdcd7dddfc1152e4"
-    },
-    {
-      "path": "dist/apgc/logo.png",
-      "sha256": "a21fca212e2b8c198371205523536b5cad1dd34880e071f7f5bd21e530005611"
-    },
-    {
-      "path": "dist/apple-icon-114x114.png",
-      "sha256": "428212e4cc15290a0f68de5c647d13916a708325a46feecc92048c61677810f8"
-    },
-    {
-      "path": "dist/apple-icon-120x120.png",
-      "sha256": "fd7156591ecd0b71586f43781550cff637c84ae3a20548e4484cf90143b33854"
-    },
-    {
-      "path": "dist/apple-icon-144x144.png",
-      "sha256": "c0ef4822437382842c192cbb7c96f147bcbfa174f9f7c311056792e6322b839e"
-    },
-    {
-      "path": "dist/apple-icon-152x152.png",
-      "sha256": "49579e9e3b9793a058f4176051840f0def2de9f409505332c89b71f5ef6359ed"
-    },
-    {
-      "path": "dist/apple-icon-180x180.png",
-      "sha256": "6eb123ef326dcd00f2a5583b12ab74ee8d8816f25c55923fde783f5a2755d02f"
-    },
-    {
-      "path": "dist/apple-icon-57x57.png",
-      "sha256": "4764214efb318b34d5e0c1abdca40910ac85b1bd4ce31fde8e669c4a5d47903e"
-    },
-    {
-      "path": "dist/apple-icon-60x60.png",
-      "sha256": "a7b2d0c3f1e11b404d2949e5c2d805c7f22d196bf67ccb16325dd8f35c79120c"
-    },
-    {
-      "path": "dist/apple-icon-72x72.png",
-      "sha256": "445058b11159638d59e841da143c8a4862ac6d7ff2d9c16f6081d1a1901268b6"
-    },
-    {
-      "path": "dist/apple-icon-76x76.png",
-      "sha256": "52dfbbc48c9754a84db0a2c0fa8ba8ce2ef787cefb1e4fedc61b500859cb19e6"
-    },
-    {
-      "path": "dist/apple-icon-precomposed.png",
-      "sha256": "d8647464fead2b509b6f3ad1a2ba914cd38af3ebfc4b8d87e77060ca0a8c1af0"
-    },
-    {
-      "path": "dist/apple-icon.png",
-      "sha256": "d8647464fead2b509b6f3ad1a2ba914cd38af3ebfc4b8d87e77060ca0a8c1af0"
-    },
-    {
-      "path": "dist/assets/index-CtHDCged.js",
-      "sha256": "ff75e00de394b81ddb448fb8e7c079492d2706a89df5e467dc3cb2548e18309b"
-    },
-    {
-      "path": "dist/assets/index-iERxV_7x.css",
-      "sha256": "f8417a24290c36f25877569c63c0be96986a0cd0bd8270d63e0d5e176f33689a"
-    },
-    {
-      "path": "dist/banner-preview.png",
-      "sha256": "ddf29827fee17e6f652801827eb9c688fb7846d2fcd31a3c9ee38f92ff848567"
-    },
-    {
-      "path": "dist/browserconfig.xml",
-      "sha256": "13bc647273455808acd0f6605124ab3a78bbae67b532f8b993dc0f8ce2a03d0d"
-    },
-    {
-      "path": "dist/conper/logo.png",
-      "sha256": "1665248d4049c97afa2133b3a70cb0c1202485d5e3595bde68fadcb99ed0bacd"
-    },
-    {
-      "path": "dist/favicon-16x16.png",
-      "sha256": "2ec8ade66d6cc0f94ec5ce0eb2693dbd99614d0e73f7dd288f4923c125e4e554"
-    },
-    {
-      "path": "dist/favicon-32x32.png",
-      "sha256": "789467aa220d65baf737e46608c779c783cfb3f5f41d248d59fc769f4773c683"
-    },
-    {
-      "path": "dist/favicon-96x96.png",
-      "sha256": "c2a1b6131476850fa873d8182064a9c22bff5fbbc84a652ebdcd7dddfc1152e4"
-    },
-    {
-      "path": "dist/favicon.ico",
-      "sha256": "4d92ba751264ebb712b7f94ed692c8b9485a5818e735348551b972c08335b32e"
-    },
-    {
-      "path": "dist/index.html",
-      "sha256": "cf4efed6e9e19c26099a24e53875d87c05ddbf7a9d5f01632ac7bec5773e60af"
-    },
-    {
-      "path": "dist/manifest.json",
-      "sha256": "27eca3e8297eb7ff340deb3849b210185a459b3845456aa4d0036f6d966b3518"
-    },
-    {
-      "path": "dist/ms-icon-144x144.png",
-      "sha256": "c0ef4822437382842c192cbb7c96f147bcbfa174f9f7c311056792e6322b839e"
-    },
-    {
-      "path": "dist/ms-icon-150x150.png",
-      "sha256": "2157b59b4e86a3de17d681a380f5d77310a6cd9d8fc1bb5f55dbbeff1240a9c4"
-    },
-    {
-      "path": "dist/ms-icon-310x310.png",
-      "sha256": "1735213e49d6b79a733b857fe3b972a9296b091429e9a664dcc09682f7b29c0d"
-    },
-    {
-      "path": "dist/ms-icon-70x70.png",
-      "sha256": "fea4d2d4fdea98bad92604da1f95a15d25f53e97ff7c4c1e535233d74b22e1b0"
-    },
-    {
-      "path": "dist/pineapplepay/logo.png",
-      "sha256": "50e4b264b522a9aa2fdf096a56b19216799b800f108f70e8cc21b1f55df4a9c9"
-    },
-    {
-      "path": "dist/robots.txt",
-      "sha256": "15dc0cf459cf8372f10ccfd9c77198ac4f77dae47ed03e0a0099d9a4240225a4"
-    }
-  ],
-  "source": [
-    {
-      "path": ".env.example",
-      "sha256": "582ccdc284b0019c1187c0cb9de169e4d98041c4b99a74e8044115f95dfe7481"
-    },
-    {
-      "path": ".firebaserc",
-      "sha256": "457fa0f7eaa80af0b9ecc947701cc3eeacdf05f6782a0d5e948fdeba903cb51f"
-    },
-    {
-      "path": ".gitignore",
-      "sha256": "976f557821d25fa8e7e41f9cb039b2439cab5bc7c1ee516d6f806e52f071d029"
-    },
-    {
-      "path": "App.tsx",
-      "sha256": "1dd64415ee85d8d575b0cf94b80c757360d64dc6faf208e9b65f21533448a9cc"
-    },
-    {
-      "path": "LEIA-ME-PUBLICAR.md",
-      "sha256": "d7a9667707e88716ee57a98f9120f415f7149740e3a9c530f1d8e34f5fa9b9cb"
-    },
-    {
-      "path": "Publicar-Portfolio.ps1",
-      "sha256": "53c9454ed3205d1fddae77fe88580e20a2cff4a22c116e96fcb87a1d8220005a"
-    },
-    {
-      "path": "components/AutoPartsCaseStudy.tsx",
-      "sha256": "ceddf5d8f372f35785cc38d02764c8336ac9a83ea4e1264b69d14c20af917120"
-    },
-    {
-      "path": "components/BichoMimadoCaseStudy.tsx",
-      "sha256": "b316182fa02049c19125ec9d417ebc4ee45a05c110b2194963bcd423a2e10b80"
-    },
-    {
-      "path": "components/BichoMimadoLanding.tsx",
-      "sha256": "6c48f157a5f46565b905abbf282268e9e4fb8b65632536ff35a2d9ccac9fa599"
-    },
-    {
-      "path": "components/CaseStatusNotice.tsx",
-      "sha256": "fb36f10af14c1cafa0a58452b5c7a11847d8b5bef4bf8a980b984b6a48479896"
-    },
-    {
-      "path": "components/CfcFocusCaseStudy.tsx",
-      "sha256": "cfd45f6f1e049c1fe662d116061829e1cec4a7b6a01daf8bffa87b496fd8f355"
-    },
-    {
-      "path": "components/ClientApp.tsx",
-      "sha256": "ffb91b88bfa7a3c1d4b3019de5de259e7b243ce3740fdfe8cc7d0d1525ca2057"
-    },
-    {
-      "path": "components/CommunityOverview.tsx",
-      "sha256": "32f5d45c7b3b46d02f55d2460e20b9c36080e4f35b7961a8139984f15d8c1a9f"
-    },
-    {
-      "path": "components/ConperCaseStudy.tsx",
-      "sha256": "7693328cc7480b209cb66fbe94a9f29254003458f18a4d9b73b61a063928c4b1"
-    },
-    {
-      "path": "components/Contact.tsx",
-      "sha256": "397867b29e7dd987bdf90ea3b567a0120ddba8d20c1116283d3da028782aeb19"
-    },
-    {
-      "path": "components/CoursesOverview.tsx",
-      "sha256": "f922a07e0a9d4a65c7b1f73ec6959fbe9a83a95e5e6d066c6fdf8a1157a615cf"
-    },
-    {
-      "path": "components/DesignPhilosophy.tsx",
-      "sha256": "9d7b05be61b212f264fd51ff975331325c64c495c5b10c1e9fabb981593571df"
-    },
-    {
-      "path": "components/ECommerceOverview.tsx",
-      "sha256": "5e3bdf0a77228be6476b0144f6e88c3ce9a9d27a9464522c7b3a435bd5bdd8a6"
-    },
-    {
-      "path": "components/EvidenceCaseStudy.tsx",
-      "sha256": "e64535122ae74e474085db046dce094c7c265d7f0495b55bb9308c37f1692169"
-    },
-    {
-      "path": "components/Experience.tsx",
-      "sha256": "e5bc0eed758fa3f12499b750a22d0eadfb0ab033a93c6e2e9f9d638c9f69b1a3"
-    },
-    {
-      "path": "components/Gy44CaseStudy.tsx",
-      "sha256": "50db8b2e177c19d365950f19a2e48825fe9949b686c1970ba3b98a5e716541e0"
-    },
-    {
-      "path": "components/GynMoveCaseStudy.tsx",
-      "sha256": "05c1e8c38232f3550d1fa24f167ac9cf6bd4a2a82d8247b203ccdbdf3ce571fe"
-    },
-    {
-      "path": "components/Hero.tsx",
-      "sha256": "4b6f7e05ff01d5be40b3f88f56733afc616f2c722282ff3ac2ce57349ef845c6"
-    },
-    {
-      "path": "components/LoginScreen.tsx",
-      "sha256": "5e16858463341978620cd92f4e1ee58b5677dd9b911d4a0d25e2c6349796d006"
-    },
-    {
-      "path": "components/Methodology.tsx",
-      "sha256": "af70c1c55fdcafcc37e1ae962e010e97faedfdae2d7bf5d6746542fa5560df32"
-    },
-    {
-      "path": "components/Navbar.tsx",
-      "sha256": "ac0fb39d95cb019843d145e6984aa9d43ce39b5f0cb8e7530db28c2d9cff8511"
-    },
-    {
-      "path": "components/PineapplePayCaseStudy.tsx",
-      "sha256": "9d5d4d45394a11fa36812c7dd8971af6a302b4e5833826dc470f4c93975fef00"
-    },
-    {
-      "path": "components/PineapplePayLanding.tsx",
-      "sha256": "3845f9db95d52120a7353f8dabbf375c4b1b2eb0fc789dbd75308a6d2d801c57"
-    },
-    {
-      "path": "components/Projects.tsx",
-      "sha256": "72297674a7044bf3a7cb9dbc612415673a23d280e2d544741d3bda8f5e882f9d"
-    },
-    {
-      "path": "components/ScrollToTop.tsx",
-      "sha256": "e5af6a486aa6c1c39c29afde2468786f6d1c70c25d675448013a7dc45018b4e5"
-    },
-    {
-      "path": "components/SectionLink.tsx",
-      "sha256": "88bb186911a41505b0980854229b69787d9cb17779b5814808a22923a13abd12"
-    },
-    {
-      "path": "components/ServicesPage.tsx",
-      "sha256": "5b71366fb40a010a03a33ffe4c3737cd46187ba96c9bcb33b47acb7ccfc239a4"
-    },
-    {
-      "path": "components/Skills.tsx",
-      "sha256": "de17132f6e1ee614fe6d8b75e75db8d1ce81e43831abafb9c53db98a8391e771"
-    },
-    {
-      "path": "components/SmartDropCaseStudy.tsx",
-      "sha256": "4057db015fbdcec38ce01897ba100c06233268da5401281f0a8153daf0d373fc"
-    },
-    {
-      "path": "components/TechnicalStudies.tsx",
-      "sha256": "6ea0cc7cce1d373423c5d66e65e2b9798f7c4d2ae1561efdb6e6f30f2445515e"
-    },
-    {
-      "path": "components/WebDevelopmentLanding.tsx",
-      "sha256": "ff174d45600ece50c9eff90c97ec12f181436dea5f643b0f121672e048621acb"
-    },
-    {
-      "path": "components/ui/LottieIcon.tsx",
-      "sha256": "c998bc05b19cda00678ad684fdef7f788c4ce8119f7bae56e9d49a934af50f22"
-    },
-    {
-      "path": "constants.ts",
-      "sha256": "afe3acb085fd0ff0f83ddff0dcfcac214c0e00293f0390f901d3ceff2622c846"
-    },
-    {
-      "path": "firebase.json",
-      "sha256": "74d9ebd7376b7d60c4e4dbfda34bca74d5afed9b360f4d8bbb1c574ec9b02555"
-    },
-    {
-      "path": "index.css",
-      "sha256": "20b46b51c09ac443f19635a79a0fe77fde197d9064fbe018af9c00fb3219b92a"
-    },
-    {
-      "path": "index.html",
-      "sha256": "de61e8a3b84c3ad7bba91b670a8c72035e11e5cf9af1527cd530b26bbe5fae53"
-    },
-    {
-      "path": "index.tsx",
-      "sha256": "850366f90c85638abab2dd52d1f4a39a59a923c569b9af3e8562fafd5feedae3"
-    },
-    {
-      "path": "package-lock.json",
-      "sha256": "f6b63a8858c0db26a2e0c95db394de5c1af0f02bc59bcdd3a5d250cceb118299"
-    },
-    {
-      "path": "package.json",
-      "sha256": "068d8eceeefd0272866e401daa67297ffd203844c09e9b6ef75615434fbb126e"
-    },
-    {
-      "path": "playwright.config.ts",
-      "sha256": "1dfe58acbf73b01d19d15fb2a5b47832739a551b203e6b7fba77f4c0f75ecd44"
-    },
-    {
-      "path": "postcss.config.js",
-      "sha256": "08910ce1d5cd87d2167e9c78b77262bf985b3f07dc5037ff745ecd6a759fd0c0"
-    },
-    {
-      "path": "projectEvidence.ts",
-      "sha256": "b0b8f11c2a36b52a21f765337dfd95a56598994cae1da8bd03b052f294c2e84b"
-    },
-    {
-      "path": "public/robots.txt",
-      "sha256": "15dc0cf459cf8372f10ccfd9c77198ac4f77dae47ed03e0a0099d9a4240225a4"
-    },
-    {
-      "path": "services/appUrl.ts",
-      "sha256": "6d9c8fbeaeb09cd22a7544bb3a3a703406bd28a87ee3a2e2900e0bafc75c521f"
-    },
-    {
-      "path": "tailwind.config.js",
-      "sha256": "e99850e5f861106e1deb51c78407030eebf4bcbf94fe57437b291b9af202e18f"
-    },
-    {
-      "path": "tests/app-url.spec.ts",
-      "sha256": "10d2ca7756023ba744e4cf24867630446a9e3681e44a4f5a5ad20672f86bfb43"
-    },
-    {
-      "path": "tests/editorial.spec.ts",
-      "sha256": "524a9aaacd0c9cef43d72de37b109705635be1a4dbe51caac0b9c8d75292de3f"
-    },
-    {
-      "path": "tests/navigation.spec.ts",
-      "sha256": "929ad8ffa749f2d3b44c7f1adc2d4edec92003fee950e721e91dad129127e5a1"
-    },
-    {
-      "path": "tsconfig.json",
-      "sha256": "8641deb29adfd1958488d1951f0d5ddf3013f498aa67ce0f621e347f0ef608d2"
-    },
-    {
-      "path": "types.ts",
-      "sha256": "955ca8266ecc038b7e14a2553882fbd04581573ef1f88a977d0856b497fb0e83"
-    },
-    {
-      "path": "vite-env.d.ts",
-      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
-    },
-    {
-      "path": "vite.config.ts",
-      "sha256": "3114056c8aaf992ad01911f48df4b1872742542c5655bbdefb4b8b1e71104b1a"
-    }
-  ],
-  "validation": {
-    "build": "passed",
-    "typescript": "passed",
-    "non_browser_tests": 6,
-    "browser": "not executed: environment blocked",
-    "powershell": "static review only; runtime unavailable"
-  }
+﻿{
+    "build":  "portfolio-react-publico-2026-10-30",
+    "dist":  [
+                 {
+                     "path":  "dist/.nojekyll",
+                     "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                 },
+                 {
+                     "path":  "dist/44gyn/logo.jpg",
+                     "sha256":  "ff33d71aeda78943730571f9dacf56484722ce2b488fc2fafa40afc378d88751"
+                 },
+                 {
+                     "path":  "dist/android-icon-144x144.png",
+                     "sha256":  "c0ef4822437382842c192cbb7c96f147bcbfa174f9f7c311056792e6322b839e"
+                 },
+                 {
+                     "path":  "dist/android-icon-192x192.png",
+                     "sha256":  "4f5013011f09e5e073ae39488a5a7f5da5ef9d6ba25843aa3adb007185e9efc2"
+                 },
+                 {
+                     "path":  "dist/android-icon-36x36.png",
+                     "sha256":  "68776a7c42f173b6ebc5fa88961ef2e1b57c3d6f2682900a2c2882d10e6a7333"
+                 },
+                 {
+                     "path":  "dist/android-icon-48x48.png",
+                     "sha256":  "dd77db3d9f68220ed03ecbee3c1cd4a3e51eb8b26a18aec6509f4eb3f7b16389"
+                 },
+                 {
+                     "path":  "dist/android-icon-72x72.png",
+                     "sha256":  "445058b11159638d59e841da143c8a4862ac6d7ff2d9c16f6081d1a1901268b6"
+                 },
+                 {
+                     "path":  "dist/android-icon-96x96.png",
+                     "sha256":  "c2a1b6131476850fa873d8182064a9c22bff5fbbc84a652ebdcd7dddfc1152e4"
+                 },
+                 {
+                     "path":  "dist/apgc/logo.png",
+                     "sha256":  "a21fca212e2b8c198371205523536b5cad1dd34880e071f7f5bd21e530005611"
+                 },
+                 {
+                     "path":  "dist/apple-icon-114x114.png",
+                     "sha256":  "428212e4cc15290a0f68de5c647d13916a708325a46feecc92048c61677810f8"
+                 },
+                 {
+                     "path":  "dist/apple-icon-120x120.png",
+                     "sha256":  "fd7156591ecd0b71586f43781550cff637c84ae3a20548e4484cf90143b33854"
+                 },
+                 {
+                     "path":  "dist/apple-icon-144x144.png",
+                     "sha256":  "c0ef4822437382842c192cbb7c96f147bcbfa174f9f7c311056792e6322b839e"
+                 },
+                 {
+                     "path":  "dist/apple-icon-152x152.png",
+                     "sha256":  "49579e9e3b9793a058f4176051840f0def2de9f409505332c89b71f5ef6359ed"
+                 },
+                 {
+                     "path":  "dist/apple-icon-180x180.png",
+                     "sha256":  "6eb123ef326dcd00f2a5583b12ab74ee8d8816f25c55923fde783f5a2755d02f"
+                 },
+                 {
+                     "path":  "dist/apple-icon-57x57.png",
+                     "sha256":  "4764214efb318b34d5e0c1abdca40910ac85b1bd4ce31fde8e669c4a5d47903e"
+                 },
+                 {
+                     "path":  "dist/apple-icon-60x60.png",
+                     "sha256":  "a7b2d0c3f1e11b404d2949e5c2d805c7f22d196bf67ccb16325dd8f35c79120c"
+                 },
+                 {
+                     "path":  "dist/apple-icon-72x72.png",
+                     "sha256":  "445058b11159638d59e841da143c8a4862ac6d7ff2d9c16f6081d1a1901268b6"
+                 },
+                 {
+                     "path":  "dist/apple-icon-76x76.png",
+                     "sha256":  "52dfbbc48c9754a84db0a2c0fa8ba8ce2ef787cefb1e4fedc61b500859cb19e6"
+                 },
+                 {
+                     "path":  "dist/apple-icon-precomposed.png",
+                     "sha256":  "d8647464fead2b509b6f3ad1a2ba914cd38af3ebfc4b8d87e77060ca0a8c1af0"
+                 },
+                 {
+                     "path":  "dist/apple-icon.png",
+                     "sha256":  "d8647464fead2b509b6f3ad1a2ba914cd38af3ebfc4b8d87e77060ca0a8c1af0"
+                 },
+                 {
+                     "path":  "dist/assets/index-BXlAUp5j.js",
+                     "sha256":  "162403a80348e3fe7d243daa1d3f5a1bc4c6ad1c509ae268aaa184f11c9b37a1"
+                 },
+                 {
+                     "path":  "dist/assets/index-bVHDxWYH.css",
+                     "sha256":  "83ce0666099f0251edd5083c1b7178b5a398991f24a0109a9d3a381609a7cf7f"
+                 },
+                 {
+                     "path":  "dist/banner-preview.png",
+                     "sha256":  "ddf29827fee17e6f652801827eb9c688fb7846d2fcd31a3c9ee38f92ff848567"
+                 },
+                 {
+                     "path":  "dist/browserconfig.xml",
+                     "sha256":  "13bc647273455808acd0f6605124ab3a78bbae67b532f8b993dc0f8ce2a03d0d"
+                 },
+                 {
+                     "path":  "dist/conper/logo.png",
+                     "sha256":  "1665248d4049c97afa2133b3a70cb0c1202485d5e3595bde68fadcb99ed0bacd"
+                 },
+                 {
+                     "path":  "dist/favicon-16x16.png",
+                     "sha256":  "2ec8ade66d6cc0f94ec5ce0eb2693dbd99614d0e73f7dd288f4923c125e4e554"
+                 },
+                 {
+                     "path":  "dist/favicon-32x32.png",
+                     "sha256":  "789467aa220d65baf737e46608c779c783cfb3f5f41d248d59fc769f4773c683"
+                 },
+                 {
+                     "path":  "dist/favicon-96x96.png",
+                     "sha256":  "c2a1b6131476850fa873d8182064a9c22bff5fbbc84a652ebdcd7dddfc1152e4"
+                 },
+                 {
+                     "path":  "dist/favicon.ico",
+                     "sha256":  "4d92ba751264ebb712b7f94ed692c8b9485a5818e735348551b972c08335b32e"
+                 },
+                 {
+                     "path":  "dist/index.html",
+                     "sha256":  "c99cccae74977803a2cb9eec70c124352ccc4d63ab27e20083d3554c3d3bdcaf"
+                 },
+                 {
+                     "path":  "dist/manifest.json",
+                     "sha256":  "27eca3e8297eb7ff340deb3849b210185a459b3845456aa4d0036f6d966b3518"
+                 },
+                 {
+                     "path":  "dist/ms-icon-144x144.png",
+                     "sha256":  "c0ef4822437382842c192cbb7c96f147bcbfa174f9f7c311056792e6322b839e"
+                 },
+                 {
+                     "path":  "dist/ms-icon-150x150.png",
+                     "sha256":  "2157b59b4e86a3de17d681a380f5d77310a6cd9d8fc1bb5f55dbbeff1240a9c4"
+                 },
+                 {
+                     "path":  "dist/ms-icon-310x310.png",
+                     "sha256":  "1735213e49d6b79a733b857fe3b972a9296b091429e9a664dcc09682f7b29c0d"
+                 },
+                 {
+                     "path":  "dist/ms-icon-70x70.png",
+                     "sha256":  "fea4d2d4fdea98bad92604da1f95a15d25f53e97ff7c4c1e535233d74b22e1b0"
+                 },
+                 {
+                     "path":  "dist/pineapplepay/logo.png",
+                     "sha256":  "50e4b264b522a9aa2fdf096a56b19216799b800f108f70e8cc21b1f55df4a9c9"
+                 },
+                 {
+                     "path":  "dist/robots.txt",
+                     "sha256":  "15dc0cf459cf8372f10ccfd9c77198ac4f77dae47ed03e0a0099d9a4240225a4"
+                 }
+             ],
+    "source":  [
+                   {
+                       "path":  ".env.example",
+                       "sha256":  "582ccdc284b0019c1187c0cb9de169e4d98041c4b99a74e8044115f95dfe7481"
+                   },
+                   {
+                       "path":  ".firebaserc",
+                       "sha256":  "457fa0f7eaa80af0b9ecc947701cc3eeacdf05f6782a0d5e948fdeba903cb51f"
+                   },
+                   {
+                       "path":  ".gitignore",
+                       "sha256":  "89dc942c66d73c6349a7161dab95b09f181df36dc39e956e3064656feccb2447"
+                   },
+                   {
+                       "path":  "App.tsx",
+                       "sha256":  "1dd64415ee85d8d575b0cf94b80c757360d64dc6faf208e9b65f21533448a9cc"
+                   },
+                   {
+                       "path":  "LEIA-ME-PUBLICAR.md",
+                       "sha256":  "d7a9667707e88716ee57a98f9120f415f7149740e3a9c530f1d8e34f5fa9b9cb"
+                   },
+                   {
+                       "path":  "Publicar-Portfolio.ps1",
+                       "sha256":  "41c7da71bb932c5f20c781e35dcae3154537c224f70deb885fba3982fb266767"
+                   },
+                   {
+                       "path":  "components/AutoPartsCaseStudy.tsx",
+                       "sha256":  "ceddf5d8f372f35785cc38d02764c8336ac9a83ea4e1264b69d14c20af917120"
+                   },
+                   {
+                       "path":  "components/BichoMimadoCaseStudy.tsx",
+                       "sha256":  "b316182fa02049c19125ec9d417ebc4ee45a05c110b2194963bcd423a2e10b80"
+                   },
+                   {
+                       "path":  "components/BichoMimadoLanding.tsx",
+                       "sha256":  "6c48f157a5f46565b905abbf282268e9e4fb8b65632536ff35a2d9ccac9fa599"
+                   },
+                   {
+                       "path":  "components/CaseStatusNotice.tsx",
+                       "sha256":  "fb36f10af14c1cafa0a58452b5c7a11847d8b5bef4bf8a980b984b6a48479896"
+                   },
+                   {
+                       "path":  "components/CfcFocusCaseStudy.tsx",
+                       "sha256":  "cfd45f6f1e049c1fe662d116061829e1cec4a7b6a01daf8bffa87b496fd8f355"
+                   },
+                   {
+                       "path":  "components/ClientApp.tsx",
+                       "sha256":  "ffb91b88bfa7a3c1d4b3019de5de259e7b243ce3740fdfe8cc7d0d1525ca2057"
+                   },
+                   {
+                       "path":  "components/CommunityOverview.tsx",
+                       "sha256":  "32f5d45c7b3b46d02f55d2460e20b9c36080e4f35b7961a8139984f15d8c1a9f"
+                   },
+                   {
+                       "path":  "components/ConperCaseStudy.tsx",
+                       "sha256":  "7693328cc7480b209cb66fbe94a9f29254003458f18a4d9b73b61a063928c4b1"
+                   },
+                   {
+                       "path":  "components/Contact.tsx",
+                       "sha256":  "397867b29e7dd987bdf90ea3b567a0120ddba8d20c1116283d3da028782aeb19"
+                   },
+                   {
+                       "path":  "components/CoursesOverview.tsx",
+                       "sha256":  "f922a07e0a9d4a65c7b1f73ec6959fbe9a83a95e5e6d066c6fdf8a1157a615cf"
+                   },
+                   {
+                       "path":  "components/DesignPhilosophy.tsx",
+                       "sha256":  "9d7b05be61b212f264fd51ff975331325c64c495c5b10c1e9fabb981593571df"
+                   },
+                   {
+                       "path":  "components/ECommerceOverview.tsx",
+                       "sha256":  "5e3bdf0a77228be6476b0144f6e88c3ce9a9d27a9464522c7b3a435bd5bdd8a6"
+                   },
+                   {
+                       "path":  "components/EvidenceCaseStudy.tsx",
+                       "sha256":  "e64535122ae74e474085db046dce094c7c265d7f0495b55bb9308c37f1692169"
+                   },
+                   {
+                       "path":  "components/Experience.tsx",
+                       "sha256":  "df9d002929dc0151e1eade254a503ab5df8e3a3114fece6c20be7fd9f44e66cc"
+                   },
+                   {
+                       "path":  "components/Gy44CaseStudy.tsx",
+                       "sha256":  "50db8b2e177c19d365950f19a2e48825fe9949b686c1970ba3b98a5e716541e0"
+                   },
+                   {
+                       "path":  "components/GynMoveCaseStudy.tsx",
+                       "sha256":  "05c1e8c38232f3550d1fa24f167ac9cf6bd4a2a82d8247b203ccdbdf3ce571fe"
+                   },
+                   {
+                       "path":  "components/Hero.tsx",
+                       "sha256":  "4b6f7e05ff01d5be40b3f88f56733afc616f2c722282ff3ac2ce57349ef845c6"
+                   },
+                   {
+                       "path":  "components/LoginScreen.tsx",
+                       "sha256":  "5e16858463341978620cd92f4e1ee58b5677dd9b911d4a0d25e2c6349796d006"
+                   },
+                   {
+                       "path":  "components/Methodology.tsx",
+                       "sha256":  "af70c1c55fdcafcc37e1ae962e010e97faedfdae2d7bf5d6746542fa5560df32"
+                   },
+                   {
+                       "path":  "components/Navbar.tsx",
+                       "sha256":  "ac0fb39d95cb019843d145e6984aa9d43ce39b5f0cb8e7530db28c2d9cff8511"
+                   },
+                   {
+                       "path":  "components/PineapplePayCaseStudy.tsx",
+                       "sha256":  "9d5d4d45394a11fa36812c7dd8971af6a302b4e5833826dc470f4c93975fef00"
+                   },
+                   {
+                       "path":  "components/PineapplePayLanding.tsx",
+                       "sha256":  "3845f9db95d52120a7353f8dabbf375c4b1b2eb0fc789dbd75308a6d2d801c57"
+                   },
+                   {
+                       "path":  "components/Projects.tsx",
+                       "sha256":  "72297674a7044bf3a7cb9dbc612415673a23d280e2d544741d3bda8f5e882f9d"
+                   },
+                   {
+                       "path":  "components/ScrollToTop.tsx",
+                       "sha256":  "e5af6a486aa6c1c39c29afde2468786f6d1c70c25d675448013a7dc45018b4e5"
+                   },
+                   {
+                       "path":  "components/SectionLink.tsx",
+                       "sha256":  "88bb186911a41505b0980854229b69787d9cb17779b5814808a22923a13abd12"
+                   },
+                   {
+                       "path":  "components/ServicesPage.tsx",
+                       "sha256":  "5b71366fb40a010a03a33ffe4c3737cd46187ba96c9bcb33b47acb7ccfc239a4"
+                   },
+                   {
+                       "path":  "components/Skills.tsx",
+                       "sha256":  "de17132f6e1ee614fe6d8b75e75db8d1ce81e43831abafb9c53db98a8391e771"
+                   },
+                   {
+                       "path":  "components/SmartDropCaseStudy.tsx",
+                       "sha256":  "4057db015fbdcec38ce01897ba100c06233268da5401281f0a8153daf0d373fc"
+                   },
+                   {
+                       "path":  "components/TechnicalStudies.tsx",
+                       "sha256":  "6ea0cc7cce1d373423c5d66e65e2b9798f7c4d2ae1561efdb6e6f30f2445515e"
+                   },
+                   {
+                       "path":  "components/WebDevelopmentLanding.tsx",
+                       "sha256":  "ff174d45600ece50c9eff90c97ec12f181436dea5f643b0f121672e048621acb"
+                   },
+                   {
+                       "path":  "components/ui/LottieIcon.tsx",
+                       "sha256":  "c998bc05b19cda00678ad684fdef7f788c4ce8119f7bae56e9d49a934af50f22"
+                   },
+                   {
+                       "path":  "constants.ts",
+                       "sha256":  "b576d307834a7cc2e891eba7e54d9feaa7120f89029cbe4c4705f5bc447e3d88"
+                   },
+                   {
+                       "path":  "firebase.json",
+                       "sha256":  "74d9ebd7376b7d60c4e4dbfda34bca74d5afed9b360f4d8bbb1c574ec9b02555"
+                   },
+                   {
+                       "path":  "index.css",
+                       "sha256":  "20b46b51c09ac443f19635a79a0fe77fde197d9064fbe018af9c00fb3219b92a"
+                   },
+                   {
+                       "path":  "index.html",
+                       "sha256":  "de61e8a3b84c3ad7bba91b670a8c72035e11e5cf9af1527cd530b26bbe5fae53"
+                   },
+                   {
+                       "path":  "index.tsx",
+                       "sha256":  "850366f90c85638abab2dd52d1f4a39a59a923c569b9af3e8562fafd5feedae3"
+                   },
+                   {
+                       "path":  "package-lock.json",
+                       "sha256":  "f6b63a8858c0db26a2e0c95db394de5c1af0f02bc59bcdd3a5d250cceb118299"
+                   },
+                   {
+                       "path":  "package.json",
+                       "sha256":  "068d8eceeefd0272866e401daa67297ffd203844c09e9b6ef75615434fbb126e"
+                   },
+                   {
+                       "path":  "playwright.config.ts",
+                       "sha256":  "1dfe58acbf73b01d19d15fb2a5b47832739a551b203e6b7fba77f4c0f75ecd44"
+                   },
+                   {
+                       "path":  "postcss.config.js",
+                       "sha256":  "08910ce1d5cd87d2167e9c78b77262bf985b3f07dc5037ff745ecd6a759fd0c0"
+                   },
+                   {
+                       "path":  "projectEvidence.ts",
+                       "sha256":  "b0b8f11c2a36b52a21f765337dfd95a56598994cae1da8bd03b052f294c2e84b"
+                   },
+                   {
+                       "path":  "public/robots.txt",
+                       "sha256":  "15dc0cf459cf8372f10ccfd9c77198ac4f77dae47ed03e0a0099d9a4240225a4"
+                   },
+                   {
+                       "path":  "services/appUrl.ts",
+                       "sha256":  "6d9c8fbeaeb09cd22a7544bb3a3a703406bd28a87ee3a2e2900e0bafc75c521f"
+                   },
+                   {
+                       "path":  "tailwind.config.js",
+                       "sha256":  "e99850e5f861106e1deb51c78407030eebf4bcbf94fe57437b291b9af202e18f"
+                   },
+                   {
+                       "path":  "tests/app-url.spec.ts",
+                       "sha256":  "10d2ca7756023ba744e4cf24867630446a9e3681e44a4f5a5ad20672f86bfb43"
+                   },
+                   {
+                       "path":  "tests/editorial.spec.ts",
+                       "sha256":  "524a9aaacd0c9cef43d72de37b109705635be1a4dbe51caac0b9c8d75292de3f"
+                   },
+                   {
+                       "path":  "tests/navigation.spec.ts",
+                       "sha256":  "929ad8ffa749f2d3b44c7f1adc2d4edec92003fee950e721e91dad129127e5a1"
+                   },
+                   {
+                       "path":  "tsconfig.json",
+                       "sha256":  "8641deb29adfd1958488d1951f0d5ddf3013f498aa67ce0f621e347f0ef608d2"
+                   },
+                   {
+                       "path":  "types.ts",
+                       "sha256":  "11df8dad390a33ae2cfbc9ba2dd3e87ee3fcf5ffa20baa94f34eae6e2aeaed60"
+                   },
+                   {
+                       "path":  "vite-env.d.ts",
+                       "sha256":  "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+                   },
+                   {
+                       "path":  "vite.config.ts",
+                       "sha256":  "3114056c8aaf992ad01911f48df4b1872742542c5655bbdefb4b8b1e71104b1a"
+                   }
+               ],
+    "validation":  {
+                       "build":  "passed",
+                       "typescript":  "passed",
+                       "non_browser_tests":  6,
+                       "browser":  "not executed: environment blocked",
+                       "powershell":  "static review only; runtime unavailable"
+                   }
 }
