@@ -86,8 +86,8 @@
       "sha256": "c3f090b5a5e12646658ea5bef7fa42b9bde18b6656fcd096ac29d0ef33566941"
     },
     {
-      "path": "dist/assets/index-Cj9kiQUR.js",
-      "sha256": "2ee46530df67f078ec4e58f4b2d2a213bf6ad7c6a8a34b0410725b246ec8519e"
+      "path": "dist/assets/index-DGHpY9gz.js",
+      "sha256": "812b5b05ff548d791f59745cea52f509033ebcedd72739d749ac2ef3edf0fe1e"
     },
     {
       "path": "dist/banner-preview.png",
@@ -119,7 +119,7 @@
     },
     {
       "path": "dist/index.html",
-      "sha256": "eb4fa292f4aa4990fd0d83ce384998ae81390ed13acc2c1ba01182ecdd156b04"
+      "sha256": "886db1175fecfc060133ca46ae0ac98f2a01dfbedbe49e4647e96b30d0e99e29"
     },
     {
       "path": "dist/manifest.json",
@@ -173,7 +173,7 @@
     },
     {
       "path": "Publicar-Portfolio.ps1",
-      "sha256": "99674d4ca7b3538d944ba199baa723d403ca4b33a9aaa33759b3a7a585daf683"
+      "sha256": "77906204ba1283e73c8345049b60dac8b9290cf51fc985b71bc2e855c0d192b5"
     },
     {
       "path": "components/AutoPartsCaseStudy.tsx",
@@ -301,7 +301,7 @@
     },
     {
       "path": "constants.ts",
-      "sha256": "18ebf3028f40a7d632270cd3e53af34878a5f0767dee5b4f7cdaa0101054a4cb"
+      "sha256": "afe3acb085fd0ff0f83ddff0dcfcac214c0e00293f0390f901d3ceff2622c846"
     },
     {
       "path": "firebase.json",
@@ -329,7 +329,7 @@
     },
     {
       "path": "playwright.config.ts",
-      "sha256": "73510377c2910f0b1d938904178610e77c2e07139c831d1eb3f28eed19da5aa1"
+      "sha256": "1dfe58acbf73b01d19d15fb2a5b47832739a551b203e6b7fba77f4c0f75ecd44"
     },
     {
       "path": "postcss.config.js",
@@ -337,7 +337,7 @@
     },
     {
       "path": "projectEvidence.ts",
-      "sha256": "0c9854b8d6bbde9db7092b3d2c8880283ad8e4d170025f8903ba71176667d9aa"
+      "sha256": "b0b8f11c2a36b52a21f765337dfd95a56598994cae1da8bd03b052f294c2e84b"
     },
     {
       "path": "public/robots.txt",
