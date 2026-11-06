@@ -6,10 +6,12 @@ import {
   Lock, FileText, AlertTriangle, ExternalLink, Sparkles, MessageSquare,
   BarChart3, Award, Database, Check, Edit3, Trash2, ChevronRight,
   LogOut, UserCheck, CheckCircle2, Phone, ArrowRight, ShieldCheck, Flame,
-  Instagram, Key
+  Instagram, Key, Truck
 } from 'lucide-react';
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import InstagramStudio from './InstagramStudio';
+import AiTelemetryPanel from './AiTelemetryPanel';
+import PhysicalOpsPanel from './PhysicalOpsPanel';
 import { 
   ADMIN_PROFILE, 
   CLIENT_PROFILES, 
@@ -199,10 +201,9 @@ export const FounderOS: React.FC = () => {
 
   // Navigation tab state
   const tabParam = searchParams.get('tab') as any;
-  const initialTab = ['cockpit', 'projects', 'instagram', 'growth', 'finance', 'academy', 'terminal'].includes(tabParam) 
-    ? tabParam 
-    : 'cockpit';
-  const [activeTab, setActiveTab] = useState<'cockpit' | 'projects' | 'instagram' | 'growth' | 'finance' | 'academy' | 'terminal'>(initialTab);
+  const validTabs = ['cockpit', 'projects', 'ai-telemetry', 'physical-ops', 'instagram', 'growth', 'finance', 'academy', 'terminal'];
+  const initialTab = validTabs.includes(tabParam) ? tabParam : 'cockpit';
+  const [activeTab, setActiveTab] = useState<'cockpit' | 'projects' | 'ai-telemetry' | 'physical-ops' | 'instagram' | 'growth' | 'finance' | 'academy' | 'terminal'>(initialTab);
 
   const [isFounderMode, setIsFounderMode] = useState<boolean>(true);
 
@@ -556,6 +557,8 @@ export const FounderOS: React.FC = () => {
           {[
             { id: 'cockpit', label: 'Cockpit Executivo', icon: Activity },
             { id: 'projects', label: 'Aplicativos & Clientes', icon: Smartphone, badge: projects.length.toString() },
+            { id: 'ai-telemetry', label: 'Telemetria IA & Tokens', icon: Cpu, badge: 'SQUAD IA' },
+            { id: 'physical-ops', label: 'Operação Física & Demanda', icon: Truck, badge: 'CUSTOS' },
             { id: 'instagram', label: 'Instagram Studio & Posts', icon: Instagram },
             { id: 'growth', label: 'Radar de Tendências & Leads', icon: Flame },
             { id: 'finance', label: 'PineapplePay & Finanças', icon: DollarSign },
@@ -776,6 +779,22 @@ export const FounderOS: React.FC = () => {
                         </button>
 
                         <button
+                          onClick={() => handleSelectTab('ai-telemetry')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-purple-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Cpu size={15} className="text-purple-400" /> Telemetria de IA & Consumo de Tokens</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <button
+                          onClick={() => handleSelectTab('physical-ops')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-amber-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Truck size={15} className="text-amber-400" /> Operação Física & Demanda Inteligente</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <button
                           onClick={() => handleSelectTab('instagram')}
                           className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-pink-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
                         >
@@ -806,6 +825,22 @@ export const FounderOS: React.FC = () => {
                           className="w-full py-2.5 px-3 bg-[#00B4D8] text-black font-mono font-bold text-xs rounded-lg flex items-center justify-between hover:bg-[#38c9e7] transition-all"
                         >
                           <span className="flex items-center gap-2"><Smartphone size={15} /> Acompanhar Meu Aplicativo</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <button
+                          onClick={() => handleSelectTab('ai-telemetry')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-purple-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Cpu size={15} className="text-purple-400" /> Ver Consumo de Tokens & Horas de IA</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <button
+                          onClick={() => handleSelectTab('physical-ops')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-amber-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Truck size={15} className="text-amber-400" /> Otimizar Demanda Física & Entregas</span>
                           <ArrowRight size={14} />
                         </button>
 
@@ -1103,7 +1138,27 @@ export const FounderOS: React.FC = () => {
           </div>
         )}
 
-        {/* TAB 3: INSTAGRAM STUDIO UNIFICADO */}
+        {/* TAB 3: TELEMETRIA IA & TOKENS */}
+        {activeTab === 'ai-telemetry' && (
+          <div className="space-y-6">
+            <AiTelemetryPanel 
+              projectId={currentUser.projectId || 'autoparts'} 
+              projectName={projects.find(p => p.id === (currentUser.projectId || 'autoparts'))?.name || 'Projeto em Andamento'} 
+              userRole={currentUser.role} 
+            />
+          </div>
+        )}
+
+        {/* TAB 4: OPERAÇÃO FÍSICA & DEMANDA INTELIGENTE */}
+        {activeTab === 'physical-ops' && (
+          <div className="space-y-6">
+            <PhysicalOpsPanel 
+              userRole={currentUser.role} 
+            />
+          </div>
+        )}
+
+        {/* TAB 5: INSTAGRAM STUDIO UNIFICADO */}
         {activeTab === 'instagram' && (
           <div className="space-y-6">
             <InstagramStudio 

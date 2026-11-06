@@ -134,24 +134,98 @@ class DashboardScreen extends StatelessWidget {
           if (role == UserRole.client) ...[
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
                   children: [
-                    Expanded(
-                      child: _StatCard(
-                        label: "Commits",
-                        value: "${MockData.stats.totalCommits}",
-                        icon: Icons.commit,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _StatCard(
+                            label: "Commits GitHub",
+                            value: "${MockData.stats.totalCommits}",
+                            icon: Icons.commit,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: _StatCard(
+                            label: "Horas de IA",
+                            value: "46.8h",
+                            icon: Icons.psychology_outlined,
+                            color: const Color(0xFFD0BCFF),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _StatCard(
-                        label: "Horas",
-                        value: "${MockData.stats.hoursSpent}h",
-                        icon: Icons.timer_outlined,
-                        color: Theme.of(context).colorScheme.secondary,
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _StatCard(
+                            label: "Saldo de Tokens",
+                            value: "5.5M / 20M",
+                            icon: Icons.token_outlined,
+                            color: const Color(0xFF44D62C),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: _StatCard(
+                            label: "Intervenções Fábio",
+                            value: "4 resolvidas",
+                            icon: Icons.verified_user_outlined,
+                            color: const Color(0xFF00B4D8),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF161D2B),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.3)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.local_shipping_outlined, color: Color(0xFFF59E0B), size: 20),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    "Demanda & Remanejamento",
+                                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF59E0B).withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Text(
+                                  "IA Preditiva",
+                                  style: TextStyle(fontSize: 10, color: Color(0xFFF59E0B), fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "1 pedido isolado na terça-feira remanejado para sexta-feira. Economia de frete e custos invisíveis: R$ 380,00 este mês.",
+                            style: TextStyle(fontSize: 12, color: Colors.grey[300], height: 1.4),
+                          ),
+                        ],
                       ),
                     ),
                   ],
