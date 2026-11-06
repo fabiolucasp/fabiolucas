@@ -18,6 +18,7 @@ import LoginScreen from './components/LoginScreen';
 import BichoMimadoLanding from './components/BichoMimadoLanding';
 import PineapplePayLanding from './components/PineapplePayLanding';
 import InstagramStudio from './components/InstagramStudio';
+import FounderOS from './components/FounderOS';
 import ScrollToTop from './components/ScrollToTop';
 
 // Main Portfolio sections component
@@ -75,6 +76,7 @@ const MainLayout = () => {
                     <Route path="/bicho-mimado-app" element={<BichoMimadoLanding />} />
                     <Route path="/pineapple-pay" element={<PineapplePayLanding />} />
                     <Route path="/instagram-studio" element={<InstagramStudio />} />
+                    <Route path="/founder-os" element={<FounderOS />} />
                 </Routes>
             </main>
             

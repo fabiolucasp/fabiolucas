@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2, Instagram } from 'lucide-react';
+import { Menu, X, Code2, Instagram, Zap } from 'lucide-react';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 
 const Navbar: React.FC = () => {
@@ -69,6 +69,16 @@ const Navbar: React.FC = () => {
           >
             <Instagram size={18} />
           </NavLink>
+
+          {/* FounderOS Executive Button */}
+          <NavLink
+            to="/founder-os"
+            title="FounderOS - Sistema Operacional do Fundador"
+            className="flex items-center gap-1.5 px-3 py-1.5 ml-2 rounded-full text-xs font-mono font-bold bg-[#141A28] border border-[#44D62C]/50 text-[#44D62C] hover:bg-[#44D62C] hover:text-black hover:border-transparent transition-all duration-200 shadow-sm shadow-[#44D62C]/20"
+          >
+            <Zap size={14} className="animate-pulse" />
+            <span>FounderOS</span>
+          </NavLink>
         </div>
 
         {/* Mobile Toggle */}
@@ -106,6 +116,13 @@ const Navbar: React.FC = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <Instagram size={18} /> Instagram Studio
+          </NavLink>
+          <NavLink 
+            to="/founder-os" 
+            className="flex items-center gap-2 px-4 py-3 rounded-lg bg-[#44D62C]/10 border border-[#44D62C]/40 text-[#44D62C] hover:bg-[#44D62C] hover:text-black font-mono font-bold" 
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <Zap size={18} /> FounderOS (Gestão)
           </NavLink>
         </div>
       )}

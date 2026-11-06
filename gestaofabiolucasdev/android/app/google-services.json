@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "662562416089",
+    "project_id": "fabiolucasdev-a3ab4",
+    "storage_bucket": "fabiolucasdev-a3ab4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662562416089:android:8f4e787dc32a3a1a57e5c8",
+        "android_client_info": {
+          "package_name": "com.fabiolucas.gestaofabiolucasdev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzV81pD00BsgBQs28ovFfri_-8_35cRTE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -37,3 +37,15 @@ playwright-report/
 *.njsproj
 *.sln
 *.sw?
+
+# Flutter / Dart / Gradle build
+gestaofabiolucasdev/.dart_tool/
+gestaofabiolucasdev/build/
+gestaofabiolucasdev/.flutter-plugins*
+gestaofabiolucasdev/android/.gradle/
+gestaofabiolucasdev/windows/flutter/ephemeral/
+gestaofabiolucasdev/.firebase/
+functions/node_modules/
+functions/lib/
+gestaofabiolucasdev/functions/node_modules/
+gestaofabiolucasdev/functions/lib/
