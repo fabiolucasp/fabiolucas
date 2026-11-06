@@ -17,7 +17,7 @@ test('login never collects credentials and stays unavailable without configurati
 test('all public routes render without runtime errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  for (const route of ['/', '/servicos', '/servicos/web', '/ebooks', '/cursos', '/comunidade', '/cliente', '/login', '/bicho-mimado-app', '/pineapple-pay']) {
+  for (const route of ['/', '/servicos', '/servicos/web', '/ebooks', '/cursos', '/comunidade', '/cliente', '/login', '/bicho-mimado-app', '/pineapple-pay', '/instagram-studio']) {
     await page.goto(`/#${route}`);
     await expect(page.locator('main')).not.toBeEmpty();
     await expect(page.locator('h1, h2').first()).toBeVisible();

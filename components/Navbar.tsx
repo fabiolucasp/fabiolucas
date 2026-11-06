@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X, Code2, Instagram } from 'lucide-react';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 
 const Navbar: React.FC = () => {
@@ -59,6 +59,16 @@ const Navbar: React.FC = () => {
           <NavLink to="/login" className="px-4 py-2 ml-4 rounded-full text-sm font-medium bg-[#44D62C] text-[#000000] hover:bg-[#5aff3d] transition-all duration-200 font-mono">
             Login
           </NavLink>
+
+          {/* Instagram Studio Pill */}
+          <NavLink
+            to="/instagram-studio"
+            title="Instagram Studio & Gestor de Marketing"
+            aria-label="Instagram Studio"
+            className="p-2 ml-2 rounded-full text-[#AAA] hover:text-white hover:bg-gradient-to-tr hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCAF45] transition-all duration-200"
+          >
+            <Instagram size={18} />
+          </NavLink>
         </div>
 
         {/* Mobile Toggle */}
@@ -89,6 +99,13 @@ const Navbar: React.FC = () => {
           ))}
           <NavLink to="/login" className="block px-4 py-3 rounded-lg bg-[#44D62C] text-[#000000] hover:bg-[#5aff3d] font-mono" onClick={() => setIsMobileMenuOpen(false)}>
             Login
+          </NavLink>
+          <NavLink 
+            to="/instagram-studio" 
+            className="flex items-center gap-2 px-4 py-3 rounded-lg text-[#EEEEEE] hover:bg-[#111111] hover:text-[#44D62C] font-mono" 
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <Instagram size={18} /> Instagram Studio
           </NavLink>
         </div>
       )}

@@ -17,6 +17,7 @@ import WebDevelopmentLanding from './components/WebDevelopmentLanding';
 import LoginScreen from './components/LoginScreen';
 import BichoMimadoLanding from './components/BichoMimadoLanding';
 import PineapplePayLanding from './components/PineapplePayLanding';
+import InstagramStudio from './components/InstagramStudio';
 import ScrollToTop from './components/ScrollToTop';
 
 // Main Portfolio sections component
@@ -53,7 +54,7 @@ const MainLayout = () => {
     
     // Verifica se a rota atual é a landing page do Bicho Mimado, Pineapple Pay ou Login
     // Usar useLocation é mais performático e seguro que ouvir eventos de window
-    const hideNavbarRoutes = ['/bicho-mimado-app', '/login', '/pineapple-pay'];
+    const hideNavbarRoutes = ['/bicho-mimado-app', '/login', '/pineapple-pay', '/instagram-studio'];
     const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
     return (
@@ -73,6 +74,7 @@ const MainLayout = () => {
                     <Route path="/login" element={<LoginScreen />} />
                     <Route path="/bicho-mimado-app" element={<BichoMimadoLanding />} />
                     <Route path="/pineapple-pay" element={<PineapplePayLanding />} />
+                    <Route path="/instagram-studio" element={<InstagramStudio />} />
                 </Routes>
             </main>
             
