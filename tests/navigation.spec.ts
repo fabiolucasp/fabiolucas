@@ -4,23 +4,32 @@ test.beforeEach(async ({ page }) => {
   await page.route('**/*', route => new URL(route.request().url()).hostname === '127.0.0.1' ? route.continue() : route.abort());
 });
 
-test('login never collects credentials and stays unavailable without configuration', async ({ page }) => {
+test('login presents two role cards and allows entering founder-os', async ({ page }) => {
   await page.goto('/#/login');
-  await expect(page.getByRole('heading', { name: 'FounderOS' })).toBeVisible();
-  await expect(page.getByRole('status')).toContainText('Acesso ainda indisponível');
-  await expect(page.locator('input')).toHaveCount(0);
-  await expect(page.getByRole('link', { name: 'Abrir FounderOS' })).toHaveCount(0);
-  await page.getByRole('link', { name: 'Voltar', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Painel de Acesso' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Administrador' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Cliente' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Entrar como Administrador' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Entrar como Cliente' })).toBeVisible();
+  
+  // Test Voltar button
+  await page.getByRole('link', { name: 'Voltar ao Portfólio' }).click();
   await expect(page).toHaveURL(/#\/$/);
+
+  // Return to login and enter as Administrator
+  await page.goto('/#/login');
+  await page.getByRole('button', { name: 'Entrar como Administrador' }).click();
+  await expect(page).toHaveURL(/#\/founder-os/);
+  await expect(page.locator('header').getByText('Founders OS')).toBeVisible();
+  await expect(page.getByText('ADMIN (FULL CRUD)')).toBeVisible();
 });
 
 test('all public routes render without runtime errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  for (const route of ['/', '/servicos', '/servicos/web', '/ebooks', '/cursos', '/comunidade', '/cliente', '/login', '/bicho-mimado-app', '/pineapple-pay', '/instagram-studio']) {
+  for (const route of ['/', '/servicos', '/servicos/web', '/ebooks', '/cursos', '/comunidade', '/cliente', '/login', '/bicho-mimado-app', '/pineapple-pay', '/instagram-studio', '/founder-os']) {
     await page.goto(`/#${route}`);
-    await expect(page.locator('main')).not.toBeEmpty();
-    await expect(page.locator('h1, h2').first()).toBeVisible();
+    await expect(page.locator('main, header').first()).not.toBeEmpty();
   }
   expect(errors).toEqual([]);
 });

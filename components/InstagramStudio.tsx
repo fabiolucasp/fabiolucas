@@ -98,8 +98,18 @@ const DEFAULT_EDITORIAL_PLAN: EditorialPlanItem[] = [
   }
 ];
 
-export default function InstagramStudio() {
-  const [activeTab, setActiveTab] = useState<'feed' | 'studio' | 'calendar' | 'trends' | 'whatsapp' | 'leads' | 'strategy' | 'api'>('feed');
+export interface InstagramStudioProps {
+  embedded?: boolean;
+  userRole?: 'admin' | 'client';
+  initialTab?: 'feed' | 'studio' | 'calendar' | 'trends' | 'whatsapp' | 'leads' | 'strategy' | 'api';
+}
+
+export default function InstagramStudio({ 
+  embedded = false, 
+  userRole = 'admin', 
+  initialTab = 'feed' 
+}: InstagramStudioProps = {}) {
+  const [activeTab, setActiveTab] = useState<'feed' | 'studio' | 'calendar' | 'trends' | 'whatsapp' | 'leads' | 'strategy' | 'api'>(initialTab);
   const [config, setConfig] = useState<GraphApiConfig>(getStoredGraphConfig());
   const [profile, setProfile] = useState<InstagramProfile>(MOCK_PROFILE);
   const [mediaList, setMediaList] = useState<InstagramMedia[]>(MOCK_MEDIA);
@@ -427,22 +437,31 @@ export default function InstagramStudio() {
   return (
     <div className="min-h-screen bg-[#070707] text-[#EEEEEE] font-sans pb-16">
       {/* Top Bar Studio */}
-      <header className="sticky top-0 z-40 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-[#222] px-6 py-4">
+      <header className={`sticky ${embedded ? 'top-0' : 'top-0'} z-40 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-[#222] px-6 py-4`}>
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <NavLink to="/" className="text-[#888] hover:text-[#44D62C] flex items-center gap-1.5 text-xs font-mono">
-              <ArrowLeft size={16} /> Voltar ao Portfólio
-            </NavLink>
-            <div className="h-4 w-px bg-[#333] hidden sm:block"></div>
+            {!embedded && (
+              <>
+                <NavLink to="/" className="text-[#888] hover:text-[#44D62C] flex items-center gap-1.5 text-xs font-mono">
+                  <ArrowLeft size={16} /> Voltar ao Portfólio
+                </NavLink>
+                <div className="h-4 w-px bg-[#333] hidden sm:block"></div>
+              </>
+            )}
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-xl bg-gradient-to-tr from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] text-white shadow-[0_0_15px_rgba(253,29,29,0.3)]">
                 <Instagram size={22} />
               </div>
               <div>
                 <h1 className="text-lg font-bold font-mono text-[#FFF] flex items-center gap-2">
-                  Central de Gestão & Marketing <span className="text-xs px-2 py-0.5 rounded-full bg-[#1A1A1A] border border-[#333] text-[#44D62C] font-mono">Growth OS</span>
+                  Instagram Studio & Gestor de Marketing <span className="text-xs px-2 py-0.5 rounded-full bg-[#1A1A1A] border border-[#333] text-[#44D62C] font-mono">Founders OS</span>
+                  {userRole === 'client' && (
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#00B4D8]/15 border border-[#00B4D8]/30 text-[#00B4D8] font-mono font-normal">
+                      Visualização do Cliente
+                    </span>
+                  )}
                 </h1>
-                <p className="text-xs text-[#888] font-mono">Fábio Lucas &bull; @{profile.username} &bull; Gestor de Redes & Automação</p>
+                <p className="text-xs text-[#888] font-mono">Fábio Lucas &bull; @{profile.username} &bull; Automação, Criação e Analytics</p>
               </div>
             </div>
           </div>

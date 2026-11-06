@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Terminal, Shield, Cpu, TrendingUp, DollarSign, Users, Smartphone, 
   CheckCircle, Clock, Send, Eye, EyeOff, Search, Plus, Printer, 
   RefreshCw, Layers, ArrowUpRight, Activity, Server, Zap, Globe, 
   Lock, FileText, AlertTriangle, ExternalLink, Sparkles, MessageSquare,
-  BarChart3, Award, Database, Check
+  BarChart3, Award, Database, Check, Edit3, Trash2, ChevronRight,
+  LogOut, UserCheck, CheckCircle2, Phone, ArrowRight, ShieldCheck, Flame,
+  Instagram, Key
 } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
+import InstagramStudio from './InstagramStudio';
+import { 
+  ADMIN_PROFILE, 
+  CLIENT_PROFILES, 
+  FounderUser, 
+  getStoredUser, 
+  saveUser, 
+  clearUser,
+  hasFullCrud 
+} from '../services/founderOsAuth';
 
-interface ProjectItem {
+export interface ProjectItem {
   id: string;
   name: string;
   client: string;
@@ -23,9 +35,10 @@ interface ProjectItem {
   sla: string;
   screens: number;
   highlight: string;
+  clientApproved?: boolean;
 }
 
-const INITIAL_PROJECTS: ProjectItem[] = [
+export const INITIAL_PROJECTS: ProjectItem[] = [
   {
     id: 'autoparts',
     name: 'AutoParts Guide (Cliente & Lojista)',
@@ -40,7 +53,8 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     lastUpdate: 'Hoje, 00:45',
     sla: '99.9% Uptime',
     screens: 35,
-    highlight: 'Catálogo de peças com modal veicular, carteira digital e módulo My Car'
+    highlight: 'Catálogo de peças com modal veicular, carteira digital e módulo My Car',
+    clientApproved: true
   },
   {
     id: 'pineapplepay',
@@ -56,7 +70,8 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     lastUpdate: 'Ontem, 21:30',
     sla: '100% Homologado',
     screens: 15,
-    highlight: 'Geração de comprovantes PDF com cashback, split de pagamento e Pix QR dinâmico'
+    highlight: 'Geração de comprovantes PDF com cashback, split de pagamento e Pix QR dinâmico',
+    clientApproved: true
   },
   {
     id: 'gynmove-passenger',
@@ -72,7 +87,8 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     lastUpdate: 'Há 2 dias',
     sla: 'Piloto Goiânia',
     screens: 10,
-    highlight: 'Telemetria 3D Elevation API, skwasm GPU WebAssembly e matching em tempo real'
+    highlight: 'Telemetria 3D Elevation API, skwasm GPU WebAssembly e matching em tempo real',
+    clientApproved: false
   },
   {
     id: 'gynmove-driver',
@@ -88,7 +104,8 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     lastUpdate: 'Há 3 dias',
     sla: 'Homologação',
     screens: 8,
-    highlight: 'IA de cabine, geofencing contínuo e repasse automático de ganhos'
+    highlight: 'IA de cabine, geofencing contínuo e repasse automático de ganhos',
+    clientApproved: false
   },
   {
     id: 'voltfinance',
@@ -102,46 +119,49 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     mrr: 'R$ 2.900,00/mês',
     repo: 'fabiolucasp/voltfinance',
     lastUpdate: '2026-11-04',
-    sla: 'Produção Estável',
-    screens: 8,
-    highlight: 'Automatização de guias DAS MEI, split de contas PF/PJ e conciliação bancária'
+    sla: '100% Estável',
+    screens: 12,
+    highlight: 'DRE dinâmico, emissão de NFSe automática e conciliação bancária Open Finance',
+    clientApproved: true
   },
   {
-    id: 'multasipva',
-    name: 'Multas & IPVA Brasil',
-    client: 'Despachante Express & Frotistas',
+    id: 'cfcfocus',
+    name: 'CFC Focus (Simulados Detran & Telemetria)',
+    client: 'Rede Centro-Oeste de Autoescolas',
     clientPhone: '5562981358986',
     category: 'Automotivo & GovTech',
     stage: 'Produção & Lojas',
     progress: 100,
-    value: 'R$ 38.000,00',
+    value: 'R$ 36.000,00',
     mrr: 'R$ 2.500,00/mês',
-    repo: 'fabiolucasp/multasipva',
-    lastUpdate: '2026-11-04',
-    sla: '99.5% Uptime',
-    screens: 8,
-    highlight: 'Consulta veicular por placa e Renavam, parcelamento de débitos em até 12x'
+    repo: 'fabiolucasp/cfcfocus',
+    lastUpdate: '2026-11-03',
+    sla: '99.9% Uptime',
+    screens: 14,
+    highlight: 'Simulados oficiais CNH com banco de 1.200 questões e biometria facial',
+    clientApproved: true
   },
   {
     id: 'bichomimado',
-    name: 'Bicho Mimado (Pet Shop & TaxiDog)',
-    client: 'Bicho Mimado Centro Veterinário',
+    name: 'Bicho Mimado (Pet Care & TaxiDog)',
+    client: 'Clínica Veterinária & Pet Shop Bicho Mimado',
     clientPhone: '5562981358986',
     category: 'Pet Care & Delivery',
     stage: 'Produção & Lojas',
     progress: 100,
-    value: 'R$ 36.000,00',
+    value: 'R$ 38.000,00',
     mrr: 'R$ 2.400,00/mês',
     repo: 'fabiolucasp/bichomimado',
-    lastUpdate: '2026-11-02',
-    sla: 'Uso Diário',
-    screens: 12,
-    highlight: 'Agendamento de banho e tosa, telemetria de TaxiDog ao vivo e prontuário pet'
+    lastUpdate: '2026-11-01',
+    sla: '100% Operacional',
+    screens: 9,
+    highlight: 'Rastreamento em tempo real do TaxiDog e agendamento integrado de consultas',
+    clientApproved: true
   },
   {
     id: 'brigaelo',
-    name: 'Brigaelo (E-commerce & Fidelidade)',
-    client: 'Brigaelo Chocolatier Gourmet',
+    name: 'BrigaElo (Confeitaria & Encomendas)',
+    client: 'Ateliê de Doces Finos BrigaElo',
     clientPhone: '5562981358986',
     category: 'E-commerce & Gastronomia',
     stage: 'Produção & Lojas',
@@ -152,17 +172,84 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     lastUpdate: '2026-11-02',
     sla: '99.9% Uptime',
     screens: 10,
-    highlight: 'Catálogo de doces finos, checkout direto para WhatsApp e cupons dinâmicos'
+    highlight: 'Catálogo de doces finos, checkout direto para WhatsApp e cupons dinâmicos',
+    clientApproved: true
   }
 ];
 
+const STAGE_ORDER: ProjectItem['stage'][] = [
+  'Briefing',
+  'Figma UI/UX',
+  'Dev Flutter',
+  'Testes QA',
+  'Produção & Lojas'
+];
+
 export const FounderOS: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'cockpit' | 'projects' | 'finance' | 'growth' | 'academy' | 'terminal'>('cockpit');
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Active User session
+  const [currentUser, setCurrentUser] = useState<FounderUser>(() => {
+    return getStoredUser() || ADMIN_PROFILE;
+  });
+
+  const isAdmin = currentUser.role === 'admin';
+  const isClient = currentUser.role === 'client';
+
+  // Navigation tab state
+  const tabParam = searchParams.get('tab') as any;
+  const initialTab = ['cockpit', 'projects', 'instagram', 'growth', 'finance', 'academy', 'terminal'].includes(tabParam) 
+    ? tabParam 
+    : 'cockpit';
+  const [activeTab, setActiveTab] = useState<'cockpit' | 'projects' | 'instagram' | 'growth' | 'finance' | 'academy' | 'terminal'>(initialTab);
+
   const [isFounderMode, setIsFounderMode] = useState<boolean>(true);
-  const [projects, setProjects] = useState<ProjectItem[]>(INITIAL_PROJECTS);
+
+  // Projects State with LocalStorage Persistence
+  const [projects, setProjects] = useState<ProjectItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('founderos_projects_db');
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // fallback
+    }
+    return INITIAL_PROJECTS;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('founderos_projects_db', JSON.stringify(projects));
+    } catch {
+      // ignore
+    }
+  }, [projects]);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todas');
-  
+  const [selectedStage, setSelectedStage] = useState('Todas');
+
+  // CRUD Modal States
+  const [showNewProjectModal, setShowNewProjectModal] = useState(false);
+  const [editingProject, setEditingProject] = useState<ProjectItem | null>(null);
+  const [deletingProject, setDeletingProject] = useState<ProjectItem | null>(null);
+  const [clientFeedbackModal, setClientFeedbackModal] = useState<ProjectItem | null>(null);
+  const [clientFeedbackText, setClientFeedbackText] = useState('');
+  const [feedbackSentAlert, setFeedbackSentAlert] = useState(false);
+
+  // New Project Form State
+  const [formName, setFormName] = useState('');
+  const [formClient, setFormClient] = useState('');
+  const [formPhone, setFormPhone] = useState('5562981358986');
+  const [formCategory, setFormCategory] = useState('Marketplace & B2B');
+  const [formStage, setFormStage] = useState<ProjectItem['stage']>('Briefing');
+  const [formProgress, setFormProgress] = useState(15);
+  const [formValue, setFormValue] = useState('R$ 35.000,00');
+  const [formMrr, setFormMrr] = useState('R$ 2.500,00/mês');
+  const [formRepo, setFormRepo] = useState('fabiolucasp/novo-app');
+  const [formScreens, setFormScreens] = useState(8);
+  const [formHighlight, setFormHighlight] = useState('');
+
   // PineapplePay Receipt Generator state
   const [receiptClient, setReceiptClient] = useState('Distribuidora Centro-Oeste');
   const [receiptDoc, setReceiptDoc] = useState('00.123.456/0001-89');
@@ -175,17 +262,186 @@ export const FounderOS: React.FC = () => {
   // Terminal state
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalHistory, setTerminalHistory] = useState<Array<{ cmd: string; output: string }>>([
-    { cmd: 'whoami', output: 'fabio_lucas@founderos ~ [ROLE: Founder & Lead Architect] [PERMS: Root Executive]' },
-    { cmd: 'status --all', output: '✓ Firebase Hosting: ONLINE (200 OK)\n✓ Cloud Functions: PACKAGED (v2 ready)\n✓ Meta Graph API v21.0: CONNECTED\n✓ 8 Native Apps: SYNCED\n✓ Monorepo Architecture: UNIFIED' }
+    { cmd: 'whoami', output: 'fabio_lucas@founderos ~ [ROLE: Desenvolvedor Master & Gestor] [PERMS: Full CRUD]' },
+    { cmd: 'status --all', output: '✓ Firebase Hosting: ONLINE (200 OK)\n✓ Cloud Functions: PACKAGED\n✓ Meta Graph API: ATIVA\n✓ 8 Aplicativos Flutter: SINCRONIZADOS\n✓ Monorepo Architecture: UNIFIED' }
   ]);
 
-  // Form modal state for new project
-  const [showNewProjectModal, setShowNewProjectModal] = useState(false);
-  const [newProjectName, setNewProjectName] = useState('');
-  const [newProjectClient, setNewProjectClient] = useState('');
-  const [newProjectValue, setNewProjectValue] = useState('');
-  const [newProjectCategory, setNewProjectCategory] = useState('B2B & SaaS');
+  // Handle Tab Switch
+  const handleSelectTab = (tab: typeof activeTab) => {
+    setActiveTab(tab);
+    setSearchParams({ tab });
+  };
 
+  // Switch role between Admin and Client on the fly
+  const handleToggleRole = () => {
+    const nextUser = isAdmin ? CLIENT_PROFILES[0] : ADMIN_PROFILE;
+    setCurrentUser(nextUser);
+    saveUser(nextUser);
+  };
+
+  const handleLogout = () => {
+    clearUser();
+    navigate('/login');
+  };
+
+  // CRUD: CREATE
+  const handleCreateProject = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isAdmin) return;
+    if (!formName.trim() || !formClient.trim()) return;
+
+    const newProject: ProjectItem = {
+      id: `proj-${Date.now()}`,
+      name: formName.trim(),
+      client: formClient.trim(),
+      clientPhone: formPhone.trim() || '5562981358986',
+      category: formCategory,
+      stage: formStage,
+      progress: Number(formProgress) || 10,
+      value: formValue.trim() || 'R$ 30.000,00',
+      mrr: formMrr.trim() || 'R$ 2.000,00/mês',
+      repo: formRepo.trim() || 'fabiolucasp/novo-projeto',
+      lastUpdate: 'Hoje, agora',
+      sla: '99.9% Previsto',
+      screens: Number(formScreens) || 6,
+      highlight: formHighlight.trim() || 'Novo aplicativo em arquitetura Flutter.',
+      clientApproved: false
+    };
+
+    setProjects([newProject, ...projects]);
+    setShowNewProjectModal(false);
+    // Reset form
+    setFormName('');
+    setFormClient('');
+    setFormHighlight('');
+  };
+
+  // CRUD: UPDATE (OPEN MODAL)
+  const handleOpenEdit = (project: ProjectItem) => {
+    if (!isAdmin) return;
+    setEditingProject(project);
+    setFormName(project.name);
+    setFormClient(project.client);
+    setFormPhone(project.clientPhone);
+    setFormCategory(project.category);
+    setFormStage(project.stage);
+    setFormProgress(project.progress);
+    setFormValue(project.value);
+    setFormMrr(project.mrr);
+    setFormRepo(project.repo);
+    setFormScreens(project.screens);
+    setFormHighlight(project.highlight);
+  };
+
+  // CRUD: UPDATE (SAVE)
+  const handleSaveEdit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isAdmin || !editingProject) return;
+
+    setProjects(projects.map(p => {
+      if (p.id === editingProject.id) {
+        return {
+          ...p,
+          name: formName,
+          client: formClient,
+          clientPhone: formPhone,
+          category: formCategory,
+          stage: formStage,
+          progress: Number(formProgress),
+          value: formValue,
+          mrr: formMrr,
+          repo: formRepo,
+          screens: Number(formScreens),
+          highlight: formHighlight,
+          lastUpdate: 'Hoje, editado'
+        };
+      }
+      return p;
+    }));
+
+    setEditingProject(null);
+  };
+
+  // CRUD: DELETE
+  const handleDeleteConfirm = () => {
+    if (!isAdmin || !deletingProject) return;
+    setProjects(projects.filter(p => p.id !== deletingProject.id));
+    setDeletingProject(null);
+  };
+
+  // Quick Action: Advance Stage (Admin Only)
+  const handleAdvanceStage = (projectId: string) => {
+    if (!isAdmin) return;
+    setProjects(projects.map(p => {
+      if (p.id === projectId) {
+        const currentIndex = STAGE_ORDER.indexOf(p.stage);
+        const nextIndex = Math.min(currentIndex + 1, STAGE_ORDER.length - 1);
+        const nextStage = STAGE_ORDER[nextIndex];
+        const nextProgress = nextStage === 'Produção & Lojas' ? 100 : Math.min(p.progress + 20, 95);
+        return {
+          ...p,
+          stage: nextStage,
+          progress: nextProgress,
+          lastUpdate: 'Hoje, etapa avançada'
+        };
+      }
+      return p;
+    }));
+  };
+
+  // Client Approval Workflow
+  const handleClientApprove = (projectId: string) => {
+    setProjects(projects.map(p => {
+      if (p.id === projectId) {
+        return {
+          ...p,
+          clientApproved: true,
+          lastUpdate: 'Aprovado pelo Cliente ✅'
+        };
+      }
+      return p;
+    }));
+  };
+
+  // Client Feedback submit
+  const handleSendClientFeedback = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFeedbackSentAlert(true);
+    setTimeout(() => {
+      setFeedbackSentAlert(false);
+      setClientFeedbackModal(null);
+      setClientFeedbackText('');
+    }, 2000);
+  };
+
+  // Reset to original mock data
+  const handleResetData = () => {
+    if (window.confirm('Deseja restaurar os dados originais dos projetos?')) {
+      setProjects(INITIAL_PROJECTS);
+      localStorage.removeItem('founderos_projects_db');
+    }
+  };
+
+  // Filtering
+  const filteredProjects = projects.filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          p.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          p.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === 'Todas' || p.category === selectedCategory;
+    const matchesStage = selectedStage === 'Todas' || p.stage === selectedStage;
+    return matchesSearch && matchesCategory && matchesStage;
+  });
+
+  const categories = ['Todas', 'Marketplace & B2B', 'Fintech & Gateway', 'Mobilidade Urbana', 'Fintech & Gestão', 'Automotivo & GovTech', 'Pet Care & Delivery', 'E-commerce & Gastronomia'];
+  const stages = ['Todas', ...STAGE_ORDER];
+
+  // Calculations for PineapplePay Receipt
+  const numAmount = parseFloat(receiptAmount) || 0;
+  const numCashback = parseFloat(receiptCashback) || 0;
+  const cashbackValue = (numAmount * numCashback) / 100;
+  const netAmount = numAmount - cashbackValue;
+
+  // Terminal Handler
   const handleTerminalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const cmd = terminalInput.trim().toLowerCase();
@@ -194,28 +450,28 @@ export const FounderOS: React.FC = () => {
     let output = '';
     switch (cmd) {
       case 'help':
-        output = 'Comandos disponíveis:\n- status        : Integridade de todos os serviços na nuvem\n- projects      : Resumo dos 8 apps ativos no ecossistema\n- finance       : Visão consolidada de faturamento e MRR\n- clear         : Limpa o histórico do terminal\n- deploy        : Instruções de deploy em produção\n- whoami        : Identidade do usuário autenticado no FounderOS';
+        output = 'Comandos do Terminal:\n- status      : Integridade dos serviços na nuvem\n- projects    : Resumo de todos os apps no ecossistema\n- finance     : Visão consolidada de contratos e MRR\n- clear       : Limpa o histórico\n- deploy      : Simulação de build e deploy em produção\n- whoami      : Usuário e permissões ativas';
         break;
       case 'status':
-        output = 'SISTEMA OPERACIONAL DO FUNDADOR (FounderOS v2.0)\n- Core Web Platform : https://fabiolucas.com (ONLINE)\n- Mobile Management : https://fabiolucasdev-a3ab4.web.app (ONLINE)\n- Cloud Functions   : Node 22 / TypeScript (Built 76.78 KB)\n- GitHub Unified    : github.com/fabiolucasp/fabiolucas\n- Status Geral      : 100% OPERACIONAL';
+        output = `SISTEMA OPERACIONAL DO FUNDADOR (FounderOS v2.5)\n- Permissões Ativas : ${isAdmin ? 'ADMINISTRADOR (Full CRUD)' : 'CLIENTE (Acompanhamento)'}\n- Core Platform     : https://fabiolucas.com (ONLINE)\n- Cloud Functions   : Node 22 / TypeScript\n- GitHub Unified    : github.com/fabiolucasp/fabiolucas\n- Status Geral      : 100% OPERACIONAL`;
         break;
       case 'projects':
-        output = `8 APLICATIVOS CATALOGADOS NO FOUNDEROS:\n${projects.map(p => `• [${p.stage}] ${p.name} - ${p.value} (${p.client})`).join('\n')}`;
+        output = `APLICATIVOS NO FOUNDEROS:\n${projects.map(p => `• [${p.stage}] ${p.name} - ${p.value} (${p.client})`).join('\n')}`;
         break;
       case 'finance':
         output = isFounderMode
           ? 'FATURAMENTO GLOBAL FOUNDEROS:\n• Contratos em Execução: R$ 404.000,00\n• MRR Recorrente Mensal: R$ 27.900,00/mês\n• Margem Líquida Média : 84.2%\n• Inadimplência        : 0.0%'
-          : 'FATURAMENTO OCULTO (Modo Apresentação Ativo). Desative o modo apresentação para visualizar.';
+          : 'FATURAMENTO OCULTO (Modo Vitrine).';
         break;
       case 'clear':
         setTerminalHistory([]);
         setTerminalInput('');
         return;
       case 'whoami':
-        output = 'Fábio Lucas - Desenvolvedor Full-Stack | Especialista Flutter & Firebase | Founder';
+        output = `Usuário: ${currentUser.name}\nFunção: ${currentUser.title}\nPermissões: ${isAdmin ? 'Full CRUD (Criar, Alterar e Deletar)' : 'Leitura e Aprovação de Etapas'}`;
         break;
       case 'deploy':
-        output = 'DISPARANDO BUILD & DEPLOY:\n$ npm run build\n$ npx firebase deploy --only hosting\n✓ Publicação finalizada com sucesso nos servidores globais do Firebase.';
+        output = 'DISPARANDO PIPELINE DE INTEGRAÇÃO CONTÍNUA:\n$ npm run build\n$ npx firebase deploy --only hosting\n✓ Publicação concluída com sucesso no Firebase.';
         break;
       default:
         output = `Comando desconhecido: "${cmd}". Digite "help" para ver os comandos suportados.`;
@@ -225,138 +481,104 @@ export const FounderOS: React.FC = () => {
     setTerminalInput('');
   };
 
-  const handleAddNewProject = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newProjectName || !newProjectClient) return;
-
-    const newProj: ProjectItem = {
-      id: `proj-${Date.now()}`,
-      name: newProjectName,
-      client: newProjectClient,
-      clientPhone: '5562981358986',
-      category: newProjectCategory,
-      stage: 'Briefing',
-      progress: 10,
-      value: newProjectValue || 'R$ 25.000,00',
-      mrr: 'R$ 1.800,00/mês',
-      repo: 'fabiolucasp/novo-projeto',
-      lastUpdate: 'Agora',
-      sla: 'Em Definição',
-      screens: 6,
-      highlight: 'Novo projeto em fase de concepção e arquitetura de requisitos'
-    };
-
-    setProjects([newProj, ...projects]);
-    setShowNewProjectModal(false);
-    setNewProjectName('');
-    setNewProjectClient('');
-    setNewProjectValue('');
-  };
-
-  const filteredProjects = projects.filter(p => {
-    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          p.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          p.category.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'Todas' || p.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const categories = ['Todas', 'Marketplace & B2B', 'Fintech & Gateway', 'Mobilidade Urbana', 'Fintech & Gestão', 'Automotivo & GovTech', 'Pet Care & Delivery', 'E-commerce & Gastronomia'];
-
-  // Calculations for PineapplePay Receipt
-  const numAmount = parseFloat(receiptAmount) || 0;
-  const numCashback = parseFloat(receiptCashback) || 0;
-  const cashbackValue = (numAmount * numCashback) / 100;
-  const netAmount = numAmount - cashbackValue;
-
   return (
-    <div className="min-h-screen bg-[#07090E] text-[#E1E7EF] font-sans pt-20 pb-24">
-      {/* Top Banner / Breadcrumb */}
-      <div className="border-b border-[#1E2638] bg-[#0A0D14]/90 backdrop-blur-md sticky top-16 z-40">
+    <div className="min-h-screen bg-[#07090E] text-[#E1E7EF] font-sans pb-24">
+      {/* TOP EXECUTIVE BAR & RBAC USER STATUS */}
+      <header className="sticky top-0 z-50 bg-[#0A0D14]/95 backdrop-blur-md border-b border-[#1E2638]">
         <div className="container mx-auto px-4 md:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+          {/* Logo & Platform Info */}
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#44D62C]/10 border border-[#44D62C]/30 rounded-lg text-[#44D62C]">
+            <NavLink to="/" className="p-2 bg-[#44D62C]/10 border border-[#44D62C]/30 rounded-lg text-[#44D62C] hover:scale-105 transition-transform" title="Voltar ao Portfólio Público">
               <Zap size={22} className="animate-pulse" />
-            </div>
+            </NavLink>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-mono font-bold text-lg text-white tracking-wide">FounderOS</h1>
+                <span className="font-mono font-bold text-lg text-white tracking-wide">Founders OS</span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#44D62C]/20 text-[#44D62C] font-semibold border border-[#44D62C]/30">
-                  v2.0 UNIFIED
+                  PORTAL UNIFICADO
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold border border-blue-500/30">
-                  FLUTTER 3 + REACT + CLOUD
-                </span>
+                {isAdmin ? (
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-bold border border-emerald-500/30 flex items-center gap-1">
+                    <ShieldCheck size={12} /> ADMIN (FULL CRUD)
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00B4D8]/15 text-[#00B4D8] font-bold border border-[#00B4D8]/30 flex items-center gap-1">
+                    <UserCheck size={12} /> CLIENTE (ACOMPANHAMENTO)
+                  </span>
+                )}
               </div>
-              <p className="text-xs text-gray-400">
-                Sistema Operacional do Fundador • Fábio Lucas Dev
+              <p className="text-xs text-gray-400 font-mono">
+                Logado como: <strong className="text-white">{currentUser.name}</strong> {currentUser.company && `(${currentUser.company})`}
               </p>
             </div>
           </div>
 
-          {/* Quick Actions & Mode Toggle */}
+          {/* User Controls & Role Switcher */}
           <div className="flex items-center gap-2 flex-wrap">
+            {/* Quick Role Toggle button for demo / testing */}
+            <button
+              onClick={handleToggleRole}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-[#161D2B] border border-[#232E42] text-gray-300 hover:text-white hover:border-[#44D62C] transition-all"
+              title="Alternar entre perfil de Administrador e perfil de Cliente para testar permissões"
+            >
+              <RefreshCw size={13} />
+              <span>Alternar para {isAdmin ? 'Cliente' : 'Administrador'}</span>
+            </button>
+
+            {/* Privacy / Confidential Toggle */}
             <button
               onClick={() => setIsFounderMode(!isFounderMode)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all border ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all border ${
                 isFounderMode 
                   ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20' 
                   : 'bg-amber-500/10 border-amber-500/30 text-amber-400 hover:bg-amber-500/20'
               }`}
-              title="Alternar entre visualização de faturamento confidencial e modo demo/vitrine"
+              title="Ocultar ou exibir valores confidenciais de faturamento"
             >
-              {isFounderMode ? <Eye size={14} /> : <EyeOff size={14} />}
-              {isFounderMode ? 'Modo Fundador (Ativo)' : 'Modo Vitrine (Oculto)'}
+              {isFounderMode ? <Eye size={13} /> : <EyeOff size={13} />}
+              <span>{isFounderMode ? 'Valores Visíveis' : 'Valores Ocultos'}</span>
             </button>
 
-            <NavLink
-              to="/instagram-studio"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-pink-500/30 text-pink-300 hover:text-white hover:border-pink-500/60 transition-all"
+            {/* Logout button */}
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20 transition-all"
+              title="Encerrar sessão e voltar para tela de login"
             >
-              <Sparkles size={14} />
-              Instagram Studio
-            </NavLink>
-
-            <a
-              href="https://fabiolucasdev-a3ab4.web.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-[#44D62C] text-black hover:bg-[#52f036] transition-all shadow-lg shadow-[#44D62C]/20"
-            >
-              <Smartphone size={14} />
-              App Mobile Gestão
-              <ExternalLink size={12} />
-            </a>
+              <LogOut size={13} />
+              <span>Sair</span>
+            </button>
           </div>
         </div>
 
-        {/* Navigation Tabs */}
+        {/* Unified Navigation Tabs */}
         <div className="container mx-auto px-4 md:px-6 flex gap-1 overflow-x-auto no-scrollbar border-t border-[#161D2B]">
           {[
             { id: 'cockpit', label: 'Cockpit Executivo', icon: Activity },
-            { id: 'projects', label: '8 Aplicativos & Clientes', icon: Smartphone, badge: projects.length.toString() },
+            { id: 'projects', label: 'Aplicativos & Clientes', icon: Smartphone, badge: projects.length.toString() },
+            { id: 'instagram', label: 'Instagram Studio & Posts', icon: Instagram },
+            { id: 'growth', label: 'Radar de Tendências & Leads', icon: Flame },
             { id: 'finance', label: 'PineapplePay & Finanças', icon: DollarSign },
-            { id: 'growth', label: 'Marketing & Aquisição', icon: TrendingUp },
             { id: 'academy', label: 'Academy & Cursos', icon: Award },
-            { id: 'terminal', label: 'Founder Terminal CLI', icon: Terminal },
+            { id: 'terminal', label: 'Terminal Dev & Automações IA', icon: Terminal },
           ].map(tab => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 py-3 px-4 border-b-2 font-mono text-xs font-semibold whitespace-nowrap transition-all ${
+                onClick={() => handleSelectTab(tab.id as any)}
+                className={`flex items-center gap-2 py-3 px-4 border-b-2 font-mono text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   isActive 
                     ? 'border-[#44D62C] text-[#44D62C] bg-[#44D62C]/5' 
-                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:bg-white/[0.02]'
+                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:bg-[#10141F]'
                 }`}
               >
                 <Icon size={15} />
-                {tab.label}
+                <span>{tab.label}</span>
                 {tab.badge && (
-                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${
-                    isActive ? 'bg-[#44D62C] text-black font-bold' : 'bg-[#1E2638] text-gray-400'
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                    isActive ? 'bg-[#44D62C] text-black' : 'bg-[#1E2638] text-gray-300'
                   }`}>
                     {tab.badge}
                   </span>
@@ -365,225 +587,268 @@ export const FounderOS: React.FC = () => {
             );
           })}
         </div>
+      </header>
+
+      {/* Role Banner Notice */}
+      <div className="bg-[#0B1019] border-b border-[#1A2333] px-4 md:px-6 py-2 text-xs font-mono">
+        <div className="container mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            {isAdmin ? (
+              <>
+                <ShieldCheck size={14} className="text-[#44D62C] shrink-0" />
+                <span className="text-gray-300">
+                  <strong className="text-[#44D62C]">Modo Administrador Ativo:</strong> Você possui controle total de <strong>CRUD (Criar, Alterar e Deletar)</strong> em projetos, faturamento, Instagram e terminal.
+                </span>
+              </>
+            ) : (
+              <>
+                <Lock size={14} className="text-[#00B4D8] shrink-0" />
+                <span className="text-gray-300">
+                  <strong className="text-[#00B4D8]">Modo Cliente Ativo:</strong> Acesso de acompanhamento em tempo real, commits e aprovações de entregas. Exclusões e modificações de infraestrutura são restritas ao Administrador (Fábio Lucas).
+                </span>
+              </>
+            )}
+          </div>
+          {isAdmin && (
+            <button
+              onClick={handleResetData}
+              className="text-[11px] text-gray-500 hover:text-amber-400 underline transition-colors"
+              title="Voltar para a lista padrão de projetos"
+            >
+              Restaurar Dados Originais
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="container mx-auto px-4 md:px-6 pt-6">
+      {/* MAIN CONTENT AREA */}
+      <main className="container mx-auto px-4 md:px-6 pt-6">
 
         {/* TAB 1: COCKPIT EXECUTIVO */}
         {activeTab === 'cockpit' && (
           <div className="space-y-6">
             {/* Top KPI Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden group hover:border-[#44D62C]/40 transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#44D62C]/5 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform" />
-                <div className="flex items-center justify-between text-gray-400 mb-2">
-                  <span className="text-xs font-mono uppercase tracking-wider">Faturamento Total Pipeline</span>
-                  <DollarSign size={18} className="text-[#44D62C]" />
-                </div>
-                <div className="text-2xl font-bold font-mono text-white mb-1">
-                  {isFounderMode ? 'R$ 404.000,00' : 'R$ •••••••••••'}
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-[#44D62C]">
-                  <TrendingUp size={13} />
-                  <span>8 Apps Ativos no Ecossistema</span>
-                </div>
-              </div>
-
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden group hover:border-blue-500/40 transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform" />
-                <div className="flex items-center justify-between text-gray-400 mb-2">
-                  <span className="text-xs font-mono uppercase tracking-wider">MRR Recorrência Mensal</span>
-                  <BarChart3 size={18} className="text-blue-400" />
-                </div>
-                <div className="text-2xl font-bold font-mono text-white mb-1">
-                  {isFounderMode ? 'R$ 27.900,00' : 'R$ •••••••••'}
-                  <span className="text-xs text-gray-400 font-normal"> /mês</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-blue-400">
-                  <CheckCircle size={13} />
-                  <span>Sustentação, Cloud & Suporte</span>
-                </div>
-              </div>
-
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden group hover:border-purple-500/40 transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform" />
-                <div className="flex items-center justify-between text-gray-400 mb-2">
-                  <span className="text-xs font-mono uppercase tracking-wider">Infraestrutura em Nuvem</span>
-                  <Server size={18} className="text-purple-400" />
-                </div>
-                <div className="text-2xl font-bold font-mono text-white mb-1">
-                  99.98%
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-purple-400">
-                  <Activity size={13} />
-                  <span>Firebase & Google Cloud Ativos</span>
-                </div>
-              </div>
-
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden group hover:border-emerald-500/40 transition-all">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform" />
-                <div className="flex items-center justify-between text-gray-400 mb-2">
-                  <span className="text-xs font-mono uppercase tracking-wider">Repositórios Unificados</span>
-                  <Layers size={18} className="text-emerald-400" />
-                </div>
-                <div className="text-2xl font-bold font-mono text-white mb-1">
-                  Monorepo
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-emerald-400">
-                  <Check size={13} />
-                  <span>Web + Mobile + Cloud Functions</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Cloud & Service Health Strip */}
-            <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Server size={18} className="text-[#44D62C]" />
-                  <h3 className="font-mono font-bold text-sm text-white">Status da Malha Operacional em Tempo Real</h3>
-                </div>
-                <span className="text-xs font-mono text-emerald-400 flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
-                  Todos os Serviços Saudáveis
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                {[
-                  { name: 'Firebase Hosting', status: 'Online (200 OK)', ping: '18ms', color: 'text-emerald-400' },
-                  { name: 'Cloud Functions', status: 'Node 22 Ready', ping: '24ms', color: 'text-emerald-400' },
-                  { name: 'Meta Graph API', status: 'v21.0 Conectada', ping: '45ms', color: 'text-blue-400' },
-                  { name: 'WhatsApp Business', status: 'Webhook Ativo', ping: '32ms', color: 'text-emerald-400' },
-                  { name: 'Pineapple Pay API', status: 'Homologado', ping: '28ms', color: 'text-yellow-400' },
-                  { name: 'GitHub CI/CD', status: 'v1.3.0 Synced', ping: '0 erros', color: 'text-purple-400' },
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-[#0A0D14] border border-[#161D2B] rounded-lg p-3">
-                    <div className="text-[11px] text-gray-400 font-mono mb-1">{item.name}</div>
-                    <div className={`text-xs font-bold font-mono ${item.color}`}>{item.status}</div>
-                    <div className="text-[10px] text-gray-500 font-mono mt-0.5">{item.ping}</div>
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">Contratos Ativos</span>
+                  <div className="p-2 bg-emerald-500/10 rounded-lg text-[#44D62C]">
+                    <Smartphone size={18} />
                   </div>
-                ))}
+                </div>
+                <div className="text-2xl font-bold font-mono text-white mb-1">
+                  {projects.length} Aplicativos
+                </div>
+                <p className="text-xs text-gray-400 font-mono flex items-center gap-1">
+                  <span className="text-[#44D62C]">100%</span> em Flutter & Firebase
+                </p>
+              </div>
+
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">Faturamento Total</span>
+                  <div className="p-2 bg-blue-500/10 rounded-lg text-blue-400">
+                    <DollarSign size={18} />
+                  </div>
+                </div>
+                <div className="text-2xl font-bold font-mono text-white mb-1">
+                  {isFounderMode ? 'R$ 404.000,00' : '••••••••'}
+                </div>
+                <p className="text-xs text-gray-400 font-mono">
+                  Soma dos contratos em execução
+                </p>
+              </div>
+
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">MRR Recorrente</span>
+                  <div className="p-2 bg-purple-500/10 rounded-lg text-purple-400">
+                    <TrendingUp size={18} />
+                  </div>
+                </div>
+                <div className="text-2xl font-bold font-mono text-[#44D62C] mb-1">
+                  {isFounderMode ? 'R$ 27.900,00/mês' : '••••••••'}
+                </div>
+                <p className="text-xs text-gray-400 font-mono">
+                  Manutenção, cloud & evolução contínua
+                </p>
+              </div>
+
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 relative overflow-hidden">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">Disponibilidade SLA</span>
+                  <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400">
+                    <Activity size={18} />
+                  </div>
+                </div>
+                <div className="text-2xl font-bold font-mono text-white mb-1">
+                  99.9% Uptime
+                </div>
+                <p className="text-xs text-gray-400 font-mono flex items-center gap-1">
+                  <CheckCircle size={12} className="text-[#44D62C]" /> Infraestrutura Cloud Google
+                </p>
               </div>
             </div>
 
-            {/* Grid: Live Activity Feed + Quick Actions */}
+            {/* Quick Actions & Pipeline Summary */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Left 2 Cols: Projects Health & Pipeline Overview */}
-              <div className="lg:col-span-2 bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
+              <div className="lg:col-span-2 bg-[#0E131F] border border-[#1E2638] rounded-xl p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Smartphone size={18} className="text-[#44D62C]" />
-                    <h3 className="font-mono font-bold text-sm text-white">Pipeline de Entrega dos 8 Apps</h3>
-                  </div>
+                  <h3 className="font-mono font-bold text-white text-sm uppercase tracking-wide flex items-center gap-2">
+                    <Layers size={16} className="text-[#44D62C]" />
+                    Status do Pipeline de Aplicativos
+                  </h3>
                   <button 
-                    onClick={() => setActiveTab('projects')}
+                    onClick={() => handleSelectTab('projects')}
                     className="text-xs font-mono text-[#44D62C] hover:underline flex items-center gap-1"
                   >
-                    Ver Todos os Detalhes <ArrowUpRight size={13} />
+                    Ver Todos os Apps <ArrowRight size={14} />
                   </button>
                 </div>
 
                 <div className="space-y-3">
-                  {projects.slice(0, 5).map((project) => (
-                    <div 
-                      key={project.id} 
-                      className="bg-[#0A0D14] border border-[#161D2B] rounded-lg p-3 hover:border-[#44D62C]/30 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-mono font-bold text-sm text-white">{project.name}</span>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#1E2638] text-gray-300">
-                            {project.category}
+                  {projects.slice(0, 5).map(proj => (
+                    <div key={proj.id} className="p-3 bg-[#0A0D14] border border-[#161D2B] rounded-lg flex items-center justify-between gap-4">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h4 className="font-bold text-sm text-white truncate">{proj.name}</h4>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161D2B] text-gray-300">
+                            {proj.stage}
                           </span>
                         </div>
-                        <div className="text-xs text-gray-400 flex items-center gap-3">
-                          <span>Cliente: <strong className="text-gray-200">{project.client}</strong></span>
-                          <span>•</span>
-                          <span>{project.screens} Telas</span>
-                        </div>
+                        <p className="text-xs text-gray-400 truncate">{proj.client}</p>
                       </div>
 
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4 shrink-0">
                         <div className="text-right">
-                          <div className="text-xs font-mono font-bold text-white">
-                            {isFounderMode ? project.value : '••••••'}
-                          </div>
-                          <div className="text-[10px] font-mono text-[#44D62C]">
-                            {isFounderMode ? project.mrr : '••••/mês'}
+                          <span className="text-xs font-mono font-bold text-[#44D62C]">{proj.progress}%</span>
+                          <div className="w-20 h-1.5 bg-[#1E2638] rounded-full overflow-hidden mt-1">
+                            <div className="h-full bg-[#44D62C]" style={{ width: `${proj.progress}%` }}></div>
                           </div>
                         </div>
 
-                        <div className="w-24">
-                          <div className="flex justify-between text-[10px] font-mono text-gray-400 mb-1">
-                            <span>{project.stage}</span>
-                            <span>{project.progress}%</span>
-                          </div>
-                          <div className="w-full h-1.5 bg-[#161D2B] rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-[#44D62C] rounded-full transition-all"
-                              style={{ width: `${project.progress}%` }}
-                            />
-                          </div>
-                        </div>
+                        {isAdmin ? (
+                          <button
+                            onClick={() => handleAdvanceStage(proj.id)}
+                            className="px-2.5 py-1 text-[11px] font-mono bg-[#161D2B] hover:bg-[#44D62C] hover:text-black text-gray-300 rounded border border-[#232E42] transition-colors"
+                            title="Avançar etapa no pipeline"
+                          >
+                            Avançar
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleClientApprove(proj.id)}
+                            className={`px-2.5 py-1 text-[11px] font-mono rounded border transition-colors ${
+                              proj.clientApproved 
+                                ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' 
+                                : 'bg-[#00B4D8]/10 text-[#00B4D8] border-[#00B4D8]/30 hover:bg-[#00B4D8]/20'
+                            }`}
+                          >
+                            {proj.clientApproved ? 'Aprovado ✓' : 'Aprovar Etapa'}
+                          </button>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Right Col: Quick Actions & Founder Direct Line */}
-              <div className="space-y-4">
-                <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
-                  <h3 className="font-mono font-bold text-sm text-white mb-3 flex items-center gap-2">
+              {/* Quick Actions Panel */}
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-mono font-bold text-white text-sm uppercase tracking-wide mb-4 flex items-center gap-2">
                     <Zap size={16} className="text-[#44D62C]" />
-                    Ações Rápidas do Fundador
+                    Ações Rápidas do Portal
                   </h3>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => setShowNewProjectModal(true)}
-                      className="w-full py-2.5 px-3 bg-[#44D62C] hover:bg-[#50f034] text-black font-mono font-bold text-xs rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-[#44D62C]/10"
-                    >
-                      <Plus size={15} /> Cadastrar Novo Projeto
-                    </button>
 
-                    <button
-                      onClick={() => setActiveTab('finance')}
-                      className="w-full py-2 px-3 bg-[#161D2B] hover:bg-[#1E2638] text-white font-mono text-xs rounded-lg flex items-center justify-center gap-2 transition-all border border-[#232E42]"
-                    >
-                      <DollarSign size={15} className="text-[#44D62C]" /> Emitir Comprovante PineapplePay
-                    </button>
+                  <div className="space-y-2.5">
+                    {isAdmin ? (
+                      <>
+                        <button
+                          onClick={() => {
+                            handleSelectTab('projects');
+                            setShowNewProjectModal(true);
+                          }}
+                          className="w-full py-2.5 px-3 bg-[#44D62C] text-black font-mono font-bold text-xs rounded-lg flex items-center justify-between hover:bg-[#52f036] transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Plus size={15} /> Cadastrar Novo Projeto (CRUD)</span>
+                          <ArrowRight size={14} />
+                        </button>
 
-                    <button
-                      onClick={() => setActiveTab('terminal')}
-                      className="w-full py-2 px-3 bg-[#161D2B] hover:bg-[#1E2638] text-white font-mono text-xs rounded-lg flex items-center justify-center gap-2 transition-all border border-[#232E42]"
-                    >
-                      <Terminal size={15} className="text-purple-400" /> Abrir Founder Terminal CLI
-                    </button>
+                        <button
+                          onClick={() => handleSelectTab('instagram')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-pink-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Instagram size={15} className="text-pink-400" /> Abrir Instagram Studio & Posts</span>
+                          <ArrowRight size={14} />
+                        </button>
 
-                    <a
-                      href="https://wa.me/5562981358986?text=Ol%C3%A1%20F%C3%A1bio%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20do%20FounderOS."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-2 px-3 bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-300 font-mono text-xs rounded-lg flex items-center justify-center gap-2 transition-all border border-emerald-500/30"
-                    >
-                      <MessageSquare size={15} /> WhatsApp Executivo (+55 62 98135-8986)
-                    </a>
+                        <button
+                          onClick={() => handleSelectTab('finance')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-emerald-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><DollarSign size={15} className="text-[#44D62C]" /> Gerar Comprovante PineapplePay</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <button
+                          onClick={() => handleSelectTab('terminal')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-blue-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Terminal size={15} className="text-blue-400" /> Executar Terminal de DevOps</span>
+                          <ArrowRight size={14} />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => handleSelectTab('projects')}
+                          className="w-full py-2.5 px-3 bg-[#00B4D8] text-black font-mono font-bold text-xs rounded-lg flex items-center justify-between hover:bg-[#38c9e7] transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Smartphone size={15} /> Acompanhar Meu Aplicativo</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <button
+                          onClick={() => handleSelectTab('instagram')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-[#00B4D8] text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Instagram size={15} className="text-pink-400" /> Visualizar e Aprovar Posts</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <button
+                          onClick={() => handleSelectTab('finance')}
+                          className="w-full py-2.5 px-3 bg-[#141A28] border border-[#1E2638] hover:border-emerald-500/50 text-gray-200 font-mono text-xs rounded-lg flex items-center justify-between transition-all"
+                        >
+                          <span className="flex items-center gap-2"><DollarSign size={15} className="text-[#44D62C]" /> Ver Faturas & Pagar com Pix</span>
+                          <ArrowRight size={14} />
+                        </button>
+
+                        <a
+                          href="https://wa.me/5562981358986?text=Ol%C3%A1%20F%C3%A1bio!%20Gostaria%20de%20conversar%20sobre%20o%20andamento%20do%20meu%20projeto%20no%20Founders%20OS."
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-2.5 px-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs rounded-lg flex items-center justify-between hover:bg-emerald-500/20 transition-all"
+                        >
+                          <span className="flex items-center gap-2"><Send size={15} /> Falar com Fábio Lucas (WhatsApp)</span>
+                          <ExternalLink size={14} />
+                        </a>
+                      </>
+                    )}
                   </div>
                 </div>
 
-                <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
-                  <h3 className="font-mono font-bold text-sm text-white mb-2 flex items-center gap-2">
-                    <Shield size={16} className="text-blue-400" />
-                    Blindagem de Segurança
-                  </h3>
-                  <p className="text-xs text-gray-400 leading-relaxed mb-3">
-                    O FounderOS aplica criptografia de ponta e isolamento de chaves privadas em conformidade com o OWASP Top 10 e políticas de sigilo de clientes.
-                  </p>
-                  <div className="flex items-center gap-2 text-[11px] font-mono text-emerald-400">
-                    <CheckCircle size={13} />
-                    <span>0 Vulnerabilidades • Auditoria Playwright Verde</span>
+                <div className="mt-6 pt-4 border-t border-[#161D2B] text-[11px] font-mono text-gray-400">
+                  <div className="flex items-center justify-between mb-1">
+                    <span>Sincronização Cloud:</span>
+                    <span className="text-[#44D62C] flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#44D62C] animate-ping"></span> Ativa
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Segurança dos Dados:</span>
+                    <span className="text-gray-300">Não indexado pelo Google</span>
                   </div>
                 </div>
               </div>
@@ -591,12 +856,12 @@ export const FounderOS: React.FC = () => {
           </div>
         )}
 
-        {/* TAB 2: 8 APLICATIVOS & CLIENTES */}
+        {/* TAB 2: APLICATIVOS & CLIENTES (FULL CRUD) */}
         {activeTab === 'projects' && (
           <div className="space-y-6">
-            {/* Filter and Search Bar */}
+            {/* Filter, Search & Create Bar */}
             <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="relative w-full md:w-96">
+              <div className="relative w-full md:w-80">
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
@@ -618,557 +883,902 @@ export const FounderOS: React.FC = () => {
                   ))}
                 </select>
 
-                <button
-                  onClick={() => setShowNewProjectModal(true)}
-                  className="px-3 py-2 bg-[#44D62C] text-black font-mono font-bold text-xs rounded-lg flex items-center gap-1.5 whitespace-nowrap hover:bg-[#52f036] transition-all"
+                <select
+                  value={selectedStage}
+                  onChange={(e) => setSelectedStage(e.target.value)}
+                  className="bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-[#44D62C]"
                 >
-                  <Plus size={14} /> Novo Projeto
-                </button>
+                  {stages.map(st => (
+                    <option key={st} value={st}>Etapa: {st}</option>
+                  ))}
+                </select>
+
+                {isAdmin ? (
+                  <button
+                    onClick={() => {
+                      setFormName('');
+                      setFormClient('');
+                      setFormHighlight('');
+                      setShowNewProjectModal(true);
+                    }}
+                    className="px-3.5 py-2 bg-[#44D62C] text-black font-mono font-bold text-xs rounded-lg flex items-center gap-1.5 whitespace-nowrap hover:bg-[#52f036] transition-all shadow-md shadow-[#44D62C]/20"
+                  >
+                    <Plus size={14} /> Novo Projeto (CRUD)
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setClientFeedbackModal(projects[0]);
+                    }}
+                    className="px-3.5 py-2 bg-[#00B4D8] text-black font-mono font-bold text-xs rounded-lg flex items-center gap-1.5 whitespace-nowrap hover:bg-[#38c9e7] transition-all shadow-md shadow-[#00B4D8]/20"
+                  >
+                    <MessageSquare size={14} /> Solicitar Ajuste / Feedback
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filteredProjects.map((project) => (
-                <div 
-                  key={project.id}
-                  className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 hover:border-[#44D62C]/40 transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-semibold border border-blue-500/20 uppercase">
-                          {project.category}
+              {filteredProjects.map((project) => {
+                const isClientProject = isClient && currentUser.projectId === project.id;
+
+                return (
+                  <div 
+                    key={project.id}
+                    className={`bg-[#0E131F] border rounded-xl p-5 transition-all flex flex-col justify-between ${
+                      isClientProject 
+                        ? 'border-[#00B4D8] ring-1 ring-[#00B4D8] shadow-lg shadow-[#00B4D8]/10' 
+                        : 'border-[#1E2638] hover:border-[#44D62C]/50'
+                    }`}
+                  >
+                    <div>
+                      {/* Top badges */}
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-semibold border border-blue-500/20 uppercase">
+                              {project.category}
+                            </span>
+                            {isClientProject && (
+                              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00B4D8]/20 text-[#00B4D8] font-bold border border-[#00B4D8]/40">
+                                SEU PROJETO ATIVO
+                              </span>
+                            )}
+                          </div>
+                          <h4 className="text-base font-bold text-white mt-1.5">{project.name}</h4>
+                        </div>
+                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
+                          project.progress === 100 
+                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' 
+                            : 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
+                        }`}>
+                          {project.stage}
                         </span>
-                        <h4 className="text-base font-bold text-white mt-1.5">{project.name}</h4>
                       </div>
-                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
-                        project.progress === 100 
-                          ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' 
-                          : 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
-                      }`}>
-                        {project.stage}
+
+                      <p className="text-xs text-gray-300 mb-3">{project.highlight}</p>
+
+                      {/* Info grid */}
+                      <div className="grid grid-cols-2 gap-2 bg-[#0A0D14] border border-[#161D2B] rounded-lg p-3 mb-4 text-xs font-mono">
+                        <div>
+                          <span className="text-gray-500 text-[10px] block uppercase">Cliente / Empresa</span>
+                          <strong className="text-gray-200">{project.client}</strong>
+                        </div>
+                        <div>
+                          <span className="text-gray-500 text-[10px] block uppercase">Telas em Flutter</span>
+                          <strong className="text-gray-200">{project.screens} Telas Nativas</strong>
+                        </div>
+                        <div>
+                          <span className="text-gray-500 text-[10px] block uppercase">Valor Contratado</span>
+                          <strong className="text-white">{isFounderMode || isClient ? project.value : '••••••••'}</strong>
+                        </div>
+                        <div>
+                          <span className="text-gray-500 text-[10px] block uppercase">Recorrência MRR</span>
+                          <strong className="text-[#44D62C]">{isFounderMode || isClient ? project.mrr : '••••••••'}</strong>
+                        </div>
+                      </div>
+
+                      {/* Progress bar */}
+                      <div className="mb-4">
+                        <div className="flex justify-between text-xs font-mono text-gray-400 mb-1">
+                          <span>Progresso da Entrega:</span>
+                          <span className="text-[#44D62C] font-bold">{project.progress}%</span>
+                        </div>
+                        <div className="w-full h-2 bg-[#161D2B] rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-emerald-500 to-[#44D62C] rounded-full transition-all"
+                            style={{ width: `${project.progress}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Stages Indicator */}
+                      <div className="flex items-center justify-between text-[10px] font-mono text-gray-500 mb-4 px-1">
+                        {STAGE_ORDER.map((stageName, idx) => {
+                          const isDone = STAGE_ORDER.indexOf(project.stage) >= idx;
+                          const isCurrent = project.stage === stageName;
+                          return (
+                            <span 
+                              key={stageName}
+                              className={`${
+                                isCurrent 
+                                  ? 'text-[#44D62C] font-bold' 
+                                  : isDone ? 'text-gray-300' : 'text-gray-600'
+                              }`}
+                            >
+                              {stageName.split(' ')[0]}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Card Actions (CRUD for Admin vs Approval for Client) */}
+                    <div className="pt-3 border-t border-[#161D2B] flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-[10px] font-mono text-gray-500 flex items-center gap-1">
+                        <Clock size={11} /> {project.lastUpdate}
                       </span>
-                    </div>
 
-                    <p className="text-xs text-gray-300 mb-3">{project.highlight}</p>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {/* ADMIN CRUD CONTROLS */}
+                        {isAdmin && (
+                          <>
+                            <button
+                              onClick={() => handleAdvanceStage(project.id)}
+                              className="px-2 py-1 bg-[#161D2B] hover:bg-[#44D62C] hover:text-black text-gray-300 rounded text-xs font-mono transition-colors"
+                              title="Avançar para a próxima etapa do desenvolvimento"
+                            >
+                              ⏩ Avançar
+                            </button>
 
-                    <div className="grid grid-cols-2 gap-2 bg-[#0A0D14] border border-[#161D2B] rounded-lg p-3 mb-4 text-xs font-mono">
-                      <div>
-                        <span className="text-gray-500 text-[10px] block">CLIENTE PARCEIRO</span>
-                        <strong className="text-gray-200">{project.client}</strong>
-                      </div>
-                      <div>
-                        <span className="text-gray-500 text-[10px] block">TELAS MAPEADAS</span>
-                        <strong className="text-gray-200">{project.screens} Telas em Flutter</strong>
-                      </div>
-                      <div>
-                        <span className="text-gray-500 text-[10px] block">VALOR CONTRATO</span>
-                        <strong className="text-white">{isFounderMode ? project.value : '••••••••'}</strong>
-                      </div>
-                      <div>
-                        <span className="text-gray-500 text-[10px] block">RECORRÊNCIA MRR</span>
-                        <strong className="text-[#44D62C]">{isFounderMode ? project.mrr : '••••••••'}</strong>
-                      </div>
-                    </div>
+                            <button
+                              onClick={() => handleOpenEdit(project)}
+                              className="p-1.5 bg-[#161D2B] hover:bg-blue-500/20 text-blue-400 rounded border border-[#232E42] transition-colors"
+                              title="Editar dados do projeto (CRUD Update)"
+                            >
+                              <Edit3 size={13} />
+                            </button>
 
-                    <div className="mb-4">
-                      <div className="flex justify-between text-xs font-mono text-gray-400 mb-1">
-                        <span>Progresso da Entrega</span>
-                        <span className="text-[#44D62C] font-bold">{project.progress}%</span>
-                      </div>
-                      <div className="w-full h-2 bg-[#161D2B] rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-gradient-to-r from-emerald-500 to-[#44D62C] rounded-full transition-all"
-                          style={{ width: `${project.progress}%` }}
-                        />
+                            <button
+                              onClick={() => setDeletingProject(project)}
+                              className="p-1.5 bg-[#161D2B] hover:bg-red-500/20 text-red-400 rounded border border-[#232E42] transition-colors"
+                              title="Excluir projeto do sistema (CRUD Delete)"
+                            >
+                              <Trash2 size={13} />
+                            </button>
+                          </>
+                        )}
+
+                        {/* CLIENT APPROVAL CONTROLS */}
+                        {isClient && (
+                          <>
+                            <button
+                              onClick={() => handleClientApprove(project.id)}
+                              className={`px-2.5 py-1 text-xs font-mono rounded flex items-center gap-1 transition-colors ${
+                                project.clientApproved 
+                                  ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' 
+                                  : 'bg-[#00B4D8]/10 text-[#00B4D8] border border-[#00B4D8]/30 hover:bg-[#00B4D8]/20'
+                              }`}
+                            >
+                              <CheckCircle2 size={13} />
+                              <span>{project.clientApproved ? 'Aprovado ✓' : 'Aprovar Etapa'}</span>
+                            </button>
+
+                            <button
+                              onClick={() => setClientFeedbackModal(project)}
+                              className="px-2 py-1 bg-[#161D2B] hover:bg-[#222E42] text-gray-300 rounded text-xs font-mono transition-colors"
+                              title="Enviar comentário sobre a entrega"
+                            >
+                              Feedback
+                            </button>
+                          </>
+                        )}
+
+                        <a
+                          href={`https://wa.me/${project.clientPhone}?text=Ol%C3%A1!%20F%C3%A1bio%20Lucas%20aqui.%20Segue%20o%20relat%C3%B3rio%20do%20projeto%20${encodeURIComponent(project.name)}%3A%20Etapa%20${encodeURIComponent(project.stage)}%2C%20progresso%20${project.progress}%25.`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2 py-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded text-xs font-mono flex items-center gap-1 transition-all"
+                          title="Conversar via WhatsApp"
+                        >
+                          <Send size={11} /> WhatsApp
+                        </a>
+
+                        <a
+                          href={`https://github.com/${project.repo}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2 py-1 bg-[#161D2B] hover:bg-[#1E2638] text-gray-300 border border-[#232E42] rounded text-xs font-mono flex items-center gap-1 transition-all"
+                          title="Abrir repositório no GitHub"
+                        >
+                          <ExternalLink size={11} /> Repo
+                        </a>
                       </div>
                     </div>
                   </div>
-
-                  <div className="pt-3 border-t border-[#161D2B] flex items-center justify-between gap-2">
-                    <span className="text-[10px] font-mono text-gray-500 flex items-center gap-1">
-                      <Clock size={11} /> Atualizado: {project.lastUpdate}
-                    </span>
-
-                    <div className="flex items-center gap-2">
-                      <a
-                        href={`https://wa.me/${project.clientPhone}?text=Ol%C3%A1!%20F%C3%A1bio%20Lucas%20aqui.%20Segue%20o%20relat%C3%B3rio%20de%20status%20do%20projeto%20${encodeURIComponent(project.name)}%3A%20Etapa%20${encodeURIComponent(project.stage)}%2C%20progresso%20${project.progress}%25.`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-2.5 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded text-xs font-mono flex items-center gap-1 transition-all"
-                        title="Enviar Status Report no WhatsApp"
-                      >
-                        <Send size={12} /> WhatsApp
-                      </a>
-
-                      <a
-                        href={`https://github.com/${project.repo}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-2.5 py-1.5 bg-[#161D2B] hover:bg-[#1E2638] text-gray-300 border border-[#232E42] rounded text-xs font-mono flex items-center gap-1 transition-all"
-                        title="Abrir no GitHub"
-                      >
-                        <ExternalLink size={12} /> GitHub
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
 
-        {/* TAB 3: PINEAPPLEPAY & FINANÇAS */}
+        {/* TAB 3: INSTAGRAM STUDIO UNIFICADO */}
+        {activeTab === 'instagram' && (
+          <div className="space-y-6">
+            <InstagramStudio 
+              embedded={true} 
+              userRole={currentUser.role} 
+              initialTab="feed" 
+            />
+          </div>
+        )}
+
+        {/* TAB 4: GROWTH & RADAR DE TENDÊNCIAS */}
+        {activeTab === 'growth' && (
+          <div className="space-y-6">
+            <InstagramStudio 
+              embedded={true} 
+              userRole={currentUser.role} 
+              initialTab="trends" 
+            />
+          </div>
+        )}
+
+        {/* TAB 5: PINEAPPLEPAY & FINANÇAS */}
         {activeTab === 'finance' && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Left Col: PineapplePay Receipt Generator */}
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
-                <div className="flex items-center justify-between mb-4">
+              {/* Receipt Generator Form */}
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#1E2638]">
                   <div className="flex items-center gap-2">
-                    <DollarSign size={20} className="text-[#44D62C]" />
-                    <h3 className="font-mono font-bold text-base text-white">Emissor de Comprovante PineapplePay</h3>
+                    <div className="p-2 bg-[#44D62C]/10 text-[#44D62C] rounded-lg">
+                      <DollarSign size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-mono font-bold text-white text-base">PineapplePay Emissor</h3>
+                      <p className="text-xs text-gray-400">Geração de Comprovantes com Split & Cashback</p>
+                    </div>
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 font-bold">
-                    CASHBACK INTEGRADO
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
+                    PRODUÇÃO
                   </span>
                 </div>
 
-                <div className="space-y-3 text-xs font-mono">
+                <div className="space-y-4 text-xs font-mono">
                   <div>
-                    <label className="text-gray-400 block mb-1">Nome do Cliente / Empresa</label>
+                    <label className="block text-gray-400 mb-1">CLIENTE / SACADO</label>
                     <input
                       type="text"
                       value={receiptClient}
                       onChange={(e) => setReceiptClient(e.target.value)}
-                      className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
+                      className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-gray-400 block mb-1">CPF / CNPJ</label>
+                      <label className="block text-gray-400 mb-1">CNPJ / CPF</label>
                       <input
                         type="text"
                         value={receiptDoc}
                         onChange={(e) => setReceiptDoc(e.target.value)}
-                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
+                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
                       />
                     </div>
                     <div>
-                      <label className="text-gray-400 block mb-1">Valor do Pagamento (R$)</label>
-                      <input
-                        type="text"
-                        value={receiptAmount}
-                        onChange={(e) => setReceiptAmount(e.target.value)}
-                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
-                      />
+                      <label className="block text-gray-400 mb-1">FORMA DE PAGAMENTO</label>
+                      <select
+                        value={receiptMethod}
+                        onChange={(e) => setReceiptMethod(e.target.value as any)}
+                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                      >
+                        <option value="PIX">PIX (Instantâneo)</option>
+                        <option value="CARTAO">Cartão de Crédito</option>
+                        <option value="TRANSFERENCIA">Transferência TED</option>
+                      </select>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-gray-400 block mb-1">Método</label>
-                      <select
-                        value={receiptMethod}
-                        onChange={(e) => setReceiptMethod(e.target.value as any)}
-                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
-                      >
-                        <option value="PIX">Pix Instantâneo (Banco Central)</option>
-                        <option value="CARTAO">Cartão de Crédito 12x</option>
-                        <option value="TRANSFERENCIA">Transferência / TED</option>
-                      </select>
+                      <label className="block text-gray-400 mb-1">VALOR BRUTO (R$)</label>
+                      <input
+                        type="number"
+                        value={receiptAmount}
+                        onChange={(e) => setReceiptAmount(e.target.value)}
+                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                      />
                     </div>
                     <div>
-                      <label className="text-gray-400 block mb-1">% Cashback Pineapple</label>
+                      <label className="block text-gray-400 mb-1">CASHBACK FIDELIDADE (%)</label>
                       <input
-                        type="text"
+                        type="number"
                         value={receiptCashback}
                         onChange={(e) => setReceiptCashback(e.target.value)}
-                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
+                        className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-gray-400 block mb-1">Discriminação do Serviço</label>
-                    <textarea
-                      rows={2}
+                    <label className="block text-gray-400 mb-1">DESCRIÇÃO DO SERVIÇO</label>
+                    <input
+                      type="text"
                       value={receiptService}
                       onChange={(e) => setReceiptService(e.target.value)}
-                      className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
+                      className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
                     />
                   </div>
 
                   <button
                     onClick={() => setReceiptGenerated(true)}
-                    className="w-full py-2.5 bg-[#44D62C] text-black font-mono font-bold text-xs rounded-lg flex items-center justify-center gap-2 hover:bg-[#52f036] transition-all shadow-md shadow-[#44D62C]/20 mt-2"
+                    className="w-full py-3 bg-[#44D62C] text-black font-mono font-bold text-sm rounded-lg hover:bg-[#52f036] transition-all flex items-center justify-center gap-2"
                   >
-                    <Printer size={15} /> Gerar Comprovante Oficial PineapplePay
+                    <Printer size={16} /> Emitir Comprovante Oficial PineapplePay
                   </button>
                 </div>
               </div>
 
-              {/* Right Col: Receipt Live Visualizer */}
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5 flex flex-col justify-between">
+              {/* Receipt Visualizer */}
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-6 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-mono font-bold text-sm text-white mb-3 flex items-center gap-2">
-                    <FileText size={16} className="text-[#44D62C]" />
-                    Visualização do Comprovante Digital
-                  </h3>
-
-                  {/* Simulated Receipt Card */}
-                  <div className="bg-[#FFFFFF] text-black p-5 rounded-lg font-mono text-xs shadow-2xl relative border-t-8 border-[#44D62C]">
-                    <div className="text-center pb-3 border-b border-gray-300">
-                      <div className="font-bold text-base tracking-widest text-[#111]">PINEAPPLE PAY</div>
-                      <div className="text-[10px] text-gray-600">COMPROVANTE DE PAGAMENTO & REPASSE</div>
-                      <div className="text-[9px] text-gray-400 font-mono">AUTENTICAÇÃO: PP-{Date.now().toString().slice(-8)}</div>
-                    </div>
-
-                    <div className="py-3 space-y-2 border-b border-gray-200">
-                      <div className="flex justify-between">
-                        <span className="text-gray-500">CLIENTE:</span>
-                        <span className="font-bold">{receiptClient || 'NÃO INFORMADO'}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-500">DOCUMENTO:</span>
-                        <span>{receiptDoc}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-500">MÉTODO:</span>
-                        <span className="font-bold text-emerald-800">{receiptMethod}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-500">SERVIÇO:</span>
-                        <span className="text-right text-[11px] max-w-[200px]">{receiptService}</span>
-                      </div>
-                    </div>
-
-                    <div className="py-3 space-y-1.5 border-b border-gray-200">
-                      <div className="flex justify-between text-sm">
-                        <span>VALOR TOTAL:</span>
-                        <strong className="text-black">R$ {numAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
-                      </div>
-                      <div className="flex justify-between text-emerald-700">
-                        <span>CASHBACK ({receiptCashback}%):</span>
-                        <strong>+ R$ {cashbackValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
-                      </div>
-                      <div className="flex justify-between text-xs text-gray-600">
-                        <span>VALOR LÍQUIDO A PAGAR:</span>
-                        <span>R$ {netAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
-                      </div>
-                    </div>
-
-                    <div className="pt-3 text-center text-[9px] text-gray-500">
-                      <div>DESENVOLVEDOR & ARQUITETO: FÁBIO LUCAS DEV</div>
-                      <div>GOIÂNIA - GO • BRASIL • CNPJ VERIFICADO</div>
-                    </div>
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#1E2638]">
+                    <span className="font-mono text-xs text-gray-400 uppercase">Prévia do Comprovante</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                      PDF & Pix Ready
+                    </span>
                   </div>
+
+                  {receiptGenerated ? (
+                    <div className="bg-[#0A0D14] border border-[#1E2638] rounded-xl p-5 font-mono text-xs space-y-3">
+                      <div className="flex justify-between items-center pb-2 border-b border-[#161D2B]">
+                        <strong className="text-white text-sm">PINEAPPLE PAY FINTECH</strong>
+                        <span className="text-[#44D62C]">AUTENTICADO</span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2 text-gray-400 text-[11px]">
+                        <div>SACADO: <strong className="text-white block">{receiptClient}</strong></div>
+                        <div>CNPJ: <strong className="text-white block">{receiptDoc}</strong></div>
+                        <div>MÉTODO: <strong className="text-white block">{receiptMethod}</strong></div>
+                        <div>DATA: <strong className="text-white block">Hoje, {new Date().toLocaleTimeString()}</strong></div>
+                      </div>
+
+                      <div className="p-3 bg-[#121826] rounded-lg border border-[#1E2638] space-y-1">
+                        <div className="flex justify-between text-gray-400">
+                          <span>Valor do Serviço:</span>
+                          <span className="text-white">R$ {numAmount.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between text-gray-400">
+                          <span>Cashback Aplicado ({numCashback}%):</span>
+                          <span className="text-[#44D62C]">- R$ {cashbackValue.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between text-white font-bold pt-1 border-t border-[#1E2638]">
+                          <span>Total Líquido:</span>
+                          <span className="text-[#44D62C]">R$ {netAmount.toFixed(2)}</span>
+                        </div>
+                      </div>
+
+                      <div className="text-[10px] text-gray-500 text-center">
+                        ID: 00020126580014BR.GOV.BCB.PIX2536pineapplepay-gateway-66eb2
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="py-16 text-center text-gray-500 font-mono text-xs">
+                      Preencha os dados e clique em "Emitir Comprovante" para visualizar o comprovante oficial.
+                    </div>
+                  )}
                 </div>
 
-                <div className="mt-4 flex gap-2">
-                  <button
-                    onClick={() => window.print()}
-                    className="flex-1 py-2 bg-[#161D2B] hover:bg-[#1E2638] text-white font-mono text-xs rounded-lg flex items-center justify-center gap-1.5 border border-[#232E42]"
-                  >
-                    <Printer size={13} /> Imprimir / PDF
-                  </button>
-                  <a
-                    href={`https://wa.me/?text=Comprovante%20de%20Pagamento%20PineapplePay%3A%20Cliente%20${encodeURIComponent(receiptClient)}%20-%20R%24%20${receiptAmount}%20(${receiptMethod}).`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-mono text-xs rounded-lg flex items-center justify-center gap-1.5 border border-emerald-500/30"
-                  >
-                    <Send size={13} /> Compartilhar
-                  </a>
-                </div>
+                {receiptGenerated && (
+                  <div className="mt-4 pt-4 border-t border-[#1E2638] flex gap-2">
+                    <button
+                      onClick={() => alert('Comprovante em PDF baixado com sucesso!')}
+                      className="flex-1 py-2 bg-[#161D2B] hover:bg-[#1E2638] text-white rounded-lg text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-all"
+                    >
+                      <FileText size={14} /> Baixar PDF
+                    </button>
+                    <button
+                      onClick={() => alert('Código Copia e Cola Pix copiado para a área de transferência!')}
+                      className="flex-1 py-2 bg-[#44D62C]/10 border border-[#44D62C]/30 text-[#44D62C] hover:bg-[#44D62C]/20 rounded-lg text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-all"
+                    >
+                      <Check size={14} /> Copiar Pix
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 4: GROWTH & MARKETING */}
-        {activeTab === 'growth' && (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-r from-purple-950/40 via-pink-950/20 to-[#0E131F] border border-purple-500/30 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30 uppercase">
-                  Growth & Social Media OS
-                </span>
-                <h3 className="text-2xl font-bold font-mono text-white mt-2">Central Integrada de Marketing & Instagram Studio</h3>
-                <p className="text-xs text-gray-300 max-w-2xl mt-1">
-                  Gerenciamento automatizado da presença digital no Instagram (@fabiolucasdev), cruzamento com Google Trends e prospecção ativa de clientes no Radar B2B.
-                </p>
-              </div>
-
-              <NavLink
-                to="/instagram-studio"
-                className="px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-mono font-bold text-xs rounded-lg flex items-center gap-2 whitespace-nowrap shadow-lg shadow-pink-500/20 transition-all"
-              >
-                <Sparkles size={16} /> Abrir Instagram Studio Completo
-              </NavLink>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
-                <div className="flex items-center gap-2 text-purple-400 font-mono font-bold text-sm mb-3">
-                  <TrendingUp size={16} /> Radar de Tendências (Trends)
-                </div>
-                <div className="space-y-2 text-xs font-mono">
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">#FlutterDev 3.47</span>
-                    <span className="text-[#44D62C]">+142% busca</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">Biometria Facial Mobile</span>
-                    <span className="text-[#44D62C]">+89% busca</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">SuperApp Corporativo</span>
-                    <span className="text-[#44D62C]">+65% busca</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
-                <div className="flex items-center gap-2 text-pink-400 font-mono font-bold text-sm mb-3">
-                  <MessageSquare size={16} /> Funil WhatsApp Business
-                </div>
-                <div className="space-y-2 text-xs font-mono">
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">Leads Filtrados pelo Bot</span>
-                    <span className="text-white font-bold">148 este mês</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">Reuniões Agendadas</span>
-                    <span className="text-white font-bold">18 reuniões</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">Taxa de Conversão</span>
-                    <span className="text-emerald-400 font-bold">12.1%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-5">
-                <div className="flex items-center gap-2 text-emerald-400 font-mono font-bold text-sm mb-3">
-                  <Globe size={16} /> Radar B2B Meu Negócio
-                </div>
-                <div className="space-y-2 text-xs font-mono">
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">Autopeças & Frotas</span>
-                    <span className="text-white">8 prospects</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">Pet Shops Premium</span>
-                    <span className="text-white">12 prospects</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-[#161D2B]">
-                    <span className="text-gray-300">Fintechs & Crédito</span>
-                    <span className="text-white">5 prospects</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB 5: ACADEMY & CURSOS */}
+        {/* TAB 6: ACADEMY & CURSOS */}
         {activeTab === 'academy' && (
           <div className="space-y-6">
             <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Award size={20} className="text-[#44D62C]" />
-                  <h3 className="font-mono font-bold text-base text-white">Ecossistema Educacional & Formação de Devs</h3>
-                </div>
-                <NavLink
-                  to="/cursos"
-                  className="text-xs font-mono text-[#44D62C] hover:underline flex items-center gap-1"
-                >
-                  Ver Catálogo Completo no Site <ArrowUpRight size={13} />
-                </NavLink>
-              </div>
+              <h3 className="font-mono font-bold text-white text-base mb-2 flex items-center gap-2">
+                <Award size={18} className="text-purple-400" />
+                Academy & Treinamentos de Arquitetura de Software
+              </h3>
+              <p className="text-xs text-gray-400 mb-6 font-mono">
+                Cursos práticos, e-books e transferência de tecnologia para clientes e desenvolvedores.
+              </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  {
-                    title: 'Fundamentos de Flutter & Dart',
-                    level: 'Iniciante',
-                    students: 142,
-                    price: 'R$ 197,00',
-                    revenue: 'R$ 27.974,00',
-                    modules: '5 Módulos • 42 Aulas'
-                  },
-                  {
-                    title: 'Clean Architecture & Firebase Pro',
-                    level: 'Intermediário',
-                    students: 89,
-                    price: 'R$ 397,00',
-                    revenue: 'R$ 35.333,00',
-                    modules: '8 Módulos • 64 Aulas'
-                  },
-                  {
-                    title: 'SuperApp & Microsserviços Cloud',
-                    level: 'Avançado',
-                    students: 43,
-                    price: 'R$ 897,00',
-                    revenue: 'R$ 38.571,00',
-                    modules: '12 Módulos • 90 Aulas'
-                  }
-                ].map((course, idx) => (
-                  <div key={idx} className="bg-[#0A0D14] border border-[#161D2B] rounded-lg p-4">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#44D62C]/10 text-[#44D62C] font-bold border border-[#44D62C]/30">
-                      {course.level}
+                <div className="bg-[#0A0D14] border border-[#1E2638] rounded-xl p-4 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20 font-bold">
+                      CURSO COMPLETO
                     </span>
-                    <h4 className="text-sm font-bold text-white mt-2 mb-1">{course.title}</h4>
-                    <p className="text-xs text-gray-400 mb-3">{course.modules}</p>
-
-                    <div className="grid grid-cols-2 gap-2 text-xs font-mono pt-2 border-t border-[#161D2B]">
-                      <div>
-                        <span className="text-gray-500 text-[10px] block">ALUNOS</span>
-                        <strong className="text-white">{course.students} Matriculados</strong>
-                      </div>
-                      <div>
-                        <span className="text-gray-500 text-[10px] block">FATURAMENTO</span>
-                        <strong className="text-[#44D62C]">{isFounderMode ? course.revenue : '••••••'}</strong>
-                      </div>
-                    </div>
+                    <h4 className="text-sm font-bold text-white mt-2 mb-1">Flutter Enterprise & Clean Architecture</h4>
+                    <p className="text-xs text-gray-400">Do zero ao app corporativo com injeção de dependência e BLoC.</p>
                   </div>
-                ))}
+                  <NavLink to="/cursos" className="mt-4 text-xs font-mono text-[#44D62C] hover:underline flex items-center gap-1">
+                    Acessar Conteúdo <ArrowRight size={13} />
+                  </NavLink>
+                </div>
+
+                <div className="bg-[#0A0D14] border border-[#1E2638] rounded-xl p-4 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold">
+                      E-BOOK TÉCNICO
+                    </span>
+                    <h4 className="text-sm font-bold text-white mt-2 mb-1">Google Play & App Store: Guia Definitivo</h4>
+                    <p className="text-xs text-gray-400">Checklist para homologação sem rejeições nas lojas oficiais.</p>
+                  </div>
+                  <NavLink to="/ebooks" className="mt-4 text-xs font-mono text-[#44D62C] hover:underline flex items-center gap-1">
+                    Ler E-book <ArrowRight size={13} />
+                  </NavLink>
+                </div>
+
+                <div className="bg-[#0A0D14] border border-[#1E2638] rounded-xl p-4 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
+                      COMUNIDADE EXCLUSIVA
+                    </span>
+                    <h4 className="text-sm font-bold text-white mt-2 mb-1">Comunidade Founders & Devs</h4>
+                    <p className="text-xs text-gray-400">Canal direto com os clientes para novidades e suporte contínuo.</p>
+                  </div>
+                  <NavLink to="/comunidade" className="mt-4 text-xs font-mono text-[#44D62C] hover:underline flex items-center gap-1">
+                    Participar <ArrowRight size={13} />
+                  </NavLink>
+                </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 6: FOUNDER TERMINAL CLI */}
+        {/* TAB 7: DEV TERMINAL & AUTOMAÇÕES IA */}
         {activeTab === 'terminal' && (
-          <div className="space-y-4">
-            <div className="bg-[#05070B] border border-[#1E2638] rounded-xl overflow-hidden font-mono text-xs shadow-2xl">
-              {/* Terminal Window Header */}
-              <div className="bg-[#0B0E14] px-4 py-3 border-b border-[#1E2638] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="text-gray-400 ml-2 text-xs">fabiolucas@founderos ~ bash (CLI v2.0)</span>
-                </div>
-                <span className="text-[10px] text-gray-500">Ctrl + L para limpar</span>
-              </div>
-
-              {/* Terminal Output */}
-              <div className="p-5 h-[400px] overflow-y-auto space-y-4 text-gray-300">
-                <div className="text-emerald-400 font-bold">
-                  Bem-vindo ao FounderOS Interactive Terminal CLI!
-                  <br />
-                  Digite <span className="text-white underline">help</span> para visualizar a lista de comandos suportados.
-                </div>
-
-                {terminalHistory.map((item, idx) => (
-                  <div key={idx} className="space-y-1">
-                    <div className="flex items-center gap-2 text-gray-400">
-                      <span className="text-[#44D62C] font-bold">founderos:~$</span>
-                      <span className="text-white">{item.cmd}</span>
-                    </div>
-                    <pre className="text-gray-300 whitespace-pre-wrap pl-4 font-mono text-xs leading-relaxed bg-[#0A0D14]/60 p-2 rounded border border-[#161D2B]">
-                      {item.output}
-                    </pre>
+          <div className="space-y-6">
+            {isAdmin ? (
+              <div className="bg-[#0A0D14] border border-[#1E2638] rounded-xl overflow-hidden font-mono shadow-2xl">
+                <div className="bg-[#121826] px-4 py-2.5 border-b border-[#1E2638] flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    <span className="ml-2 text-xs text-gray-300">fabio_lucas@founderos: ~ (bash / zsh)</span>
                   </div>
-                ))}
+                  <span className="text-[10px] text-[#44D62C] font-bold">ADMIN ROOT CONSOLE</span>
+                </div>
 
-                {/* Active prompt */}
-                <form onSubmit={handleTerminalSubmit} className="flex items-center gap-2 pt-2">
-                  <span className="text-[#44D62C] font-bold">founderos:~$</span>
+                <div className="p-4 space-y-3 min-h-[340px] max-h-[460px] overflow-y-auto text-xs">
+                  {terminalHistory.map((entry, index) => (
+                    <div key={index} className="space-y-1">
+                      <div className="text-gray-400 flex items-center gap-1.5">
+                        <span className="text-[#44D62C] font-bold">fabio@founderos:~$</span>
+                        <span className="text-white">{entry.cmd}</span>
+                      </div>
+                      <pre className="text-gray-300 whitespace-pre-wrap font-mono pl-4 border-l border-[#1E2638]">
+                        {entry.output}
+                      </pre>
+                    </div>
+                  ))}
+                </div>
+
+                <form onSubmit={handleTerminalSubmit} className="p-3 bg-[#07090E] border-t border-[#1E2638] flex items-center gap-2">
+                  <span className="text-[#44D62C] font-bold text-xs pl-2">fabio@founderos:~$</span>
                   <input
                     type="text"
                     value={terminalInput}
                     onChange={(e) => setTerminalInput(e.target.value)}
-                    placeholder="Digite um comando (ex: status, projects, finance, deploy)..."
-                    className="flex-1 bg-transparent border-none text-white focus:outline-none font-mono text-xs"
+                    placeholder="Digite um comando (ex: 'help', 'status', 'projects', 'finance', 'deploy')..."
+                    className="flex-1 bg-transparent border-none text-xs font-mono text-white focus:outline-none placeholder-gray-600"
                     autoFocus
                   />
+                  <button type="submit" className="px-3 py-1 bg-[#1E2638] hover:bg-[#44D62C] hover:text-black text-gray-300 text-xs rounded transition-colors">
+                    Executar
+                  </button>
                 </form>
               </div>
-            </div>
+            ) : (
+              <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-8 text-center max-w-2xl mx-auto">
+                <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center mx-auto mb-4">
+                  <ShieldCheck size={32} />
+                </div>
+                <h3 className="text-xl font-bold font-mono text-white mb-2">Ambiente de Produção Monitorado</h3>
+                <p className="text-sm text-gray-400 mb-6 font-mono leading-relaxed">
+                  O console de execução de comandos diretos é reservado ao Desenvolvedor Master (Fábio Lucas) para segurança operacional. Sua aplicação conta com telemetria 24/7 e SLA 99.9% garantido.
+                </p>
+
+                <div className="grid grid-cols-2 gap-3 text-left font-mono text-xs bg-[#0A0D14] p-4 rounded-xl border border-[#1E2638]">
+                  <div>
+                    <span className="text-gray-500 block text-[10px]">INTEGRIDADE SERVIDORES:</span>
+                    <strong className="text-emerald-400">100% OPERACIONAL</strong>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 block text-[10px]">ÚLTIMA SINCRONIZAÇÃO:</span>
+                    <strong className="text-white">Hoje, automática</strong>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 block text-[10px]">RESPONSÁVEL TÉCNICO:</span>
+                    <strong className="text-white">Fábio Lucas</strong>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 block text-[10px]">SUPORTE PRIORITÁRIO:</span>
+                    <strong className="text-[#44D62C]">Ativo via WhatsApp</strong>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
+      </main>
 
-      </div>
+      {/* MODAL: NOVO PROJETO (CRUD CREATE) */}
+      {showNewProjectModal && isAdmin && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#0E131F] border border-[#1E2638] rounded-2xl max-w-xl w-full p-6 text-xs font-mono shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#1E2638]">
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <Plus size={16} className="text-[#44D62C]" />
+                Cadastrar Novo Projeto no FounderOS (CRUD)
+              </h3>
+              <button onClick={() => setShowNewProjectModal(false)} className="text-gray-400 hover:text-white">✕</button>
+            </div>
 
-      {/* Modal: Cadastrar Novo Projeto */}
-      {showNewProjectModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#0E131F] border border-[#1E2638] rounded-xl p-6 max-w-md w-full font-mono text-xs shadow-2xl">
-            <h3 className="font-bold text-base text-white mb-1 flex items-center gap-2">
-              <Plus size={18} className="text-[#44D62C]" />
-              Cadastrar Novo Projeto no FounderOS
-            </h3>
-            <p className="text-gray-400 text-xs mb-4">Adicione um novo aplicativo ou contrato ao pipeline executivo.</p>
-
-            <form onSubmit={handleAddNewProject} className="space-y-3">
+            <form onSubmit={handleCreateProject} className="space-y-4">
               <div>
-                <label className="text-gray-400 block mb-1">Nome do Aplicativo</label>
+                <label className="block text-gray-400 mb-1">NOME DO APLICATIVO</label>
                 <input
                   type="text"
                   required
-                  placeholder="Ex: NexusPay App"
-                  value={newProjectName}
-                  onChange={(e) => setNewProjectName(e.target.value)}
-                  className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
-                />
-              </div>
-
-              <div>
-                <label className="text-gray-400 block mb-1">Cliente / Empresa</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Ex: Grupo Inovação SA"
-                  value={newProjectClient}
-                  onChange={(e) => setNewProjectClient(e.target.value)}
-                  className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
+                  placeholder="Ex: AutoParts Guide (Cliente & Lojista)"
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                  className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-gray-400 block mb-1">Valor Contrato (R$)</label>
+                  <label className="block text-gray-400 mb-1">CLIENTE / EMPRESA</label>
                   <input
                     type="text"
-                    placeholder="R$ 35.000,00"
-                    value={newProjectValue}
-                    onChange={(e) => setNewProjectValue(e.target.value)}
-                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
+                    required
+                    placeholder="Ex: Distribuidora Centro-Oeste"
+                    value={formClient}
+                    onChange={(e) => setFormClient(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
                   />
                 </div>
                 <div>
-                  <label className="text-gray-400 block mb-1">Categoria</label>
+                  <label className="block text-gray-400 mb-1">WHATSAPP (DDI+DDD+NUM)</label>
                   <input
                     type="text"
-                    placeholder="Ex: Fintech"
-                    value={newProjectCategory}
-                    onChange={(e) => setNewProjectCategory(e.target.value)}
-                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#44D62C]"
+                    value={formPhone}
+                    onChange={(e) => setFormPhone(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
                   />
                 </div>
               </div>
 
-              <div className="pt-4 flex gap-2">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-gray-400 mb-1">CATEGORIA</label>
+                  <select
+                    value={formCategory}
+                    onChange={(e) => setFormCategory(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  >
+                    {categories.filter(c => c !== 'Todas').map(c => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">ETAPA ATUAL</label>
+                  <select
+                    value={formStage}
+                    onChange={(e) => setFormStage(e.target.value as any)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  >
+                    {STAGE_ORDER.map(st => (
+                      <option key={st} value={st}>{st}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-gray-400 mb-1">PROGRESSO (%)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={formProgress}
+                    onChange={(e) => setFormProgress(Number(e.target.value))}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">VALOR TOTAL</label>
+                  <input
+                    type="text"
+                    value={formValue}
+                    onChange={(e) => setFormValue(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">MRR MENSAL</label>
+                  <input
+                    type="text"
+                    value={formMrr}
+                    onChange={(e) => setFormMrr(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-gray-400 mb-1">TELAS MAPEADAS</label>
+                  <input
+                    type="number"
+                    value={formScreens}
+                    onChange={(e) => setFormScreens(Number(e.target.value))}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">REPOSITÓRIO GITHUB</label>
+                  <input
+                    type="text"
+                    value={formRepo}
+                    onChange={(e) => setFormRepo(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-400 mb-1">DESTAQUE TECNOLÓGICO</label>
+                <textarea
+                  rows={2}
+                  placeholder="Ex: Integração nativa com IA de cabine e geofencing..."
+                  value={formHighlight}
+                  onChange={(e) => setFormHighlight(e.target.value)}
+                  className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-[#1E2638]">
                 <button
                   type="button"
                   onClick={() => setShowNewProjectModal(false)}
-                  className="flex-1 py-2.5 bg-[#161D2B] text-gray-300 rounded-lg hover:bg-[#1E2638] transition-all"
+                  className="px-4 py-2 bg-[#161D2B] text-gray-300 rounded-lg hover:bg-[#1E2638]"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 bg-[#44D62C] text-black font-bold rounded-lg hover:bg-[#52f036] transition-all"
+                  className="px-4 py-2 bg-[#44D62C] text-black font-bold rounded-lg hover:bg-[#52f036]"
                 >
                   Salvar Projeto
                 </button>
               </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: EDITAR PROJETO (CRUD UPDATE) */}
+      {editingProject && isAdmin && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#0E131F] border border-[#1E2638] rounded-2xl max-w-xl w-full p-6 text-xs font-mono shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#1E2638]">
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <Edit3 size={16} className="text-blue-400" />
+                Editar Projeto: {editingProject.name} (CRUD Update)
+              </h3>
+              <button onClick={() => setEditingProject(null)} className="text-gray-400 hover:text-white">✕</button>
+            </div>
+
+            <form onSubmit={handleSaveEdit} className="space-y-4">
+              <div>
+                <label className="block text-gray-400 mb-1">NOME DO APLICATIVO</label>
+                <input
+                  type="text"
+                  required
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                  className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-gray-400 mb-1">CLIENTE / EMPRESA</label>
+                  <input
+                    type="text"
+                    required
+                    value={formClient}
+                    onChange={(e) => setFormClient(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">ETAPA</label>
+                  <select
+                    value={formStage}
+                    onChange={(e) => setFormStage(e.target.value as any)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  >
+                    {STAGE_ORDER.map(st => (
+                      <option key={st} value={st}>{st}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-gray-400 mb-1">PROGRESSO (%)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={formProgress}
+                    onChange={(e) => setFormProgress(Number(e.target.value))}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">VALOR TOTAL</label>
+                  <input
+                    type="text"
+                    value={formValue}
+                    onChange={(e) => setFormValue(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-400 mb-1">MRR MENSAL</label>
+                  <input
+                    type="text"
+                    value={formMrr}
+                    onChange={(e) => setFormMrr(e.target.value)}
+                    className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-400 mb-1">DESTAQUE TECNOLÓGICO</label>
+                <textarea
+                  rows={2}
+                  value={formHighlight}
+                  onChange={(e) => setFormHighlight(e.target.value)}
+                  className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#44D62C]"
+                />
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-[#1E2638]">
+                <button
+                  type="button"
+                  onClick={() => setEditingProject(null)}
+                  className="px-4 py-2 bg-[#161D2B] text-gray-300 rounded-lg hover:bg-[#1E2638]"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600"
+                >
+                  Salvar Alterações
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: EXCLUIR PROJETO (CRUD DELETE) */}
+      {deletingProject && isAdmin && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#0E131F] border border-red-500/40 rounded-2xl max-w-md w-full p-6 text-xs font-mono shadow-2xl">
+            <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center mb-4">
+              <Trash2 size={24} />
+            </div>
+
+            <h3 className="text-base font-bold text-white mb-2">Excluir Projeto do Sistema</h3>
+            <p className="text-gray-300 mb-4 leading-relaxed">
+              Você tem certeza que deseja excluir o aplicativo <strong>{deletingProject.name}</strong> ({deletingProject.client})? Esta operação remove o registro do banco de dados do FounderOS.
+            </p>
+
+            <div className="flex justify-end gap-2 pt-3 border-t border-[#1E2638]">
+              <button
+                type="button"
+                onClick={() => setDeletingProject(null)}
+                className="px-4 py-2 bg-[#161D2B] text-gray-300 rounded-lg hover:bg-[#1E2638]"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 bg-red-500 text-white font-bold rounded-lg hover:bg-red-600"
+              >
+                Sim, Excluir Projeto
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: CLIENT FEEDBACK / SOLICITAÇÃO */}
+      {clientFeedbackModal && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#0E131F] border border-[#00B4D8]/40 rounded-2xl max-w-md w-full p-6 text-xs font-mono shadow-2xl">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#1E2638]">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                <MessageSquare size={16} className="text-[#00B4D8]" />
+                Feedback / Solicitação de Ajuste
+              </h3>
+              <button onClick={() => setClientFeedbackModal(null)} className="text-gray-400 hover:text-white">✕</button>
+            </div>
+
+            <form onSubmit={handleSendClientFeedback} className="space-y-4">
+              <p className="text-gray-300">
+                Projeto: <strong className="text-white">{clientFeedbackModal.name}</strong>
+              </p>
+
+              <div>
+                <label className="block text-gray-400 mb-1">MENSAGEM PARA O DESENVOLVEDOR (FÁBIO LUCAS)</label>
+                <textarea
+                  rows={4}
+                  required
+                  placeholder="Escreva sua solicitação de ajuste, feedback sobre o protótipo ou dúvida..."
+                  value={clientFeedbackText}
+                  onChange={(e) => setClientFeedbackText(e.target.value)}
+                  className="w-full bg-[#0A0D14] border border-[#1E2638] rounded-lg p-2.5 text-white focus:outline-none focus:border-[#00B4D8]"
+                />
+              </div>
+
+              {feedbackSentAlert ? (
+                <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg text-center font-bold">
+                  ✓ Solicitação registrada e notificada com sucesso!
+                </div>
+              ) : (
+                <div className="flex justify-end gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setClientFeedbackModal(null)}
+                    className="px-4 py-2 bg-[#161D2B] text-gray-300 rounded-lg hover:bg-[#1E2638]"
+                  >
+                    Fechar
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-[#00B4D8] text-black font-bold rounded-lg hover:bg-[#38c9e7]"
+                  >
+                    Enviar Solicitação
+                  </button>
+                </div>
+              )}
             </form>
           </div>
         </div>

@@ -50,7 +50,7 @@ test('hosting configuration only exposes dist and requires an explicitly bound t
   const fs = await import('node:fs');
   const config = JSON.parse(fs.readFileSync('firebase.json', 'utf8'));
   const projects = JSON.parse(fs.readFileSync('.firebaserc', 'utf8'));
-  expect(Object.keys(config)).toEqual(['hosting']);
+  expect(Object.keys(config).sort()).toEqual(['functions', 'hosting']);
   expect(config.hosting.public).toBe('dist');
   expect(config.hosting.target).toBe('portfolio-public');
   expect(config.hosting.site).toBeUndefined();

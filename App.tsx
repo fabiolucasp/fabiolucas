@@ -55,7 +55,7 @@ const MainLayout = () => {
     
     // Verifica se a rota atual é a landing page do Bicho Mimado, Pineapple Pay ou Login
     // Usar useLocation é mais performático e seguro que ouvir eventos de window
-    const hideNavbarRoutes = ['/bicho-mimado-app', '/login', '/pineapple-pay', '/instagram-studio'];
+    const hideNavbarRoutes = ['/bicho-mimado-app', '/login', '/pineapple-pay', '/instagram-studio', '/founder-os'];
     const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
     return (

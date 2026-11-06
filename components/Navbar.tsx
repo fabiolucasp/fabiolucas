@@ -55,29 +55,12 @@ const Navbar: React.FC = () => {
               {link.name}
             </NavLink>
           ))}
-          {/* Login Button */}
-          <NavLink to="/login" className="px-4 py-2 ml-4 rounded-full text-sm font-medium bg-[#44D62C] text-[#000000] hover:bg-[#5aff3d] transition-all duration-200 font-mono">
+          {/* Single Login Button */}
+          <NavLink 
+            to="/login" 
+            className="px-5 py-2 ml-4 rounded-full text-sm font-semibold bg-[#44D62C] text-[#000000] hover:bg-[#5aff3d] transition-all duration-200 font-mono shadow-md shadow-[#44D62C]/20"
+          >
             Login
-          </NavLink>
-
-          {/* Instagram Studio Pill */}
-          <NavLink
-            to="/instagram-studio"
-            title="Instagram Studio & Gestor de Marketing"
-            aria-label="Instagram Studio"
-            className="p-2 ml-2 rounded-full text-[#AAA] hover:text-white hover:bg-gradient-to-tr hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCAF45] transition-all duration-200"
-          >
-            <Instagram size={18} />
-          </NavLink>
-
-          {/* FounderOS Executive Button */}
-          <NavLink
-            to="/founder-os"
-            title="FounderOS - Sistema Operacional do Fundador"
-            className="flex items-center gap-1.5 px-3 py-1.5 ml-2 rounded-full text-xs font-mono font-bold bg-[#141A28] border border-[#44D62C]/50 text-[#44D62C] hover:bg-[#44D62C] hover:text-black hover:border-transparent transition-all duration-200 shadow-sm shadow-[#44D62C]/20"
-          >
-            <Zap size={14} className="animate-pulse" />
-            <span>FounderOS</span>
           </NavLink>
         </div>
 
@@ -107,22 +90,12 @@ const Navbar: React.FC = () => {
               {link.name}
             </NavLink>
           ))}
-          <NavLink to="/login" className="block px-4 py-3 rounded-lg bg-[#44D62C] text-[#000000] hover:bg-[#5aff3d] font-mono" onClick={() => setIsMobileMenuOpen(false)}>
+          <NavLink 
+            to="/login" 
+            className="block text-center px-4 py-3 rounded-lg bg-[#44D62C] text-[#000000] font-bold hover:bg-[#5aff3d] font-mono shadow-md" 
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Login
-          </NavLink>
-          <NavLink 
-            to="/instagram-studio" 
-            className="flex items-center gap-2 px-4 py-3 rounded-lg text-[#EEEEEE] hover:bg-[#111111] hover:text-[#44D62C] font-mono" 
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <Instagram size={18} /> Instagram Studio
-          </NavLink>
-          <NavLink 
-            to="/founder-os" 
-            className="flex items-center gap-2 px-4 py-3 rounded-lg bg-[#44D62C]/10 border border-[#44D62C]/40 text-[#44D62C] hover:bg-[#44D62C] hover:text-black font-mono font-bold" 
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <Zap size={18} /> FounderOS (Gestão)
           </NavLink>
         </div>
       )}

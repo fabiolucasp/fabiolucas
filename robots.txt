@@ -10,10 +10,14 @@ Allow: /*.svg
 Allow: /*.js
 Allow: /*.css
 
-# Disallow internal or system paths
+# Disallow internal, management or client private paths
 Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
+Disallow: /founder-os
+Disallow: /instagram-studio
+Disallow: /cliente
+Disallow: /login
 
 # Sitemap Location
 Sitemap: https://fabiolucas.com/sitemap.xml
