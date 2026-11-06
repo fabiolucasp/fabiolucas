@@ -29,12 +29,13 @@ class _SplashScreenState extends State<SplashScreen> {
       if (kIsWeb) {
         await Firebase.initializeApp(
           options: const FirebaseOptions(
-            apiKey: "AIzaSyC_r5e7fbc8nUJ1ONkzsBM9QWo3RGHw7hM",
-            authDomain: "fabiolucasdev-a3ab4.firebaseapp.com",
-            projectId: "fabiolucasdev-a3ab4",
-            storageBucket: "fabiolucasdev-a3ab4.appspot.com",
-            messagingSenderId: "475427269205",
-            appId: "1:475427269205:web:80cc2d034ea8d4483c02dc",
+            apiKey: "AIzaSyBby9Ld6bzzEkLSE3xycrz0GGKTFNw8kxw",
+            authDomain: "portifolio-66eb2.firebaseapp.com",
+            projectId: "portifolio-66eb2",
+            storageBucket: "portifolio-66eb2.appspot.com",
+            messagingSenderId: "832624274814",
+            appId: "1:832624274814:web:b3c1a54554de2b5eff572f",
+            measurementId: "G-H8Y76WVEJ6",
           ),
         );
       } else {

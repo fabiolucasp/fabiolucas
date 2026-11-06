@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "662562416089",
-    "project_id": "fabiolucasdev-a3ab4",
-    "storage_bucket": "fabiolucasdev-a3ab4.firebasestorage.app"
+    "project_number": "832624274814",
+    "project_id": "portifolio-66eb2",
+    "storage_bucket": "portifolio-66eb2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:662562416089:android:8f4e787dc32a3a1a57e5c8",
+        "mobilesdk_app_id": "1:832624274814:android:a46b59c3ef59b7b5ff572f",
         "android_client_info": {
           "package_name": "com.fabiolucas.gestaofabiolucasdev"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDzV81pD00BsgBQs28ovFfri_-8_35cRTE"
+          "current_key": "AIzaSyCL_rW6paWoIRDdCD-dr3m9WjOSP02yBjU"
         }
       ],
       "services": {
